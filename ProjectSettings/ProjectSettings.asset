@@ -4,7 +4,7 @@
 PlayerSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 15
-  productGUID: dd3ffea10cd524b12a4e42d4fc10c9e5
+  productGUID: ea183b6f476dd4f5a9501d092f240fba
   AndroidProfiler: 0
   AndroidFilterTouchesWhenObscured: 0
   AndroidEnableSustainedPerformanceMode: 0
@@ -13,7 +13,7 @@ PlayerSettings:
   useOnDemandResources: 0
   accelerometerFrequency: 60
   companyName: DefaultCompany
-  productName: MyFirstGame
+  productName: New Unity Project
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 0.13725491, g: 0.12156863, b: 0.1254902, a: 1}
@@ -68,7 +68,7 @@ PlayerSettings:
   androidBlitType: 0
   defaultIsNativeResolution: 0
   macRetinaSupport: 1
-  runInBackground: 0
+  runInBackground: 1
   captureSingleScreen: 0
   muteOtherAudioSources: 0
   Prepare IOS For Recording: 0
@@ -241,7 +241,7 @@ PlayerSettings:
   iOSAutomaticallyDetectAndAddCapabilities: 1
   appleEnableProMotion: 0
   clonedFromGUID: 89985c6b8386a4e28b5828b7a0a4a51b
-  templatePackageId: com.unity.template.platformer@0.1.0-preview.29
+  templatePackageId: 
   templateDefaultScene: 
   AndroidTargetArchitectures: 1
   AndroidSplashScreenScale: 0

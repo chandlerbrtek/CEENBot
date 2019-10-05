@@ -138,13 +138,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b106c573f0d5c68429b24ab0d2f3bc3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  newBlock: {fileID: 0}
+--- !u!4 &465069702 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8314570884515574579, guid: dd0a7c68d9955d34fa6a4cbd2d2b3b1c,
+    type: 3}
+  m_PrefabInstance: {fileID: 689439219}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &689439219
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 1808918437}
     m_Modifications:
     - target: {fileID: 8314570884515574583, guid: dd0a7c68d9955d34fa6a4cbd2d2b3b1c,
         type: 3}
@@ -154,17 +159,17 @@ PrefabInstance:
     - target: {fileID: 8314570884515574579, guid: dd0a7c68d9955d34fa6a4cbd2d2b3b1c,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.14
+      value: -8.43
       objectReference: {fileID: 0}
     - target: {fileID: 8314570884515574579, guid: dd0a7c68d9955d34fa6a4cbd2d2b3b1c,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.89
+      value: 4.19
       objectReference: {fileID: 0}
     - target: {fileID: 8314570884515574579, guid: dd0a7c68d9955d34fa6a4cbd2d2b3b1c,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -6.5996094
+      value: 3.4003906
       objectReference: {fileID: 0}
     - target: {fileID: 8314570884515574579, guid: dd0a7c68d9955d34fa6a4cbd2d2b3b1c,
         type: 3}
@@ -189,7 +194,7 @@ PrefabInstance:
     - target: {fileID: 8314570884515574579, guid: dd0a7c68d9955d34fa6a4cbd2d2b3b1c,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8314570884515574579, guid: dd0a7c68d9955d34fa6a4cbd2d2b3b1c,
         type: 3}
@@ -243,7 +248,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1411853630
 MonoBehaviour:
@@ -337,7 +342,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 465069702}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

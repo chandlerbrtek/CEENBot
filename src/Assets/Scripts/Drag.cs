@@ -10,7 +10,6 @@ public class Drag : MonoBehaviour
 
     private void Start()
     {
-       // OnMouseDown();
     }
 
     void OnMouseDown()

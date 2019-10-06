@@ -13,11 +13,13 @@ public class ButtonClick : MonoBehaviour
     private GameObject newButton;
     bool hasNewButton;
     private GameManager gm;
+    private int blockCount;
 
 
     // Start is called before the first frame update
     void Start()
     {
+        blockCount = 0;
         hasNewButton = false;
         gm = GameObject.FindObjectOfType<GameManager>();
     }
@@ -31,6 +33,8 @@ public class ButtonClick : MonoBehaviour
     {
         
         newButton = gm.instantiateBlock();
+        newButton.GetComponent<Drag>().blockId = blockCount;
+        blockCount++;
         hasNewButton = true;
         offset = gameObject.transform.position - Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z));
     }

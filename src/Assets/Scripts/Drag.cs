@@ -91,7 +91,7 @@ public class Drag : MonoBehaviour
     {//adds a block to this list
         if(b.GetComponent<Drag>().blockId == blockId)
         {//if this block is trying to add itself as a child, don't
-            Debug.Log("Woah");
+            //Debug.Log("Woah");
             return;
         }
         if(hasNext)

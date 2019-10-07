@@ -13,13 +13,11 @@ public class ButtonClick : MonoBehaviour
     private GameObject newButton;
     bool hasNewButton;
     private GameManager gm;
-    private int blockCount;
-
+    public int buttonType;
 
     // Start is called before the first frame update
     void Start()
     {
-        blockCount = 0;
         hasNewButton = false;
         gm = GameObject.FindObjectOfType<GameManager>();
     }
@@ -32,9 +30,7 @@ public class ButtonClick : MonoBehaviour
     void OnMouseDown()//when the button is clicked on have the game manager make a new instance of the corresponding block
     {
         
-        newButton = gm.instantiateBlock();
-        newButton.GetComponent<Drag>().blockId = blockCount;
-        blockCount++;
+        newButton = gm.instantiateBlock(buttonType);
         hasNewButton = true;
         offset = gameObject.transform.position - Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z));
     }
@@ -54,7 +50,7 @@ public class ButtonClick : MonoBehaviour
     private void OnMouseUp()
     {
         hasNewButton = false;
-        newButton.GetComponent<Drag>().checkBlocks();  
+        newButton.GetComponent<BlockBehavior>().checkBlocks();  
     }
     
 }

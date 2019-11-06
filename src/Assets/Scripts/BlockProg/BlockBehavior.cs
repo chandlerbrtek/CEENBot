@@ -3,6 +3,10 @@ using System.Collections;
 
 [RequireComponent(typeof(BoxCollider2D))]
 
+/*
+ * BlockBehavior is a script that governs how individual programming blocks behave
+ * Blocks function as a doubly linked list as well
+ */
 public class BlockBehavior : MonoBehaviour
 {
 
@@ -24,6 +28,9 @@ public class BlockBehavior : MonoBehaviour
     public int blockId;
     public bool root;
 
+    /*
+     * Initializes data for this block when created
+     */
     private void Start()
     {
         gm = GameObject.FindObjectOfType<GameManager>();
@@ -33,6 +40,11 @@ public class BlockBehavior : MonoBehaviour
 
     }
 
+    /*
+     * When this block is clicked on
+     * if it's in a list remove it from that list
+     * then collect data for the starting point that was clicked
+     */
     void OnMouseDown()
     {//function setting up data for dragging block movement
      // if (blockId != 0)
@@ -49,7 +61,10 @@ public class BlockBehavior : MonoBehaviour
         }
     }
 
-
+    /*
+     * When the mouse is moved, while it's held down on this block
+     * move the block, and all of it's children with it.
+     */
     void OnMouseDrag()
     {
       //  if (blockId != 0)
@@ -63,7 +78,10 @@ public class BlockBehavior : MonoBehaviour
             alignChildren();
         }
     }
-
+    /*
+     * When the mouse is released, check to see if this block can be attached to 
+     * a previous black
+     */
     private void OnMouseUp()
     {
       //  if (blockId != 0)
@@ -73,8 +91,11 @@ public class BlockBehavior : MonoBehaviour
         }
     }
 
+    /*
+     * returns true if the position given would be in position to be the next block
+     */
     public bool shouldSnap(Vector3 pos)
-    {//returns true if the position given would be in position to be the next block
+    {
 
         Vector3 tpos = new Vector3(pos.x, (float)(pos.y + .93), pos.z);
         if (nextCollider.bounds.Contains(tpos))
@@ -86,8 +107,11 @@ public class BlockBehavior : MonoBehaviour
         return false;
     }
 
+    /*
+     * Set the parent block to the block that was passed
+     */
     public void setPrev(GameObject b)
-    {//set parent block
+    {
       //  if (blockId != 0)
         {
             hasPrev = true;
@@ -96,12 +120,20 @@ public class BlockBehavior : MonoBehaviour
 
     }
 
+    /*
+     * Remove the child block of this block
+     */
     public void removeChild()
     {//remove child block
         hasNext = false;
         nextBlock = null;
     }
 
+    /*
+     * Function takes in a game block
+     * If this block does not have a child it's child is set to the passed block
+     * If we have a child, call pass the block recursively to it
+     */
     public void addBlock(GameObject b)
     {//adds a block to this list
         if (b.GetComponent<BlockBehavior>().blockId == blockId)
@@ -122,8 +154,11 @@ public class BlockBehavior : MonoBehaviour
         }
     }
 
+    /*
+     * Recursive function making sure that the children of this block are lined up with this one
+     */
     public void alignChildren()
-    {//make sure that the children of this block are lined up with this one
+    {
         if (hasNext)
         {
             Vector3 tpos = nextCollider.transform.position;
@@ -133,8 +168,12 @@ public class BlockBehavior : MonoBehaviour
         }
     }
 
+    /*
+     * Goes through the GameManager's list of all blocks to find out if this
+     * block is in position under another block
+     */
     public void checkBlocks()
-    {//check to find if there is a block that this block is in position under
+    { 
       //  if (blockId != 0)
         {
             foreach (GameObject go in gm.blocks)

@@ -2,6 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+ * Since blocks are doubly linked lists but there can be multiple lists
+ * the game manager functions as an object in the scene that keeps track of
+ * all of the individual blocks.
+ */
 public class GameManager : MonoBehaviour
 {
     public GameObject button1;
@@ -15,6 +20,9 @@ public class GameManager : MonoBehaviour
     private int blockId;
 
     public List<GameObject> blocks;
+    /*
+     * Intialization function
+     */
     void Start()
     {
         buttons = new GameObject[4] { button1,button2,button3,button4};
@@ -22,7 +30,9 @@ public class GameManager : MonoBehaviour
         blocks = new List<GameObject>();
         addBlock(startButton);
     }
-
+    /*
+     * creates and returns a new block with id i
+     */
     public GameObject instantiateBlock(int i)
     {
         newBlock = Instantiate(buttons[i]);
@@ -32,6 +42,9 @@ public class GameManager : MonoBehaviour
 
     }
 
+    /*
+     * adds block b to the list of all blocks
+     */
     public void addBlock(GameObject b)
     {
         Debug.Log("adding block" + blockId);
@@ -43,9 +56,4 @@ public class GameManager : MonoBehaviour
 
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

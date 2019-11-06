@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
+/**  
+* SelectOnInput takes user input, click, to select buttons   
+*/
 
 public class SelectOnInput : MonoBehaviour {
 
@@ -10,13 +13,11 @@ public class SelectOnInput : MonoBehaviour {
     public GameObject selectedObject;
 
     private bool buttonSelected;
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
+
+    /**  
+    * Update is called once per frame. Selects button on input   
+    */
+    void Update () {
 		if(Input.GetAxisRaw("Vertical") != 0 && buttonSelected == false)
         {
             eventSystem.SetSelectedGameObject(selectedObject);

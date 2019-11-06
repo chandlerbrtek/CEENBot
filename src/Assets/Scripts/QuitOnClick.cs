@@ -2,8 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class QuitOnClick : MonoBehaviour {
+/**  
+ * QuitOnClick is a simple class that exits the game on click   
+ */
 
+public class QuitOnClick : MonoBehaviour {
+    /**  
+    * Quits the game when prompted (on click of button)  
+    */
     public void Quit()
     {
 #if UNITY_EDITOR

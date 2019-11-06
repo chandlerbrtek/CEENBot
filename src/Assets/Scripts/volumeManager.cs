@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/**  
+* volumeManager adjusts in game volume based on UI sliders  
+*/
+
 public class volumeManager : MonoBehaviour {
 
     public Slider masterSlider;
@@ -12,9 +16,11 @@ public class volumeManager : MonoBehaviour {
 	void Start () {
 		
 	}
-	
-	// Update is called once per frame
-	void Update () {
+
+    /**  
+    * Update is called once per frame   
+    */ 
+    void Update () {
         musicAudio.volume = musicSlider.value;
         AudioListener.volume = masterSlider.value;
 	}

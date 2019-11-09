@@ -4211,6 +4211,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 100000, guid: 7461a7b0cf97947fd9b9e4502fd2d07b, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 400004, guid: 7461a7b0cf97947fd9b9e4502fd2d07b, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -4242,10 +4246,6 @@ PrefabInstance:
     - target: {fileID: 400004, guid: 7461a7b0cf97947fd9b9e4502fd2d07b, type: 3}
       propertyPath: m_LocalPosition.z
       value: -74.09861
-      objectReference: {fileID: 0}
-    - target: {fileID: 100000, guid: 7461a7b0cf97947fd9b9e4502fd2d07b, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 7461a7b0cf97947fd9b9e4502fd2d07b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -6566,12 +6566,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8664ab2d9b16444b3bf6b109715e7d58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speedText: {fileID: 438086883}
-  agilityText: {fileID: 1063771284}
-  sizeText: {fileID: 324172189}
-  moneyText: {fileID: 265322003}
-  highscoreText: {fileID: 475514732}
-  isMainMenu: 1
 --- !u!4 &2089323616
 Transform:
   m_ObjectHideFlags: 0

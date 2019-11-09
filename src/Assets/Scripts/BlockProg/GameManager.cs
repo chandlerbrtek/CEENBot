@@ -19,16 +19,26 @@ public class GameManager : MonoBehaviour
     private bool hasNewBlock;
     private int blockId;
 
+    public string levelString;
+    public GameObject levelManager;
+
     public List<GameObject> blocks;
     /*
      * Intialization function
      */
+
+    void Awake()
+    {
+
+    }
+
     void Start()
     {
         buttons = new GameObject[4] { button1,button2,button3,button4};
         blockId = 0;
         blocks = new List<GameObject>();
         addBlock(startButton);
+
     }
     /*
      * creates and returns a new block with id i
@@ -55,5 +65,4 @@ public class GameManager : MonoBehaviour
         
 
     }
-
 }

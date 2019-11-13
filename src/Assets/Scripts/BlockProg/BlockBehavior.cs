@@ -3,7 +3,7 @@ using System.Collections;
 
 [RequireComponent(typeof(BoxCollider2D))]
 
-/*
+/**
  * BlockBehavior is a script that governs how individual programming blocks behave
  * Blocks function as a doubly linked list as well
  */
@@ -17,9 +17,9 @@ public class BlockBehavior : MonoBehaviour
 
     //doubly linked listy of blocks
     private GameObject nextBlock;
-    private bool hasNext;
+    public bool hasNext;
     private GameObject prevBlock;
-    private bool hasPrev;
+    public bool hasPrev;
 
 
     private GameManager gm;
@@ -28,7 +28,7 @@ public class BlockBehavior : MonoBehaviour
     public int blockId;
     public bool root;
 
-    /*
+    /**
      * Initializes data for this block when created
      */
     private void Start()
@@ -37,10 +37,11 @@ public class BlockBehavior : MonoBehaviour
         nextCollider = GetComponentInChildren<BoxCollider2D>();
         hasNext = false;
         hasPrev = false;
+        screenPoint = new Vector3(0, 0, 3);
 
     }
 
-    /*
+    /**
      * When this block is clicked on
      * if it's in a list remove it from that list
      * then collect data for the starting point that was clicked
@@ -61,7 +62,7 @@ public class BlockBehavior : MonoBehaviour
         }
     }
 
-    /*
+    /**
      * When the mouse is moved, while it's held down on this block
      * move the block, and all of it's children with it.
      */
@@ -78,7 +79,7 @@ public class BlockBehavior : MonoBehaviour
             alignChildren();
         }
     }
-    /*
+    /**
      * When the mouse is released, check to see if this block can be attached to 
      * a previous black
      */
@@ -91,7 +92,7 @@ public class BlockBehavior : MonoBehaviour
         }
     }
 
-    /*
+    /**
      * returns true if the position given would be in position to be the next block
      */
     public bool shouldSnap(Vector3 pos)
@@ -107,7 +108,7 @@ public class BlockBehavior : MonoBehaviour
         return false;
     }
 
-    /*
+    /**
      * Set the parent block to the block that was passed
      */
     public void setPrev(GameObject b)
@@ -120,7 +121,7 @@ public class BlockBehavior : MonoBehaviour
 
     }
 
-    /*
+    /**
      * Remove the child block of this block
      */
     public void removeChild()
@@ -129,7 +130,9 @@ public class BlockBehavior : MonoBehaviour
         nextBlock = null;
     }
 
-    /*
+
+
+    /**
      * Function takes in a game block
      * If this block does not have a child it's child is set to the passed block
      * If we have a child, call pass the block recursively to it
@@ -154,7 +157,7 @@ public class BlockBehavior : MonoBehaviour
         }
     }
 
-    /*
+    /**
      * Recursive function making sure that the children of this block are lined up with this one
      */
     public void alignChildren()
@@ -168,7 +171,21 @@ public class BlockBehavior : MonoBehaviour
         }
     }
 
-    /*
+    public void move(Vector3 v)
+    {
+        transform.position = transform.position + v;
+    }
+
+    public GameObject getNext()
+    {
+        return nextBlock;
+    }
+
+    public GameObject getPrevious()
+    {
+        return prevBlock;
+    }
+    /**
      * Goes through the GameManager's list of all blocks to find out if this
      * block is in position under another block
      */

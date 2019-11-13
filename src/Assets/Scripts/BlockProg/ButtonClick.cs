@@ -4,7 +4,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(BoxCollider2D))]
 
-/*
+/**
  * This class functions as a button that spawns a new 
  * Programming block when clicked on.
  */
@@ -18,16 +18,17 @@ public class ButtonClick : MonoBehaviour
     private GameManager gm;
     public int buttonType;
 
-   /*
+   /**
     * Intializes class variables
     */
     void Start()
     {
         hasNewButton = false;
         gm = GameObject.FindObjectOfType<GameManager>();
+        screenPoint = new Vector3(0, 0, 3);
     }
 
-    /*
+    /**
      * When the mouse is clicked on this button
      * spawn a block of the corresponding type and
      * set it to the position of the mouse
@@ -40,7 +41,7 @@ public class ButtonClick : MonoBehaviour
         offset = gameObject.transform.position - Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z));
     }
 
-    /*
+    /**
      * Performs button dragging for intial button click
      */
     void OnMouseDrag()
@@ -55,7 +56,7 @@ public class ButtonClick : MonoBehaviour
 
     }
 
-    /*
+    /**
      * When you let the mouse up make sure it checks
      * if it is near another block
      */

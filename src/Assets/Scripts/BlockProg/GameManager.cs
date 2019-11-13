@@ -4,7 +4,7 @@ using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 
-/*
+/**
  * Since blocks are doubly linked lists but there can be multiple lists
  * the game manager functions as an object in the scene that keeps track of
  * all of the individual blocks.
@@ -15,11 +15,19 @@ public class GameManager : MonoBehaviour
     public GameObject button2;
     public GameObject button3;
     public GameObject button4;
+    public GameObject button5;
+    public GameObject button6;
+    public GameObject button7;
+
+    public GameObject resetPosition;
     public GameObject startButton;
+    public GameObject arrow;
     GameObject[] buttons;
     private GameObject newBlock;
     private bool hasNewBlock;
     private int blockId;
+
+    private Vector3 height;
     private int selectedProfile;
     private List<Player> profiles;
 
@@ -27,7 +35,7 @@ public class GameManager : MonoBehaviour
     public GameObject levelManager;
 
     public List<GameObject> blocks;
-    /*
+    /**
      * Intialization function
      */
 
@@ -38,13 +46,14 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        buttons = new GameObject[4] { button1,button2,button3,button4};
+        height = new Vector3(0, 0.93f, 0);
+        buttons = new GameObject[7] { button1,button2,button3,button4, button5, button6, button7};
         blockId = 0;
         blocks = new List<GameObject>();
         addBlock(startButton);
 
     }
-    /*
+    /**
      * creates and returns a new block with id i
      */
     public GameObject instantiateBlock(int i)
@@ -56,16 +65,14 @@ public class GameManager : MonoBehaviour
 
     }
 
-    /*
+    /**
      * adds block b to the list of all blocks
      */
     public void addBlock(GameObject b)
     {
-        Debug.Log("adding block" + blockId);
         b.GetComponent<BlockBehavior>().blockId = blockId;
         blockId++;
         blocks.Add(b);
-        Debug.Log("Blocks size:" + blocks.Count);
     }
 
     public void SaveLevelScore(int levelIndex, int numOfStars)
@@ -83,6 +90,76 @@ public class GameManager : MonoBehaviour
         save.profiles = profiles;
 
         return save;
+    }
+
+    public void moveBlocks(Vector3 offset)
+    {
+        foreach (GameObject go in blocks)
+        {
+            go.GetComponent<BlockBehavior>().move(offset);
+        }
+    }
+
+    public void executeBlockProgram()
+    {
+        resetPosition.GetComponent<ReturnScript>().resetPosition();
+        arrow.GetComponent<SpriteRenderer>().enabled=true;
+        StartCoroutine(Wait());
+    }
+
+    IEnumerator Wait()
+    {
+        GameObject curr = startButton;
+
+
+        while (true)
+        {
+            
+            
+            if(curr.name == "ForwardBlock(Clone)")
+            {
+                levelManager.GetComponent<levelManager>().forward();
+            }
+            else if(curr.name == "BackBlock(Clone)")
+            {
+                levelManager.GetComponent<levelManager>().back();
+            }
+            else if (curr.name == "RightBlock(Clone)")
+            {
+                levelManager.GetComponent<levelManager>().right();
+            }
+            else if (curr.name == "LeftBlock(Clone)")
+            {
+                levelManager.GetComponent<levelManager>().left();
+            }
+            else if (curr.name == "BeepBlock(Clone)")
+            {
+
+            }
+            else if (curr.name == "LightBlock(Clone)")
+            {
+
+            }
+            else if (curr.name == "RestartBlock(Clone)")
+            {
+                while (curr.GetComponent<BlockBehavior>().hasPrev)
+                {
+                    curr = curr.GetComponent<BlockBehavior>().getPrevious();
+                    moveBlocks(-height);
+                }
+  
+            }
+            yield return new WaitForSeconds(1);
+            moveBlocks(height);
+            if (!curr.GetComponent<BlockBehavior>().hasNext)
+                break;
+            curr = curr.GetComponent<BlockBehavior>().getNext();
+            
+        }
+        yield return new WaitForSeconds(1);
+        arrow.GetComponent<SpriteRenderer>().enabled = false;
+        resetPosition.GetComponent<ReturnScript>().resetPosition();
+        levelManager.GetComponent<levelManager>().reset();
     }
 
     private void SaveGame()

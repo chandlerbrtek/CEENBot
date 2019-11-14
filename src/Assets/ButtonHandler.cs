@@ -14,7 +14,7 @@ public class ButtonHandler : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+     
     }
 
     // Update is called once per frame
@@ -27,7 +27,7 @@ public class ButtonHandler : MonoBehaviour
     {
         string profileName = "Null";
         Debug.Log("I'm about to load the game...");
-        LoadGame();
+        LoadGame(false);
         GameObject inputFieldGo = GameObject.Find("TextBox");
         InputField inputFieldCo = inputFieldGo.GetComponent<InputField>();
         profileName = inputFieldCo.text;
@@ -38,6 +38,7 @@ public class ButtonHandler : MonoBehaviour
         profiles.Add(player);
         Debug.Log("Profiles after creation:");
         Debug.Log(profiles.ToString());
+        Debug.Log(profiles.Count);
         SaveGame();
         
     }
@@ -67,7 +68,7 @@ public class ButtonHandler : MonoBehaviour
         Debug.Log("Game Saved");
     }
 
-    public void LoadGame()
+    public void LoadGame(bool loadProfiles)
     {
         // 1
         if (File.Exists(Application.persistentDataPath + "/gamesave.save"))
@@ -86,6 +87,29 @@ public class ButtonHandler : MonoBehaviour
                 profiles = new List<Player>();
             }
             Debug.Log("Game Loaded");
+
+            if (loadProfiles)
+            {
+                GameObject inputFieldGo = GameObject.Find("ProfOneText");
+                Text inputFieldCo = inputFieldGo.GetComponent<Text>();
+                inputFieldCo.text = "" + profiles[profiles.Count - 1].username;
+
+                inputFieldGo = GameObject.Find("ProfTwoText");
+                inputFieldCo = inputFieldGo.GetComponent<Text>();
+                inputFieldCo.text = "" + profiles[profiles.Count - 2].username;
+
+                inputFieldGo = GameObject.Find("ProfThreeText");
+                inputFieldCo = inputFieldGo.GetComponent<Text>();
+                inputFieldCo.text = "" + profiles[profiles.Count - 3].username;
+
+                inputFieldGo = GameObject.Find("ProfFourText");
+                inputFieldCo = inputFieldGo.GetComponent<Text>();
+                inputFieldCo.text = "" + profiles[profiles.Count - 4].username;
+
+                inputFieldGo = GameObject.Find("ProfFiveText");
+                inputFieldCo = inputFieldGo.GetComponent<Text>();
+                inputFieldCo.text = "" + profiles[profiles.Count - 5].username;
+            }
 
         }
         else

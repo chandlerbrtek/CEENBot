@@ -25,6 +25,7 @@ public class ButtonHandler : MonoBehaviour
 
     public void CreateNewProfile()
     {
+        profiles = new List<Player>();
         string profileName = "Null";
         Debug.Log("I'm about to load the game...");
         LoadGame(false);

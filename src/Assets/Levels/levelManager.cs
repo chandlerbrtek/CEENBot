@@ -21,6 +21,8 @@ public class levelManager : MonoBehaviour
     public GameObject finish;
     public GameObject grass;
     public GameObject wall;
+    public GameObject water;
+    public GameObject mud;
 
     public GameObject robot;
 
@@ -50,8 +52,8 @@ public class levelManager : MonoBehaviour
         float[,] level1 = {     { 8,1,1,0,0,0,0},
                                 { 0,1,1,0,0,0,0},
                                 { 0,0,0,0,0,0,9},
-                                { 0,1,1,0,0,0,0},
-                                { 0,1,1,0,0,0,0}
+                                { 0,3,2,0,0,0,0},
+                                { 0,3,2,0,0,0,0}
         };
 
         level = 1;
@@ -80,6 +82,16 @@ public class levelManager : MonoBehaviour
                     GameObject go = Instantiate(wall);
                     go.transform.position = startPos + new Vector3(j * 2, i * -2);
                 }
+                if (lvl[i, j] == 2)
+                {
+                    GameObject go = Instantiate(water);
+                    go.transform.position = startPos + new Vector3(j * 2, i * -2);
+                }
+                if (lvl[i, j] == 3)
+                {
+                    GameObject go = Instantiate(mud);
+                    go.transform.position = startPos + new Vector3(j * 2, i * -2);
+                }
                 if (lvl[i, j] == 8)
                 {
                     startLocation = new Vector2(i, j);
@@ -94,6 +106,7 @@ public class levelManager : MonoBehaviour
                     GameObject go = Instantiate(finish);
                     go.transform.position = startPos + new Vector3(j * 2, i * -2);
                 }
+
             }
         }
     }
@@ -133,7 +146,7 @@ public class levelManager : MonoBehaviour
         if (pos.x >= 0 && pos.x < cols && pos.y>=0 && pos.y<rows)
         {
           // Debug.Log("Checking" + pos + " val:" + currLevel[(int)pos.y, (int)pos.x]);
-            if (currLevel[(int)pos.y,(int)pos.x] != 1)
+            if (currLevel[(int)pos.y,(int)pos.x] != 1 && currLevel[(int)pos.y, (int)pos.x]!=2)
             {
                 //Debug.Log("all clear");
                 return true;

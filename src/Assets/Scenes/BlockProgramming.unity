@@ -782,6 +782,8 @@ MonoBehaviour:
   finish: {fileID: 7938277527146806210, guid: f41d94cfb3013d340b07f9fda4c08b81, type: 3}
   grass: {fileID: 907398851740528788, guid: 560d4fc843caafc48b0d7436bcd8e0b7, type: 3}
   wall: {fileID: 530158079552366694, guid: 8afa045063c82494faa746f6fcb83462, type: 3}
+  water: {fileID: 530158079552366694, guid: 70680e833672d2842ba59561e674ebf0, type: 3}
+  mud: {fileID: 530158079552366694, guid: f5215e73ad7b75642bea49ff83032688, type: 3}
   robot: {fileID: 771445985}
 --- !u!4 &525702420
 Transform:
@@ -973,7 +975,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 9
-  m_Sprite: {fileID: 21300000, guid: 6471bd1891ea86b49a5d094333fa2165, type: 3}
+  m_Sprite: {fileID: 21300000, guid: eefa09c15af53604eacefbfe64f40867, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -991,13 +993,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 771445985}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
   m_LocalPosition: {x: -2.83, y: 3.94, z: 5}
   m_LocalScale: {x: 2.5, y: 2.5, z: 2.5}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 6
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
 --- !u!114 &771445988
 MonoBehaviour:
   m_ObjectHideFlags: 0

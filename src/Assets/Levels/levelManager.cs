@@ -35,7 +35,7 @@ public class levelManager : MonoBehaviour
     float xoffset = -6;
     float yoffset = 4;
 
-    int level;
+    static int level;
     Vector3 startPos;
     Vector2 startLocation;
     Vector2 endLocation;

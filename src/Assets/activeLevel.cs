@@ -16,4 +16,9 @@ public class activeLevel : MonoBehaviour
     {
         return currentLevel;
     }
+
+    void awake()
+    {
+        DontDestroyOnLoad(this);
+    }
 }

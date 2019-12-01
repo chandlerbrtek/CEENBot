@@ -784,7 +784,10 @@ MonoBehaviour:
   wall: {fileID: 530158079552366694, guid: 8afa045063c82494faa746f6fcb83462, type: 3}
   water: {fileID: 530158079552366694, guid: 70680e833672d2842ba59561e674ebf0, type: 3}
   mud: {fileID: 530158079552366694, guid: f5215e73ad7b75642bea49ff83032688, type: 3}
+  boulder: {fileID: 530158079552366694, guid: cd1138c25e941464f84862d00e6b4d30, type: 3}
   robot: {fileID: 771445985}
+  tiles: []
+  boulders: []
 --- !u!4 &525702420
 Transform:
   m_ObjectHideFlags: 0
@@ -1519,6 +1522,7 @@ MonoBehaviour:
   arrow: {fileID: 820391718}
   levelString: 
   levelManager: {fileID: 525702418}
+  activeLevel: {fileID: 1831761796}
   blocks: []
 --- !u!1 &1556536839
 GameObject:

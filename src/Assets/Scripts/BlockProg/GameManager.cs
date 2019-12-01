@@ -33,6 +33,7 @@ public class GameManager : MonoBehaviour
 
     public string levelString;
     public GameObject levelManager;
+    public GameObject activeLevel;
 
     public List<GameObject> blocks;
     /**
@@ -51,7 +52,8 @@ public class GameManager : MonoBehaviour
         blockId = 0;
         blocks = new List<GameObject>();
         addBlock(startButton);
-
+        Debug.Log("Loading level:" + activeLevel.GetComponent<activeLevel>().getLevel());
+        levelManager.GetComponent<levelManager>().setLevel(activeLevel.GetComponent<activeLevel>().getLevel());
     }
     /**
      * creates and returns a new block with id i

@@ -127,7 +127,7 @@ public class levelManager : MonoBehaviour
 
 
 
-        setLevel(1);
+        //setLevel(1);
 
         if (level == 1)
         {
@@ -238,6 +238,7 @@ public class levelManager : MonoBehaviour
                     GameObject go = Instantiate(finish);
                     tiles.Add(go);
                     go.transform.position = startPos + new Vector3(j * 2, i * -2);
+                 
                 }
 
             }
@@ -291,7 +292,14 @@ public class levelManager : MonoBehaviour
     public void reset()
     {
         robot.GetComponent<robot>().reset();
-        tiles.Clear();
+        foreach(GameObject go in tiles)
+        {
+            Destroy(go);
+        }
+        foreach(GameObject go in boulders)
+        {
+            Destroy(go);
+        }
         generateLevel();
 
     }

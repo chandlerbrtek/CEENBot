@@ -66,6 +66,15 @@ public class robot : MonoBehaviour
         start = pos;
     }
 
+    public Vector3 getMapPosition()
+    {
+        Vector3 rval = new Vector3();
+        rval.x = position.x;
+        rval.y = position.y * -1;
+        rval.z = 0;
+        return rval;
+    }
+
     public Vector3 getForward()
     {
         Vector3 rval = position + directions[dir];

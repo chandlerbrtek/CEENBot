@@ -37,8 +37,8 @@ public class levelManager : MonoBehaviour
 
     static int level;
     Vector3 startPos;
-    Vector2 startLocation;
-    Vector2 endLocation;
+    Vector3 startLocation;
+    Vector3 endLocation;
 
     public List<GameObject> tiles;
     public List<GameObject> boulders;
@@ -55,11 +55,13 @@ public class levelManager : MonoBehaviour
         boulders = new List<GameObject>();
         startPos = new Vector3(-2.888f, 3.974f);
 
+        currLevel = new float[(int)rows, (int)cols];
+
         level1 = new float[,] { { 8,1,1,0,0,0,0},
                                 { 0,1,1,0,0,0,0},
-                                { 4,0,0,0,0,0,9},
-                                { 0,3,2,0,0,0,0},
-                                { 0,3,2,0,0,0,0}
+                                { 0,0,0,0,4,4,9},
+                                { 0,4,2,0,0,0,0},
+                                { 0,0,2,0,0,0,0}
         };
 
         level2 = new float[,] { { 8,1,1,0,0,0,0},
@@ -127,63 +129,78 @@ public class levelManager : MonoBehaviour
 
 
 
-        //setLevel(1);
+        setLevel(0);
 
-        if (level == 1)
-        {
-            
-            Debug.Log(level1[0, 0]);
-            //generateLevel();
-        }
+
     }
 
     public void setLevel(int i)
     {
         level = i;
-        if(i==1)
+        Debug.Log("set level:" + i);
+        if(i==0)
         {
-            currLevel = level1;
+            copyLevel(level1);
+        }
+        if (i == 1)
+        {
+            copyLevel(level2);
         }
         if (i == 2)
         {
-            currLevel = level2;
+            copyLevel(level3);
         }
         if (i == 3)
         {
-            currLevel = level3;
+            copyLevel(level4);
         }
         if (i == 4)
         {
-            currLevel = level4;
+            copyLevel(level5);
         }
         if (i == 5)
         {
-            currLevel = level5;
+            copyLevel(level6);
         }
         if (i == 6)
         {
-            currLevel = level6;
+            copyLevel(level7);
         }
         if (i == 7)
         {
-            currLevel = level7;
+            copyLevel(level8);
         }
         if (i == 8)
         {
-            currLevel = level8;
+            copyLevel(level9);
         }
         if (i == 9)
         {
-            currLevel = level9;
+            copyLevel(level10);
         }
-        if (i == 10)
-        {
-            currLevel = level10;
-        }
+
         generateLevel();
+
+
+    }
+
+    public void copyLevel(float[,] arr)
+    {
+
+        currLevel = new float[(int)rows, (int)cols];
+        for (int i = 0; i < rows; i++)
+        {
+
+            for (int j = 0; j < cols; j++)
+            {
+                currLevel[i,j] = arr[i,j];
+            }
+        }
+            
     }
     public void generateLevel()
     {
+        clear();
         for (int i = 0; i < rows; i++)
         {
             
@@ -222,10 +239,11 @@ public class levelManager : MonoBehaviour
                     b.transform.position = startPos + new Vector3(j * 2, i * -2);
                     boulders.Add(b);
 
+
                 }
                 if (currLevel[i, j] == 8)
                 {
-                    startLocation = new Vector2(i, j);
+                    startLocation = new Vector3(i, j);
                     GameObject go = Instantiate(start);
                     tiles.Add(go);
                     go.transform.position = startPos + new Vector3(j * 2, i * -2);
@@ -234,7 +252,7 @@ public class levelManager : MonoBehaviour
                 }
                 if (currLevel[i, j] == 9)
                 {
-                    endLocation = new Vector2(i, j);
+                    endLocation = new Vector3(i, j);
                     GameObject go = Instantiate(finish);
                     tiles.Add(go);
                     go.transform.position = startPos + new Vector3(j * 2, i * -2);
@@ -258,7 +276,7 @@ public class levelManager : MonoBehaviour
 
     public void forward()
     {
-        if (legalMove(robot.GetComponent<robot>().getForward()))
+        if (legalMove(robot.GetComponent<robot>().getForward())&&boulderMove(robot.GetComponent<robot>().getForward()))
         {
             //Debug.Log("moving to:" + robot.GetComponent<robot>().getForward());
             robot.GetComponent<robot>().forward();
@@ -289,37 +307,96 @@ public class levelManager : MonoBehaviour
         return false;
     }
 
+    public bool legalBoulderMove(Vector3 pos)
+    {
+
+        if (pos.x >= 0 && pos.x < cols && pos.y >= 0 && pos.y < rows)
+        {
+            // Debug.Log("Checking" + pos + " val:" + currLevel[(int)pos.y, (int)pos.x]);
+            if (currLevel[(int)pos.y, (int)pos.x] != 1 && getBoulder(pos)==null)
+            {
+                
+                return true;
+            }
+        }
+        return false;
+    }
+
     public void reset()
     {
         robot.GetComponent<robot>().reset();
-        foreach(GameObject go in tiles)
-        {
-            Destroy(go);
-        }
-        foreach(GameObject go in boulders)
-        {
-            Destroy(go);
-        }
-        generateLevel();
+        setLevel(level);
 
     }
 
-    public Vector2 getPos(GameObject go)
+    public void clear()
     {
-        Vector2 rval = new Vector2();
+
+        foreach (GameObject go in tiles)
+        {
+            Destroy(go);
+        }
+        tiles.Clear();
+        foreach (GameObject go in boulders)
+        {
+            Destroy(go);
+        }
+        boulders.Clear();
+    }
+    public bool boulderMove(Vector3 pos)
+    {
+        bool rval=true;
+
+        GameObject b = getBoulder(pos);
+        if(b!=null)
+        {
+            
+            Vector3 oneFurther = pos + pos - robot.GetComponent<robot>().getMapPosition();
+            
+            if (legalBoulderMove(oneFurther))
+            {
+                Vector3 newPos = pos - robot.GetComponent<robot>().getMapPosition();
+                newPos *= 2;
+                newPos.y *= -1;
+
+                b.transform.position += newPos;
+                if (currLevel[(int)oneFurther.y, (int)oneFurther.x] == 2)
+                {//spot is water
+ 
+                    currLevel[(int)oneFurther.y, (int)oneFurther.x] = 3;
+                    GameObject go = Instantiate(mud);
+                    tiles.Add(go);
+                    go.transform.position = b.transform.position;
+                    boulders.Remove(b);
+                    Destroy(b);
+                }
+            }
+            else
+            {
+                rval = false;
+            }
+
+        }
+
+        return rval;
+    }
+
+    public Vector3 getPos(GameObject go)
+    {
+        Vector3 rval = new Vector3();
         Vector3 temp = go.transform.position - startPos;
         rval.x = temp.x / 2;
         rval.y = temp.y / -2;
         return rval;
     }
 
-    public GameObject getBoulder(int x, int y)
+    public GameObject getBoulder(Vector3 pos)
     {
+
         GameObject rval = null;
-        Vector2 pos = new Vector2(x, y);
         foreach(GameObject go in boulders)
         {
-            if(getPos(go)==pos)
+            if((getPos(go)-pos).magnitude<0.1)
             {
                 rval = go;
             }

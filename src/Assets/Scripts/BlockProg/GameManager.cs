@@ -116,9 +116,9 @@ public class GameManager : MonoBehaviour
 
         while (true)
         {
+
             
-            
-            if(curr.name == "ForwardBlock(Clone)")
+            if (curr.name == "ForwardBlock(Clone)")
             {
                 levelManager.GetComponent<levelManager>().forward();
             }
@@ -151,6 +151,7 @@ public class GameManager : MonoBehaviour
                 }
   
             }
+            
             yield return new WaitForSeconds(1);
             moveBlocks(height);
             if (!curr.GetComponent<BlockBehavior>().hasNext)

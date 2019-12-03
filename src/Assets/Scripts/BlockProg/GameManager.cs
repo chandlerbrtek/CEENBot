@@ -30,6 +30,7 @@ public class GameManager : MonoBehaviour
     private Vector3 height;
     private int selectedProfile;
     private List<Player> profiles;
+    public string blocksave;
 
     public string levelString;
     public GameObject levelManager;
@@ -196,6 +197,7 @@ public class GameManager : MonoBehaviour
 
             selectedProfile = save.selectedProfile;
             profiles = save.profiles;
+            blocksave = save.profiles[selectedProfile].progress;
 
             Debug.Log("Game Loaded");
 
@@ -206,5 +208,15 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void saveBlocks(string toSave)
+    {
+        Debug.Log(selectedProfile);
+        profiles[selectedProfile].progress = toSave;
+        SaveGame();
+    }
 
+    public GameObject getStartBlock()
+    {
+        return startButton;
+    }
 }

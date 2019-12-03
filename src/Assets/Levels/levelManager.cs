@@ -20,6 +20,9 @@ public class levelManager : MonoBehaviour
 
     public float[,] currLevel;
 
+    int objectives;
+    int completedObjectives;
+
     Vector3 offset;
     Vector3 startLocation;
     Vector3 endLocation;
@@ -38,6 +41,8 @@ public class levelManager : MonoBehaviour
     public GameObject water;
     public GameObject mud;
     public GameObject boulder;
+    public GameObject light;
+    public GameObject note;
 
     //the robot
     public GameObject robot;
@@ -77,11 +82,11 @@ public class levelManager : MonoBehaviour
 
         currLevel = new float[(int)rows, (int)cols];
 
-        level1 = new float[,] { { 8,1,1,0,0,0,0},
+        level1 = new float[,] { { 8,1,1,0,5,0,0},
                                 { 0,1,1,0,0,0,1},
                                 { 0,0,2,0,4,4,9},
                                 { 4,4,2,0,0,0,1},
-                                { 0,0,2,0,0,0,0}
+                                { 0,0,2,0,6,0,0}
         };
 
         level2 = new float[,] { { 8,1,1,0,0,0,0},
@@ -261,6 +266,20 @@ public class levelManager : MonoBehaviour
 
 
                 }
+                if(currLevel[i, j] == 5)
+                {//note tile
+                    GameObject go = Instantiate(note);
+                    tiles.Add(go);
+                    go.transform.position = offset + new Vector3(j * 2, i * -2);
+                    objectives++;
+                }
+                if(currLevel[i, j] == 6)
+                {//bulb tiles
+                    GameObject go = Instantiate(light);
+                    tiles.Add(go);
+                    go.transform.position = offset + new Vector3(j * 2, i * -2);
+                    objectives++;
+                }
                 if (currLevel[i, j] == 8)
                 {
                     startLocation = new Vector3(i, j);
@@ -294,6 +313,35 @@ public class levelManager : MonoBehaviour
         robot.GetComponent<robot>().left();
     }
 
+    public void lightActivate()
+    {
+        Vector3 temp = robot.GetComponent<robot>().getMapPosition();
+        if (currLevel[(int)temp.y, (int)temp.x]==6)
+        {
+            completedObjectives++;
+            currLevel[(int)boulderEndMapPos.y, (int)boulderEndMapPos.x] = 0;
+            GameObject go = Instantiate(grass);
+            tiles.Add(go);
+            go.transform.position = robot.GetComponent<robot>().getPos();
+
+        }
+    }
+
+    public void musicActivate()
+    {
+        Vector3 temp = robot.GetComponent<robot>().getMapPosition();
+        if (currLevel[(int)temp.y, (int)temp.x] == 5)
+        {
+            completedObjectives++;
+            currLevel[(int)boulderEndMapPos.y, (int)boulderEndMapPos.x] = 0;
+            GameObject go = Instantiate(grass);
+            tiles.Add(go);
+            go.transform.position = robot.GetComponent<robot>().getPos();
+
+        }
+    }
+
+
     public void forward()
     {
         if (legalMove(robot.GetComponent<robot>().getForward())&&boulderMove(robot.GetComponent<robot>().getForward()))
@@ -310,8 +358,11 @@ public class levelManager : MonoBehaviour
     {
         if (legalMove(robot.GetComponent<robot>().getBackward()))
         {
-           // Debug.Log("moving to:" + robot.GetComponent<robot>().getBackward());
+            // Debug.Log("moving to:" + robot.GetComponent<robot>().getBackward());
             robot.GetComponent<robot>().back();
+            startPos = robot.GetComponent<robot>().getPos();
+            endPos = robot.GetComponent<robot>().getRealBackward();
+            isMoving = true;
         }
     }
 
@@ -354,7 +405,8 @@ public class levelManager : MonoBehaviour
 
     public void clear()
     {
-
+        objectives = 0;
+        completedObjectives = 0;
         foreach (GameObject go in tiles)
         {
             Destroy(go);

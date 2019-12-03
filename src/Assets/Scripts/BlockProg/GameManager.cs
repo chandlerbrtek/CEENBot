@@ -136,11 +136,11 @@ public class GameManager : MonoBehaviour
             }
             else if (curr.name == "BeepBlock(Clone)")
             {
-
+                levelManager.GetComponent<levelManager>().musicActivate();
             }
             else if (curr.name == "LightBlock(Clone)")
             {
-
+                levelManager.GetComponent<levelManager>().lightActivate();
             }
             else if (curr.name == "RestartBlock(Clone)")
             {

@@ -7,7 +7,7 @@ public class Drag : MonoBehaviour
 {
 
     //movement data
-    private Vector3 screenPoint;
+    //private Vector3 screenPoint;
     private Vector3 offset;
     
 
@@ -33,7 +33,7 @@ public class Drag : MonoBehaviour
 
     void OnMouseDown()
     {//function setting up data for dragging block movement
-        offset = gameObject.transform.position - Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z));
+        offset = gameObject.transform.position - Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y));
 
         //if the block was in a list, remove it, but it keeps it's children
         if (hasPrev)
@@ -47,7 +47,7 @@ public class Drag : MonoBehaviour
     void OnMouseDrag()
     {
         //move the block to follow the cursor
-        Vector3 curScreenPoint = new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z);
+        Vector3 curScreenPoint = new Vector3(Input.mousePosition.x, Input.mousePosition.y);
         Vector3 curPosition = Camera.main.ScreenToWorldPoint(curScreenPoint) + offset;
         transform.position = curPosition;
 

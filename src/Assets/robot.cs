@@ -50,20 +50,31 @@ public class robot : MonoBehaviour
 
     public void forward()
     {
-        this.transform.position = this.transform.position + directions[dir]*2;
+        //this.transform.position = this.transform.position + directions[dir]*2;
         position += directions[dir];
     }
 
     public void back()
     {
-        this.transform.position = this.transform.position - directions[dir]*2;
+        //this.transform.position = this.transform.position - directions[dir]*2;
         position -= directions[dir];
     }
     
     public void setPos(Vector3 pos)
     {
         this.transform.position = pos;
+        
+    }
+
+    public void setStart(Vector3 pos)
+    {
+        this.transform.position = pos;
         start = pos;
+    }
+
+    public Vector3 getPos()
+    {
+        return this.transform.position;
     }
 
     public Vector3 getMapPosition()
@@ -87,6 +98,16 @@ public class robot : MonoBehaviour
         Vector3 rval = position - directions[dir];
         rval.y *= -1;
         return rval;
+    }
+
+    public Vector3 getRealForward()
+    {
+        return this.transform.position + directions[dir] * 2;
+    }
+
+    public Vector3 getRealBackward()
+    {
+        return this.transform.position - directions[dir] * 2;
     }
 
     public void reset()

@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class levelManager : MonoBehaviour
 {
+    //Level Data
+    static int level;
+
     public float[,] level1;
     public float[,] level2;
     public float[,] level3;
@@ -15,10 +18,19 @@ public class levelManager : MonoBehaviour
     public float[,] level9;
     public float[,] level10;
 
-
-
     public float[,] currLevel;
 
+    Vector3 offset;
+    Vector3 startLocation;
+    Vector3 endLocation;
+
+    float rows = 5;
+    float cols = 7;
+
+    float xoffset = -6;
+    float yoffset = 4;
+
+    //tiles
     public GameObject start;
     public GameObject finish;
     public GameObject grass;
@@ -27,22 +39,27 @@ public class levelManager : MonoBehaviour
     public GameObject mud;
     public GameObject boulder;
 
+    //the robot
     public GameObject robot;
 
-    float rows = 5;
-    float cols = 7;
 
-    float xoffset = -6;
-    float yoffset = 4;
 
-    static int level;
-    Vector3 startPos;
-    Vector3 startLocation;
-    Vector3 endLocation;
 
+
+    // Start is called before the first frame update
     public List<GameObject> tiles;
     public List<GameObject> boulders;
-    // Start is called before the first frame update
+
+    //movement stuff
+    public bool isMoving;
+    Vector3 startPos;
+    Vector3 endPos;
+    float speed;
+    float traveled;
+    bool boulderMoving;
+    Vector3 boulderEndPos;
+    Vector3 boulderEndMapPos;
+    GameObject bo;
 
     private void Awake()
     {
@@ -51,16 +68,19 @@ public class levelManager : MonoBehaviour
 
     void Start()
     {
+        speed = .06f;
+        traveled = 0;
+        isMoving = false;
         tiles = new List<GameObject>();
         boulders = new List<GameObject>();
-        startPos = new Vector3(-2.888f, 3.974f);
+        offset = new Vector3(-2.888f, 3.974f);
 
         currLevel = new float[(int)rows, (int)cols];
 
         level1 = new float[,] { { 8,1,1,0,0,0,0},
-                                { 0,1,1,0,0,0,0},
-                                { 0,0,0,0,4,4,9},
-                                { 0,4,2,0,0,0,0},
+                                { 0,1,1,0,0,0,1},
+                                { 0,0,2,0,4,4,9},
+                                { 4,4,2,0,0,0,1},
                                 { 0,0,2,0,0,0,0}
         };
 
@@ -129,7 +149,7 @@ public class levelManager : MonoBehaviour
 
 
 
-        setLevel(0);
+        //setLevel(0);
 
 
     }
@@ -210,33 +230,33 @@ public class levelManager : MonoBehaviour
                 {
                     GameObject go = Instantiate(grass);
                     tiles.Add(go);
-                    go.transform.position = startPos + new Vector3(j * 2, i * -2);
+                    go.transform.position = offset + new Vector3(j * 2, i * -2);
                 }
                 if (currLevel[i, j] == 1)
                 {
                     GameObject go = Instantiate(wall);
                     tiles.Add(go);
-                    go.transform.position = startPos + new Vector3(j * 2, i * -2);
+                    go.transform.position = offset + new Vector3(j * 2, i * -2);
                 }
                 if (currLevel[i, j] == 2)
                 {
                     GameObject go = Instantiate(water);
                     tiles.Add(go);
-                    go.transform.position = startPos + new Vector3(j * 2, i * -2);
+                    go.transform.position = offset + new Vector3(j * 2, i * -2);
                 }
                 if (currLevel[i, j] == 3)
                 {
                     GameObject go = Instantiate(mud);
                     tiles.Add(go);
-                    go.transform.position = startPos + new Vector3(j * 2, i * -2);
+                    go.transform.position = offset + new Vector3(j * 2, i * -2);
                 }
                 if(currLevel[i, j] == 4)
                 {//grass with boulder
                     GameObject go = Instantiate(grass);
                     tiles.Add(go);
-                    go.transform.position = startPos + new Vector3(j * 2, i * -2);
+                    go.transform.position = offset + new Vector3(j * 2, i * -2);
                     GameObject b = Instantiate(boulder);
-                    b.transform.position = startPos + new Vector3(j * 2, i * -2);
+                    b.transform.position = offset + new Vector3(j * 2, i * -2);
                     boulders.Add(b);
 
 
@@ -246,8 +266,8 @@ public class levelManager : MonoBehaviour
                     startLocation = new Vector3(i, j);
                     GameObject go = Instantiate(start);
                     tiles.Add(go);
-                    go.transform.position = startPos + new Vector3(j * 2, i * -2);
-                    robot.GetComponent<robot>().setPos(go.transform.position);
+                    go.transform.position = offset + new Vector3(j * 2, i * -2);
+                    robot.GetComponent<robot>().setStart(go.transform.position);
                     robot.GetComponent<robot>().position = new Vector3(j, i, 0);
                 }
                 if (currLevel[i, j] == 9)
@@ -255,7 +275,7 @@ public class levelManager : MonoBehaviour
                     endLocation = new Vector3(i, j);
                     GameObject go = Instantiate(finish);
                     tiles.Add(go);
-                    go.transform.position = startPos + new Vector3(j * 2, i * -2);
+                    go.transform.position = offset + new Vector3(j * 2, i * -2);
                  
                 }
 
@@ -280,6 +300,9 @@ public class levelManager : MonoBehaviour
         {
             //Debug.Log("moving to:" + robot.GetComponent<robot>().getForward());
             robot.GetComponent<robot>().forward();
+            startPos = robot.GetComponent<robot>().getPos();
+            endPos = robot.GetComponent<robot>().getRealForward();
+            isMoving = true;
         }
     }
 
@@ -355,6 +378,7 @@ public class levelManager : MonoBehaviour
             
             if (legalBoulderMove(oneFurther))
             {
+                /*
                 Vector3 newPos = pos - robot.GetComponent<robot>().getMapPosition();
                 newPos *= 2;
                 newPos.y *= -1;
@@ -369,7 +393,15 @@ public class levelManager : MonoBehaviour
                     go.transform.position = b.transform.position;
                     boulders.Remove(b);
                     Destroy(b);
-                }
+                }*/
+                boulderEndMapPos = oneFurther;
+                boulderEndPos  = pos - robot.GetComponent<robot>().getMapPosition();
+                boulderEndPos *=2;
+                boulderEndPos.y *= -1;
+                boulderEndPos += b.transform.position;
+
+                boulderMoving = true;
+                bo = b;
             }
             else
             {
@@ -384,7 +416,7 @@ public class levelManager : MonoBehaviour
     public Vector3 getPos(GameObject go)
     {
         Vector3 rval = new Vector3();
-        Vector3 temp = go.transform.position - startPos;
+        Vector3 temp = go.transform.position - offset;
         rval.x = temp.x / 2;
         rval.y = temp.y / -2;
         return rval;
@@ -402,5 +434,40 @@ public class levelManager : MonoBehaviour
             }
         }
         return rval;
+    }
+
+    private void Update()
+    {
+        if(isMoving)
+        {
+            Vector3 temp = robot.GetComponent<robot>().getPos() + ((endPos - startPos) * speed);
+            if (boulderMoving)
+            { 
+                bo.transform.position += ((endPos - startPos) * speed);
+            }
+            robot.GetComponent<robot>().setPos(temp);
+            traveled += speed;
+            if(traveled>=1)
+            {
+                traveled = 0;
+                robot.GetComponent<robot>().setPos(endPos);
+                if (boulderMoving)
+                {
+                    bo.transform.position = boulderEndPos;
+                    if (currLevel[(int)boulderEndMapPos.y, (int)boulderEndMapPos.x] == 2)
+                    {//spot is water
+
+                        currLevel[(int)boulderEndMapPos.y, (int)boulderEndMapPos.x] = 3;
+                        GameObject go = Instantiate(mud);
+                        tiles.Add(go);
+                        go.transform.position = bo.transform.position;
+                        boulders.Remove(bo);
+                        Destroy(bo);
+                    }
+                }
+                isMoving = false;
+                boulderMoving = false;
+            }
+        }
     }
 }

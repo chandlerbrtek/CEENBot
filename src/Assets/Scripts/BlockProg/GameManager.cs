@@ -152,14 +152,18 @@ public class GameManager : MonoBehaviour
   
             }
             
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(.5f);
+            while(levelManager.GetComponent<levelManager>().isMoving)
+            {
+                yield return new WaitForSeconds(.1f);
+            }
             moveBlocks(height);
             if (!curr.GetComponent<BlockBehavior>().hasNext)
                 break;
             curr = curr.GetComponent<BlockBehavior>().getNext();
             
         }
-        yield return new WaitForSeconds(1);
+        //yield return new WaitForSeconds(1);
         arrow.GetComponent<SpriteRenderer>().enabled = false;
         resetPosition.GetComponent<ReturnScript>().resetPosition();
         levelManager.GetComponent<levelManager>().reset();

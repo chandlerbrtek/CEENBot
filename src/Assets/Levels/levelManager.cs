@@ -5,7 +5,7 @@ using UnityEngine;
 public class levelManager : MonoBehaviour
 {
     //Level Data
-    static int level;
+    public static int level;
 
     public float[,] level1;
     public float[,] level2;
@@ -26,6 +26,8 @@ public class levelManager : MonoBehaviour
     Vector3 offset;
     Vector3 startLocation;
     Vector3 endLocation;
+
+    public int stars = 1;
 
     float rows = 5;
     float cols = 6;
@@ -65,12 +67,17 @@ public class levelManager : MonoBehaviour
     Vector3 boulderEndPos;
     Vector3 boulderEndMapPos;
     GameObject bo;
+    public bool complete;
 
     private void Awake()
     {
 
     }
 
+    public int getLevel()
+    {
+        return level;
+    }
     void Start()
     {
         speed = .06f;
@@ -96,21 +103,21 @@ public class levelManager : MonoBehaviour
                                 { 0,3,2,0,0,0}
         };
 
-        level3 = new float[,] { { 8,1,1,0,0,0},
+        level3 = new float[,] { { 8,1,1,0,0,1},
                                 { 0,1,1,0,0,0},
                                 { 0,0,0,0,0,9},
                                 { 0,3,2,0,0,0},
                                 { 0,3,2,0,0,0}
         };
 
-        level4 = new float[,] { { 8,1,1,0,0,0},
+        level4 = new float[,] { { 8,1,1,0,1,0},
                                 { 0,1,1,0,0,0},
                                 { 0,0,0,0,0,9},
                                 { 0,3,2,0,0,0},
                                 { 0,3,2,0,0,0}
         };
 
-        level5 = new float[,] { { 8,1,1,0,0,0},
+        level5 = new float[,] { { 8,1,1,1,0,0},
                                 { 0,1,1,0,0,0},
                                 { 0,0,0,0,0,9},
                                 { 0,3,2,0,0,0},
@@ -519,6 +526,12 @@ public class levelManager : MonoBehaviour
                 }
                 isMoving = false;
                 boulderMoving = false;
+                temp = robot.GetComponent<robot>().getMapPosition();
+                if(currLevel[(int)temp.y,(int)temp.x]==9)
+                {
+                    Debug.Log("finished");
+                    complete = true;
+                }
             }
         }
     }

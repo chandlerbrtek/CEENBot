@@ -37,6 +37,9 @@ public class GameManager : MonoBehaviour
     public GameObject activeLevel;
 
     public List<GameObject> blocks;
+
+    public bool running = false;
+    public GameObject congrats;
     /**
      * Intialization function
      */
@@ -105,9 +108,22 @@ public class GameManager : MonoBehaviour
 
     public void executeBlockProgram()
     {
-        resetPosition.GetComponent<ReturnScript>().resetPosition();
-        arrow.GetComponent<SpriteRenderer>().enabled=true;
-        StartCoroutine(Wait());
+        if (!running)
+        {
+            running = true;
+            resetPosition.GetComponent<ReturnScript>().resetPosition();
+            arrow.GetComponent<SpriteRenderer>().enabled = true;
+            StartCoroutine(Wait());
+        }
+    }
+
+    public void stopExecution()
+    {
+        if(running)
+        {
+            running = false;
+
+        }
     }
 
     IEnumerator Wait()
@@ -115,7 +131,7 @@ public class GameManager : MonoBehaviour
         GameObject curr = startButton;
 
 
-        while (true)
+        while (running)
         {
 
             
@@ -158,6 +174,15 @@ public class GameManager : MonoBehaviour
             {
                 yield return new WaitForSeconds(.1f);
             }
+            if (levelManager.GetComponent<levelManager>().complete)
+            {
+                running = false;
+                congrats.GetComponent<congrats>().complete(levelManager.GetComponent<levelManager>().stars);
+                clear();
+            }
+            
+            if (!running)
+                break;
             moveBlocks(height);
             if (!curr.GetComponent<BlockBehavior>().hasNext)
                 break;
@@ -168,6 +193,8 @@ public class GameManager : MonoBehaviour
         arrow.GetComponent<SpriteRenderer>().enabled = false;
         resetPosition.GetComponent<ReturnScript>().resetPosition();
         levelManager.GetComponent<levelManager>().reset();
+        running = false;
+        
     }
 
     private void SaveGame()
@@ -218,5 +245,16 @@ public class GameManager : MonoBehaviour
     public GameObject getStartBlock()
     {
         return startButton;
+    }
+
+    public void clear()
+    {
+        GameObject g;
+        for(int i = 1; i<blocks.Count; ++i)
+        {
+            g = blocks[i];
+            //blocks.Remove(g);
+            Destroy(g);
+        }
     }
 }

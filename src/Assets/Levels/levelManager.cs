@@ -52,8 +52,9 @@ public class levelManager : MonoBehaviour
     //the robot
     public GameObject robot;
 
-
-
+    
+    public AudioClip levelcomplete;
+    AudioSource audioSource;
 
 
     // Start is called before the first frame update
@@ -74,7 +75,7 @@ public class levelManager : MonoBehaviour
 
     private void Awake()
     {
-
+        
     }
 
     public int getLevel()
@@ -83,6 +84,8 @@ public class levelManager : MonoBehaviour
     }
     void Start()
     {
+        audioSource = GetComponent<AudioSource>();
+
         speed = .06f;
         traveled = 0;
         isMoving = false;
@@ -561,6 +564,7 @@ public class levelManager : MonoBehaviour
                 {
                     Debug.Log("finished");
                     complete = true;
+                    audioSource.PlayOneShot(levelcomplete);
                 }
             }
         }

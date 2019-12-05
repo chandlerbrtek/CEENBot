@@ -22,8 +22,6 @@ public class congrats : MonoBehaviour
         this.GetComponent<SpriteRenderer>().enabled = true;
         menu.GetComponent<SpriteRenderer>().enabled = true;
         next.GetComponent<SpriteRenderer>().enabled = true;
-        menu.GetComponent<BoxCollider2D>().enabled = true;
-        next.GetComponent<BoxCollider2D>().enabled = true;
         star[stars-1].GetComponent<SpriteRenderer>().enabled = true;
 
 
@@ -37,8 +35,6 @@ public class congrats : MonoBehaviour
         oneStar.GetComponent<SpriteRenderer>().enabled = false;
         twoStar.GetComponent<SpriteRenderer>().enabled = false;
         threeStar.GetComponent<SpriteRenderer>().enabled = false;
-        menu.GetComponent<BoxCollider2D>().enabled = false;
-        next.GetComponent<BoxCollider2D>().enabled = false;
     }
 
     // Update is called once per frame

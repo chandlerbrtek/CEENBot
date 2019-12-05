@@ -49,7 +49,6 @@ public class BlockBehavior : MonoBehaviour
     void OnMouseDown()
     {//function setting up data for dragging block movement
      // if (blockId != 0)
-        GetComponent<SpriteRenderer>().sortingOrder = 5;
         Debug.Log("Block #" + blockId + " clicked");
         {
             offset = gameObject.transform.position - Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z));
@@ -88,7 +87,6 @@ public class BlockBehavior : MonoBehaviour
     {
       //  if (blockId != 0)
         {
-            GetComponent<SpriteRenderer>().sortingOrder = 1;
             //when you stop moving the block, check if it's in position to be added to another list
             checkBlocks();
         }

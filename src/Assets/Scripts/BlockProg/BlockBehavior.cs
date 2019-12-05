@@ -70,6 +70,7 @@ public class BlockBehavior : MonoBehaviour
     {
       //  if (blockId != 0)
         {
+            GetComponent<SpriteRenderer>().sortingOrder = 5;
             //move the block to follow the cursor
             Vector3 curScreenPoint = new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z);
             Vector3 curPosition = Camera.main.ScreenToWorldPoint(curScreenPoint) + offset;
@@ -87,6 +88,7 @@ public class BlockBehavior : MonoBehaviour
     {
       //  if (blockId != 0)
         {
+            GetComponent<SpriteRenderer>().sortingOrder = 1;
             //when you stop moving the block, check if it's in position to be added to another list
             checkBlocks();
         }

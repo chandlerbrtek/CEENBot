@@ -20,6 +20,9 @@ public class levelManager : MonoBehaviour
 
     public float[,] currLevel;
 
+    public int[] levelMoves;
+    int moves = 0;
+
     int objectives;
     int completedObjectives;
 
@@ -87,6 +90,7 @@ public class levelManager : MonoBehaviour
         boulders = new List<GameObject>();
         offset = new Vector3(-2.888f, 3.974f);
 
+        levelMoves = new int[] { 20,20,20,20,20,20,20,20,20,20};
         currLevel = new float[(int)rows, (int)cols];
 
         level1 = new float[,] { { 8,1,1,0,5,0},
@@ -389,6 +393,25 @@ public class levelManager : MonoBehaviour
         return false;
     }
 
+    public int getStars()
+    {
+        stars = 0;
+        if(complete)
+        {
+            stars++;
+
+        }
+        if(completedObjectives>=objectives)
+        {
+            stars++;
+        }
+        if(moves<=levelMoves[level])
+        {
+            stars++;
+        }
+        return stars;
+    }
+
     public bool legalBoulderMove(Vector3 pos)
     {
 
@@ -413,6 +436,7 @@ public class levelManager : MonoBehaviour
 
     public void clear()
     {
+        moves = 0;
         objectives = 0;
         completedObjectives = 0;
         foreach (GameObject go in tiles)
@@ -480,6 +504,11 @@ public class levelManager : MonoBehaviour
         rval.x = temp.x / 2;
         rval.y = temp.y / -2;
         return rval;
+    }
+
+    public void addMove()
+    {
+        moves++;
     }
 
     public GameObject getBoulder(Vector3 pos)

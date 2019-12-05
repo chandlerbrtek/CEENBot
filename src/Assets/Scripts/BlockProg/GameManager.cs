@@ -250,14 +250,11 @@ public class GameManager : MonoBehaviour
     public void clear()
     {
         GameObject g;
-        blocks[0].GetComponent<BlockBehavior>().removeChild();
-        for (int i = 1; i<blocks.Count; ++i)
+        for(int i = 1; i<blocks.Count; ++i)
         {
             g = blocks[i];
             //blocks.Remove(g);
-            
-            g.GetComponent<BlockBehavior>().transform.position = new Vector3(-1000, -1000, 0);
+            Destroy(g);
         }
-       
     }
 }

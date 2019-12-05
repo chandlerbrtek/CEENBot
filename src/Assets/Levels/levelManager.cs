@@ -168,7 +168,6 @@ public class levelManager : MonoBehaviour
 
     public void setLevel(int i)
     {
-        complete = false;
         level = i;
         Debug.Log("set level:" + i);
         if(i==0)

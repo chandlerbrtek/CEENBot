@@ -1628,6 +1628,7 @@ MonoBehaviour:
   resetPosition: {fileID: 1168388194}
   startButton: {fileID: 952495607}
   arrow: {fileID: 820391718}
+  blocksave: 
   levelString: 
   levelManager: {fileID: 525702418}
   activeLevel: {fileID: 1831761796}
@@ -1661,7 +1662,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e188ee899633d0b49870a5ae38b7359d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ratio: {x: 12, y: 5}
+  ratio: {x: 10, y: 5}
   forceRatioOnAwake: 0
   listenForWindowChanges: 1
   createCameraForLetterBoxRendering: 1

@@ -39,6 +39,7 @@ public class ButtonClick : MonoBehaviour
         newButton = gm.instantiateBlock(buttonType);
         hasNewButton = true;
         offset = gameObject.transform.position - Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z));
+        newButton.GetComponent<SpriteRenderer>().sortingOrder = 5;
     }
 
     /**
@@ -63,7 +64,9 @@ public class ButtonClick : MonoBehaviour
     private void OnMouseUp()
     {
         hasNewButton = false;
-        newButton.GetComponent<BlockBehavior>().checkBlocks();  
+        newButton.GetComponent<SpriteRenderer>().sortingOrder = 1;
+        newButton.GetComponent<BlockBehavior>().checkBlocks(); 
+        
     }
     
 }

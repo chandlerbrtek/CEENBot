@@ -28,7 +28,7 @@ public class GameManager : MonoBehaviour
     private int blockId;
 
     private Vector3 height;
-    private int selectedProfile;
+    public int selectedProfile;
     private List<Player> profiles;
     public string blocksave;
 
@@ -54,6 +54,8 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        LoadGame();
+        Debug.Log(selectedProfile);
         height = new Vector3(0, 0.93f, 0);
         buttons = new GameObject[7] { button1,button2,button3,button4, button5, button6, button7};
         blockId = 0;
@@ -90,6 +92,7 @@ public class GameManager : MonoBehaviour
 
     public void SaveLevelScore(int levelIndex, int numOfStars)
     {
+        LoadGame();
         Player player = profiles[selectedProfile];
         player.stars[levelIndex] = numOfStars;
         SaveGame();
@@ -195,6 +198,7 @@ public class GameManager : MonoBehaviour
                 running = false;
                 int stars = levelManager.GetComponent<levelManager>().getStars();
                 activeLevel.GetComponent<activeLevel>().setStars(stars);
+                SaveLevelScore(activeLevel.GetComponent<activeLevel>().getLevel() - 1, stars);
                 congrats.GetComponent<congrats>().complete(stars);
                 clear();
             }

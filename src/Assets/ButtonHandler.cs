@@ -27,27 +27,20 @@ public class ButtonHandler : MonoBehaviour
     {
         profiles = new List<Player>();
         string profileName = "Null";
-        Debug.Log("I'm about to load the game...");
         LoadGame(false);
         GameObject inputFieldGo = GameObject.Find("TextBox");
         InputField inputFieldCo = inputFieldGo.GetComponent<InputField>();
         profileName = inputFieldCo.text;
-        Debug.Log(profileName);
-        Debug.Log("Profiles before creation:");
-        Debug.Log(profiles.ToString());
         Player player = new Player(profileName);
         profiles.Add(player);
-        Debug.Log("Profiles after creation:");
-        Debug.Log(profiles.ToString());
-        Debug.Log(profiles.Count);
         SaveGame();
-        
     }
 
 
     private Save CreateSaveGameObject()
     {
         Save save = new Save();
+
 
         save.selectedProfile = selectedProfile;
         save.profiles = profiles;
@@ -93,23 +86,23 @@ public class ButtonHandler : MonoBehaviour
             {
                 GameObject inputFieldGo = GameObject.Find("ProfOneText");
                 Text inputFieldCo = inputFieldGo.GetComponent<Text>();
-                inputFieldCo.text = "" + profiles[profiles.Count - 1].username;
+                inputFieldCo.text = "" + profiles[0].username;
 
                 inputFieldGo = GameObject.Find("ProfTwoText");
                 inputFieldCo = inputFieldGo.GetComponent<Text>();
-                inputFieldCo.text = "" + profiles[profiles.Count - 2].username;
+                inputFieldCo.text = "" + profiles[1].username;
 
                 inputFieldGo = GameObject.Find("ProfThreeText");
                 inputFieldCo = inputFieldGo.GetComponent<Text>();
-                inputFieldCo.text = "" + profiles[profiles.Count - 3].username;
+                inputFieldCo.text = "" + profiles[2].username;
 
                 inputFieldGo = GameObject.Find("ProfFourText");
                 inputFieldCo = inputFieldGo.GetComponent<Text>();
-                inputFieldCo.text = "" + profiles[profiles.Count - 4].username;
+                inputFieldCo.text = "" + profiles[3].username;
 
                 inputFieldGo = GameObject.Find("ProfFiveText");
                 inputFieldCo = inputFieldGo.GetComponent<Text>();
-                inputFieldCo.text = "" + profiles[profiles.Count - 5].username;
+                inputFieldCo.text = "" + profiles[4].username;
             }
 
         }
@@ -118,5 +111,12 @@ public class ButtonHandler : MonoBehaviour
             selectedProfile = 0;
             Debug.Log("No game saved!");
         }
+    }
+
+    public void SelectProfile(int profileIdx)
+    {
+        LoadGame(false);
+        selectedProfile = profileIdx;
+        SaveGame();
     }
 }

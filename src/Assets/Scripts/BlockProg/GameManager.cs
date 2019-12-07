@@ -40,6 +40,7 @@ public class GameManager : MonoBehaviour
 
     public bool running = false;
     public GameObject congrats;
+    public GameObject trash;
     /**
      * Intialization function
      */
@@ -265,13 +266,28 @@ public class GameManager : MonoBehaviour
     {
         GameObject g;
         blocks[0].GetComponent<BlockBehavior>().removeChild();
-        for (int i = 1; i<blocks.Count; ++i)
+        while(blocks.Count>1)
         {
-            g = blocks[i];
-            //blocks.Remove(g);
-            
-            g.GetComponent<BlockBehavior>().transform.position = new Vector3(-1000, -1000, 0);
+            g = blocks[1];
+            removeBlock(g);
         }
        
+    }
+
+    public void removeBlock(GameObject block)
+    {
+        blocks.Remove(block);
+        Destroy(block);
+    }
+
+    public void removeBlock(int id)
+    {
+        foreach(GameObject g in blocks)
+        {
+            if(g.GetComponent<BlockBehavior>().blockId == id)
+            {
+                removeBlock(g);
+            }
+        }
     }
 }

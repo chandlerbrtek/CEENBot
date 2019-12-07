@@ -34,7 +34,7 @@ public class BlockBehavior : MonoBehaviour
     private void Start()
     {
         gm = GameObject.FindObjectOfType<GameManager>();
-        nextCollider = GetComponentInChildren<BoxCollider2D>();
+        nextCollider = GetComponent<BoxCollider2D>();
         hasNext = false;
         hasPrev = false;
         screenPoint = new Vector3(0, 0, 3);
@@ -86,12 +86,18 @@ public class BlockBehavior : MonoBehaviour
      */
     private void OnMouseUp()
     {
-      //  if (blockId != 0)
-        {
             GetComponent<SpriteRenderer>().sortingOrder = 1;
+            Vector3 tpos = new Vector3(transform.position.x, transform.position.y, gm.trash.transform.position.z);
+            if (gm.trash.GetComponent<BoxCollider2D>().bounds.Contains(tpos))
+            {
+            deleteSelf();
+                Debug.Log("removing");
+                
+            }
+
             //when you stop moving the block, check if it's in position to be added to another list
             checkBlocks();
-        }
+
     }
 
     /**
@@ -108,6 +114,19 @@ public class BlockBehavior : MonoBehaviour
 
 
         return false;
+    }
+
+    public void deleteSelf()
+    {
+        if(hasPrev)
+        {
+            prevBlock.GetComponent<BlockBehavior>().removeChild();
+        }
+        if (hasNext)
+        {
+            nextBlock.GetComponent<BlockBehavior>().deleteSelf();
+        }
+        gm.removeBlock(this.gameObject);
     }
 
     /**

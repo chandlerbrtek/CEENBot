@@ -5,7 +5,8 @@ using UnityEngine;
 public class activeLevel : MonoBehaviour
 {
 
-    static int currentLevel; 
+    static int currentLevel;
+    static int stars=0;
    
     public void setLevel(int level)
     {
@@ -15,6 +16,17 @@ public class activeLevel : MonoBehaviour
     public int getLevel()
     {
         return currentLevel;
+    }
+
+    public int getStars()
+    {
+        return stars;
+    }
+
+    public void setStars(int newStars)
+    {
+        if(newStars>stars)
+            stars = newStars;
     }
 
     void awake()

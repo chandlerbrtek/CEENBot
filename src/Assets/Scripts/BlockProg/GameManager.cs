@@ -186,7 +186,9 @@ public class GameManager : MonoBehaviour
             if (levelManager.GetComponent<levelManager>().complete)
             {
                 running = false;
-                congrats.GetComponent<congrats>().complete(levelManager.GetComponent<levelManager>().getStars());
+                int stars = levelManager.GetComponent<levelManager>().getStars();
+                activeLevel.GetComponent<activeLevel>().setStars(stars);
+                congrats.GetComponent<congrats>().complete(stars);
                 clear();
             }
             

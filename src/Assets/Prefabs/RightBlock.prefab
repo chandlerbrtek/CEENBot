@@ -98,6 +98,8 @@ MonoBehaviour:
   hasPrev: 0
   blockId: 0
   root: 0
+  button: {fileID: 21300000, guid: b1ccc2f4b6e74de40a61998fa8916977, type: 3}
+  buttonIcon: {fileID: 21300000, guid: 8bb0f8325a656f54aa87cf8a97b79a97, type: 3}
 --- !u!61 &8653351907873831416
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -41,6 +41,8 @@ public class GameManager : MonoBehaviour
     public bool running = false;
     public GameObject congrats;
     public GameObject trash;
+
+    bool toggle = false;
     /**
      * Intialization function
      */
@@ -77,6 +79,10 @@ public class GameManager : MonoBehaviour
      */
     public void addBlock(GameObject b)
     {
+        if(toggle)
+        {
+            b.GetComponent<BlockBehavior>().toggle();
+        }
         b.GetComponent<BlockBehavior>().blockId = blockId;
         blockId++;
         blocks.Add(b);
@@ -289,5 +295,14 @@ public class GameManager : MonoBehaviour
                 removeBlock(g);
             }
         }
+    }
+
+    public void toggleBlocks()
+    {
+        for(int i = 1; i<blocks.Count; ++i)
+        {
+            blocks[i].GetComponent<BlockBehavior>().toggle();
+        }
+        toggle = !toggle;
     }
 }

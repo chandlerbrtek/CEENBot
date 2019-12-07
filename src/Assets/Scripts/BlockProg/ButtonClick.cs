@@ -17,6 +17,9 @@ public class ButtonClick : MonoBehaviour
     bool hasNewButton;
     private GameManager gm;
     public int buttonType;
+    public Sprite button;
+    public Sprite buttonIcon;
+    bool icon = false;
 
    /**
     * Intializes class variables
@@ -68,4 +71,18 @@ public class ButtonClick : MonoBehaviour
         newButton.GetComponent<BlockBehavior>().checkBlocks();  
     }
     
+    
+    public void toggleSprite()
+    {
+        if(icon)
+        {
+            this.gameObject.GetComponent<SpriteRenderer>().sprite = button;
+            icon = false;
+        }
+        else
+        {
+            this.gameObject.GetComponent<SpriteRenderer>().sprite = buttonIcon;
+            icon = true;
+        }
+    }
 }

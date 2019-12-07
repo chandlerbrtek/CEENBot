@@ -28,6 +28,10 @@ public class BlockBehavior : MonoBehaviour
     public int blockId;
     public bool root;
 
+    public Sprite button;
+    public Sprite buttonIcon;
+    public bool icon = false;
+
     /**
      * Initializes data for this block when created
      */
@@ -227,5 +231,19 @@ public class BlockBehavior : MonoBehaviour
             }
         }
 
+    }
+
+    public void toggle()
+    {
+        if (icon)
+        {
+            this.gameObject.GetComponent<SpriteRenderer>().sprite = button;
+            icon = false;
+        }
+        else
+        {
+            this.gameObject.GetComponent<SpriteRenderer>().sprite = buttonIcon;
+            icon = true;
+        }
     }
 }

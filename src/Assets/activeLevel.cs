@@ -11,6 +11,7 @@ public class activeLevel : MonoBehaviour
     public void setLevel(int level)
     {
         currentLevel = level;
+        Debug.Log("level set to:" + level);
     }
 
     public int getLevel()

@@ -28,7 +28,7 @@ public class GameManager : MonoBehaviour
     private int blockId;
 
     private Vector3 height;
-    private int selectedProfile;
+    public int selectedProfile;
     private List<Player> profiles;
     public string blocksave;
 
@@ -52,6 +52,8 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        LoadGame();
+        Debug.Log(selectedProfile);
         height = new Vector3(0, 0.93f, 0);
         buttons = new GameObject[7] { button1,button2,button3,button4, button5, button6, button7};
         blockId = 0;

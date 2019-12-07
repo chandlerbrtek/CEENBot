@@ -14,7 +14,8 @@ public class volumeManager : MonoBehaviour {
     public AudioSource musicAudio;
 
 	void Start () {
-		
+        masterSlider.value = 0.4f;
+        musicSlider.value = 0.4f;
 	}
 
     /**  
@@ -22,6 +23,6 @@ public class volumeManager : MonoBehaviour {
     */ 
     void Update () {
         musicAudio.volume = musicSlider.value;
-        AudioListener.volume = masterSlider.value;
+        AudioListener.volume = masterSlider.value *musicAudio.volume;
 	}
 }

@@ -15,6 +15,9 @@ public class robot : MonoBehaviour
     float targetDeg;
     float speed;
     float turned;
+    public Light light;
+
+    float litTime = 0;
 
     void Start()
     {
@@ -31,6 +34,14 @@ public class robot : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(litTime>0)
+        {
+            litTime--;
+            if(litTime==0)
+            {
+                light.GetComponent<Light>().enabled = false;
+            }
+        }
         if (rotating)
         {
             rotation.z += speed;
@@ -71,6 +82,13 @@ public class robot : MonoBehaviour
         dir--;
         if (dir < 0)
             dir = 3;
+
+    }
+
+    public void lightRobot()
+    {
+        litTime = 30;
+        light.GetComponent<Light>().enabled = true;
 
     }
 

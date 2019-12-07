@@ -112,8 +112,10 @@ public class GameManager : MonoBehaviour
         {
             running = true;
             resetPosition.GetComponent<ReturnScript>().resetPosition();
+            levelManager.GetComponent<levelManager>().reset();
             arrow.GetComponent<SpriteRenderer>().enabled = true;
             StartCoroutine(Wait());
+            
         }
     }
 
@@ -137,26 +139,33 @@ public class GameManager : MonoBehaviour
             
             if (curr.name == "ForwardBlock(Clone)")
             {
+
+                levelManager.GetComponent<levelManager>().startDriving();
                 levelManager.GetComponent<levelManager>().forward();
             }
             else if(curr.name == "BackBlock(Clone)")
             {
+                levelManager.GetComponent<levelManager>().startDriving();
                 levelManager.GetComponent<levelManager>().back();
             }
             else if (curr.name == "RightBlock(Clone)")
             {
+                levelManager.GetComponent<levelManager>().startDriving();
                 levelManager.GetComponent<levelManager>().right();
             }
             else if (curr.name == "LeftBlock(Clone)")
             {
+                levelManager.GetComponent<levelManager>().startDriving();
                 levelManager.GetComponent<levelManager>().left();
             }
             else if (curr.name == "BeepBlock(Clone)")
             {
+                levelManager.GetComponent<levelManager>().stopDriving();
                 levelManager.GetComponent<levelManager>().musicActivate();
             }
             else if (curr.name == "LightBlock(Clone)")
             {
+                levelManager.GetComponent<levelManager>().stopDriving();
                 levelManager.GetComponent<levelManager>().lightActivate();
             }
             else if (curr.name == "RestartBlock(Clone)")
@@ -185,14 +194,17 @@ public class GameManager : MonoBehaviour
                 break;
             moveBlocks(height);
             if (!curr.GetComponent<BlockBehavior>().hasNext)
+            {
+                levelManager.GetComponent<levelManager>().stopDriving();
                 break;
+            }
             curr = curr.GetComponent<BlockBehavior>().getNext();
             
         }
         //yield return new WaitForSeconds(1);
         arrow.GetComponent<SpriteRenderer>().enabled = false;
         resetPosition.GetComponent<ReturnScript>().resetPosition();
-        levelManager.GetComponent<levelManager>().reset();
+        //
         running = false;
         
     }

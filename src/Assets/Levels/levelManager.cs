@@ -54,6 +54,10 @@ public class levelManager : MonoBehaviour
 
     
     public AudioClip levelcomplete;
+    public AudioClip driving;
+    public AudioClip splash;
+    public AudioClip beep;
+    AudioSource drive;
     AudioSource audioSource;
 
 
@@ -72,6 +76,7 @@ public class levelManager : MonoBehaviour
     Vector3 boulderEndMapPos;
     GameObject bo;
     public bool complete;
+    bool justBeeped = false;
 
     private void Awake()
     {
@@ -84,6 +89,11 @@ public class levelManager : MonoBehaviour
     }
     void Start()
     {
+        drive = GetComponent<AudioSource>();
+
+        drive.loop = true;
+        drive.clip = driving;
+        drive.volume = 0.4f;
         audioSource = GetComponent<AudioSource>();
 
         speed = .06f;
@@ -175,7 +185,7 @@ public class levelManager : MonoBehaviour
 
     public void setLevel(int i)
     {
-        complete = false;
+       
         level = i;
         Debug.Log("set level:" + i);
         if(i==0)
@@ -331,9 +341,11 @@ public class levelManager : MonoBehaviour
     public void lightActivate()
     {
         Vector3 temp = robot.GetComponent<robot>().getMapPosition();
+        robot.GetComponent<robot>().lightRobot();
         if (currLevel[(int)temp.y, (int)temp.x]==6)
         {
             completedObjectives++;
+            
             currLevel[(int)boulderEndMapPos.y, (int)boulderEndMapPos.x] = 0;
             GameObject go = Instantiate(grass);
             tiles.Add(go);
@@ -345,6 +357,8 @@ public class levelManager : MonoBehaviour
     public void musicActivate()
     {
         Vector3 temp = robot.GetComponent<robot>().getMapPosition();
+        audioSource.PlayOneShot(beep);
+        justBeeped = true;
         if (currLevel[(int)temp.y, (int)temp.x] == 5)
         {
             completedObjectives++;
@@ -432,6 +446,10 @@ public class levelManager : MonoBehaviour
 
     public void reset()
     {
+
+        drive.Stop();
+
+        complete = false;
         robot.GetComponent<robot>().reset();
         setLevel(level);
 
@@ -527,7 +545,19 @@ public class levelManager : MonoBehaviour
         }
         return rval;
     }
+    public void startDriving()
+    {
+        if (!drive.isPlaying || justBeeped)
+        {
+            justBeeped = false;
+            drive.Play();
+        }
+    }
 
+    public void stopDriving()
+    {
+        drive.Stop();
+    }
     private void Update()
     {
         if(isMoving)
@@ -555,15 +585,19 @@ public class levelManager : MonoBehaviour
                         go.transform.position = bo.transform.position;
                         boulders.Remove(bo);
                         Destroy(bo);
+                        audioSource.volume = 1;
+                        audioSource.PlayOneShot(splash);
                     }
                 }
                 isMoving = false;
+                
                 boulderMoving = false;
                 temp = robot.GetComponent<robot>().getMapPosition();
                 if(currLevel[(int)temp.y,(int)temp.x]==9)
                 {
                     Debug.Log("finished");
                     complete = true;
+                    drive.Stop();
                     audioSource.PlayOneShot(levelcomplete);
                 }
             }

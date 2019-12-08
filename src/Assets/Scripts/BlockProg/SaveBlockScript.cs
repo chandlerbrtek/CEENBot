@@ -49,7 +49,7 @@ public class SaveBlockScript : MonoBehaviour
             }
         }
         gm.LoadGame();
-        Debug.Log(gm.selectedProfile);
+        //Debug.Log(gm.selectedProfile);
         gm.saveBlocks(saveString);
     }
     // Update is called once per frame

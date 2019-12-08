@@ -7,6 +7,7 @@ public class levelManager : MonoBehaviour
     //Level Data
     public static int level;
 
+    public float[,] level0;
     public float[,] level1;
     public float[,] level2;
     public float[,] level3;
@@ -19,6 +20,7 @@ public class levelManager : MonoBehaviour
     public float[,] level10;
 
     public float[,] currLevel;
+    float[,] path;
 
     public int[] levelMoves;
     int moves = 0;
@@ -103,12 +105,19 @@ public class levelManager : MonoBehaviour
         boulders = new List<GameObject>();
         offset = new Vector3(-2.888f, 3.974f);
 
-        levelMoves = new int[] { 20,20,20,20,20,20,20,20,20,20};
+        levelMoves = new int[] { 30,20,20,20,20,20,20,20,20,20,20 };
         currLevel = new float[(int)rows, (int)cols];
 
-        level1 = new float[,] { { 8,1,1,0,5,0},
+        level0 = new float[,] { { 1,1,1,1,1,1},
+                                { 1,1,1,1,1,1},
+                                { 1,1,1,1,1,1},
+                                { 1,1,1,1,1,1},
+                                { 1,1,1,1,1,1}
+        };
+
+        level1 = new float[,] { { 0,1,1,0,5,0},
                                 { 0,1,1,0,0,1},
-                                { 0,0,2,0,4,9},
+                                { 8,0,2,0,4,9},
                                 { 4,4,2,0,0,1},
                                 { 0,0,2,0,6,0}
         };
@@ -177,7 +186,7 @@ public class levelManager : MonoBehaviour
         };
 
 
-
+        generateRandomLevel();
         //setLevel(0);
 
 
@@ -185,46 +194,50 @@ public class levelManager : MonoBehaviour
 
     public void setLevel(int i)
     {
-       
         level = i;
         Debug.Log("set level:" + i);
-        if(i==0)
+        if(i == 0)
+        {
+            
+            copyLevel(level0);
+        }
+        if (i==1)
         {
             copyLevel(level1);
         }
-        if (i == 1)
+        if (i == 2)
         {
             copyLevel(level2);
         }
-        if (i == 2)
+        if (i == 3)
         {
             copyLevel(level3);
         }
-        if (i == 3)
+        if (i == 4)
         {
             copyLevel(level4);
         }
-        if (i == 4)
+        if (i == 5)
         {
             copyLevel(level5);
         }
-        if (i == 5)
+        if (i == 6)
         {
             copyLevel(level6);
         }
-        if (i == 6)
+        if (i == 7)
         {
             copyLevel(level7);
         }
-        if (i == 7)
+        if (i == 8)
         {
             copyLevel(level8);
         }
-        if (i == 8)
+        if (i == 9)
         {
             copyLevel(level9);
         }
-        if (i == 9)
+        if (i == 10)
         {
             copyLevel(level10);
         }
@@ -312,7 +325,7 @@ public class levelManager : MonoBehaviour
                     tiles.Add(go);
                     go.transform.position = offset + new Vector3(j * 2, i * -2);
                     robot.GetComponent<robot>().setStart(go.transform.position);
-                    robot.GetComponent<robot>().position = new Vector3(j, i, 0);
+                    robot.GetComponent<robot>().position = new Vector3(j, i*-1, 0);
                 }
                 if (currLevel[i, j] == 9)
                 {
@@ -602,5 +615,420 @@ public class levelManager : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void generateRandomLevel()
+    {
+        int startx=0, starty=0;
+        int endx=0, endy=0;
+
+        path = new float[,]         {   { 0,0,0,0,0,0},
+                                        { 0,0,0,0,0,0},
+                                        { 0,0,0,0,0,0},
+                                        { 0,0,0,0,0,0},
+                                        { 0,0,0,0,0,0}
+        };
+
+        //generate impassable terrain
+        int water = Random.Range(0, 6);
+        
+        if (water ==1 || water ==2)
+            water=1;
+        if (water == 3 || water == 4)
+            water = 2;
+        if (water == 5)
+            water = 3;
+
+            
+        while(water>0)
+        {
+            water--;
+            if(Random.Range(0,2)==0)
+            {//river
+                if (Random.Range(0, 2)==0)
+                {
+                    int i = (int)Random.Range(0, rows);
+                    for(int j=0; j<cols;j++)
+                    {
+                        level0[i, j] = 2;
+                    }
+                }
+                else
+                {
+                    int j = (int)Random.Range(0, cols);
+                    for (int i = 0; i < rows; i++)
+                    {
+                        level0[i, j] = 2;
+                    }
+
+                }
+
+            }
+            else
+            {//pond
+                int size = Random.Range(1, 4);
+                int px = (int)Random.Range(0, rows-size);
+                int py = (int)Random.Range(0, cols-size);
+                for(int i = px; i<px+size; i++)
+                    for(int j = py; j<py+size; j++)
+                    {
+                        level0[i, j] = 2;
+                    }
+            }
+        }
+
+        if(Random.Range(0,2)==0)
+        {//flip water and trees
+            for(int i =0; i<rows;++i)
+            {
+                for(int j=0; j<cols; ++j)
+                {
+                    if (level0[i, j] == 1)
+                    {
+                        level0[i, j] = 2;
+                    }
+                    else
+                    {
+                        level0[i, j] = 1;
+                    }
+                }
+            }
+        }
+
+
+        //pick a start and end
+        int wall = Random.Range(0, 4);
+        if(wall==0)
+        {
+            startx = 0;
+            starty = (int)Random.Range(0, cols);
+            endx = (int)rows - 1;
+            endy = (int)Random.Range(0, cols);
+        }
+        if (wall == 1)
+        {
+            startx = (int)rows - 1;
+            starty = (int)Random.Range(0, cols);
+            endx = 0;
+            endy = (int)Random.Range(0, cols);
+        }
+        if (wall == 2)
+        {
+            startx = (int)Random.Range(0, rows);
+            starty = 0;
+            endx = (int)Random.Range(0, rows);
+            endy = (int)cols - 1;
+        }
+        if (wall == 3)
+        {
+            startx = (int)Random.Range(0, rows);
+            starty = (int)cols - 1;
+            endx = (int)Random.Range(0, rows);
+            endy = 0;
+        }
+        level0[startx,starty] = 8;
+        level0[endx, endy] = 9;
+
+        //path[startx, starty] = 2;
+        path[endx, endy] = 9;
+
+        //generate path from start to finish
+        int curx = startx;
+        int cury = starty;
+        //int[,] dirs = { { 1, 0 }, { -1, 0 }, { 0, 1 }, { 0, -1 } };
+
+        //copyLevel(level0) ;
+        //generateLevel();
+        Debug.Log("Starting path, curr:"+curx+","+cury+" end:"+endx+","+endy);
+
+
+        pathToFinish(curx, cury);
+
+        
+
+        for (int i = Random.Range(0,(int)rows); i < rows; ++i)
+        {
+            for (int j = Random.Range(0, (int)cols); j < cols; ++j)
+            {
+                if(legalPathPlacement(i,j))
+                {
+                    if(path[i,j]!=2)
+                    path[i, j] = 1;
+                }
+            }
+        }
+
+        for (int i = 0; i < rows; ++i)
+        {
+            for (int j = 0; j < cols; ++j)
+            {
+                if (legalPathPlacement(i, j))
+                {
+                    if (path[i, j] != 2)
+                        path[i, j] = 1;
+                }
+            }
+        }
+
+
+
+        //pick obstacles 0-1
+        //put obstacles on path
+        //pick number of objectives 0-2
+        path[endx, endy] = 9;
+        int numObjectives = Random.Range(0, 4);
+        numObjectives = 3;
+        for(int i = 0; i < rows; ++i)
+        {
+            for (int j = 0; j < cols; ++j)
+            {
+                if(path[i,j]==1)
+                {
+                    int adjCount = 0;
+                    if(inBounds(i+1,j))
+                    {
+                        if (path[i+1,j] != 0)
+                            adjCount++;
+                        if (path[i + 1, j] == 9)
+                            adjCount=2;
+
+                    }
+                    if (inBounds(i - 1, j))
+                    {
+                        if (path[i - 1, j] != 0)
+                            adjCount++;
+                        if (path[i - 1, j] == 9)
+                            adjCount=2;
+
+                    }
+                    if (inBounds(i, j+1))
+                    {
+                        if (path[i, j+1] != 0)
+                            adjCount++;
+                        if (path[i, j + 1] == 9)
+                            adjCount=2;
+
+                    }
+                    if (inBounds(i,j-1))
+                    {
+                        if (path[i, j-1] != 0)
+                            adjCount++;
+                        if (path[i, j - 1] == 9)
+                            adjCount=2;
+
+                    }
+                    if(adjCount<2 && numObjectives>0)
+                    {
+                        if(Random.Range(0,2)==1)
+                        {
+                            addPath(i, j);
+                            path[i, j] = 5;
+                            level0[i, j] = 5;
+
+                        }
+                        else
+                        {
+                            addPath(i, j);
+                            path[i, j] = 6;
+                            level0[i, j] = 6;
+
+                        }
+                        numObjectives--;
+                    }
+                }
+            }
+        }
+
+
+        //generate branches from path to objectives, or on the path
+
+
+        string s = "";
+        for (int i = 0; i<rows; i++)
+        {
+            for (int j = 0; j <cols; j++)
+            {
+                s += level0[i, j];
+                s += ",";
+            }
+            Debug.Log(s);
+            s = "";
+        }
+
+        for (int i = 0; i < rows; ++i)
+        {
+            for (int j = 0; j < cols; ++j)
+            {
+                if (path[i, j] == 2)//  || path[i,j] == 1)
+                {
+                    level0[i, j] = 0;
+                }
+            }
+        }
+        level0[startx, starty] = 8;
+        level0[endx, endy] = 9;
+
+    }
+
+
+    public void addPath(int x, int y)
+    {
+        int nearx = 100;
+        int neary = 100;
+        Vector2 c = new Vector2(x, y);
+        Vector2 n = new Vector2(nearx, neary);
+        float currDist = (c - n).magnitude;
+        for (int i = 0; i < rows; ++i)
+        {
+            for (int j = 0; j < cols; ++j)
+            {
+                if (path[i, j] == 2)
+                {
+                    n = new Vector2(i, j);
+                    if ((c - n).magnitude < currDist)
+                    {
+                        currDist = (c - n).magnitude;
+                        nearx = i;
+                        neary = j;
+                    }
+                }
+            }
+        }
+        Debug.Log("Connecting " + x + "," + y + " and " + nearx + "," + neary);
+        //bool cont = true;
+        int count = 0;
+        while (x != nearx || y != neary)
+        {
+            
+            if (x>nearx && path[x-1,y]!=9)// && path[x-1,y]==1)
+            {
+                x--;
+                path[x, y] = 2;
+                Debug.Log("placing" + x + "," + y);
+            }
+            else if (x < nearx && path[x + 1, y] != 9)// && path[x + 1, y] == 1)
+            {
+                x++;
+                path[x, y] = 2;
+                Debug.Log("placing" + x + "," + y);
+            }
+            else if (y > neary && path[x, y-1] != 9)// && path[x, y-1] == 1)
+            {
+                y--;
+                path[x, y] = 2;
+                Debug.Log("placing" + x + "," + y);
+            }
+            else if (y < neary && path[x, y +1] != 9)// && path[x, y+1] == 1)
+            {
+                y++;
+                path[x, y] = 2;
+                Debug.Log("placing" + x + "," + y);
+            }
+            count++;
+            if (count > 10)
+                break;
+        }
+    }
+
+    public bool inBounds(int x, int y)
+    {
+        if (x < 0 || y < 0 || x >= rows || y >= cols)
+           return false;
+        return true;
+    }
+    public bool legalPathPlacement(int x, int y)
+    {
+        
+        bool rval = true;
+
+        //false if out of bounds
+        if (!inBounds(x, y))
+            return false;
+
+        int openAdjacents = 0;
+        
+        if(inBounds(x+1,y))
+        {
+            if (path[x+1, y] ==2 || path[x + 1, y] ==1 )
+                openAdjacents++;
+        }
+        if(inBounds(x -1, y))
+        {
+            if (path[x - 1, y] ==2 || path[x - 1, y]==1)
+                openAdjacents++;
+        }
+        if(inBounds(x, y+1))
+        {
+            if (path[x, y+1] ==2|| path[x, y + 1] == 1)
+                openAdjacents++;
+        }
+        if(inBounds(x, y-1))
+        {
+            if (path[x, y-1] ==2 || path[x, y - 1] == 1)
+                openAdjacents++;
+        }
+
+        if (openAdjacents > 1)
+            rval = false;
+
+        return rval;
+    }
+
+    public bool pathToFinish(int x, int y)
+    {
+
+        if (!inBounds(x, y))
+            return false;
+
+        
+
+        //Debug.Log("Pathing:" + x + "," + y);
+        if (path[x, y] == 9)
+            return true;
+
+        if (path[x, y] != 0)
+            return false;
+
+        path[x, y] = 2;
+
+        int trying = Random.Range(0, 4);
+        int[,] dirs = { { 1, 0 }, { -1, 0 }, { 0, 1 }, { 0, -1 } };
+
+        for (int i = 0; i < 4; i++)
+        {
+            if(legalPathPlacement(x+dirs[trying, 0],y+dirs[trying, 1]) && pathToFinish(x + dirs[trying, 0], y + dirs[trying, 1]))
+            {
+                return true;
+            }
+            trying++;
+            if (trying > 3)
+                trying = 0;
+        }
+        /*
+        //Debug.Log("Trying:" + (x-1) + "," + y);
+        if (legalPathPlacement(x - 1, y)&& pathToFinish(x - 1, y))
+        {
+            return true;
+        }
+        //Debug.Log("Trying:" + (x + 1) + "," + y);
+        if (legalPathPlacement(x + 1, y) && pathToFinish(x + 1, y))
+        {
+            return true;
+        }
+        //Debug.Log("Trying:" + x  + "," + (y+1));
+        if (legalPathPlacement(x, y + 1) && pathToFinish(x, y + 1))
+        {
+            return true;
+        }
+        //Debug.Log("Trying:" + x + "," + (y - 1));
+        if (legalPathPlacement(x, y - 1) && pathToFinish(x, y - 1))
+        {
+            return true;
+        }
+        */
+        path[x, y] = 0;
+        return false;
+
+
     }
 }

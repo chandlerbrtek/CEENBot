@@ -7,6 +7,7 @@ public class ReturnScript : MonoBehaviour
     // Start is called before the first frame update
     Vector3 startPosition;
     private GameManager gm;
+    public GameObject lm;
     void Start()
     {
         gm = GameObject.FindObjectOfType<GameManager>();
@@ -16,6 +17,7 @@ public class ReturnScript : MonoBehaviour
     void OnMouseDown()
     {//function setting up data for dragging block movement
         resetPosition();
+        lm.GetComponent<levelManager>().setLevel(lm.GetComponent<levelManager>().getLevel() + 1);
     }
 
     public void resetPosition()

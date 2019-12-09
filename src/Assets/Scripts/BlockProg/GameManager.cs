@@ -90,8 +90,9 @@ public class GameManager : MonoBehaviour
 
     public void SaveLevelScore(int levelIndex, int numOfStars)
     {
+        LoadGame();
         Player player = profiles[selectedProfile];
-        player.stars[levelIndex] = numOfStars;
+        player.stars[levelIndex - 1] = numOfStars;
         SaveGame();
     }
 
@@ -195,6 +196,7 @@ public class GameManager : MonoBehaviour
                 running = false;
                 int stars = levelManager.GetComponent<levelManager>().getStars();
                 activeLevel.GetComponent<activeLevel>().setStars(stars);
+                SaveLevelScore(activeLevel.GetComponent<activeLevel>().getLevel(), stars);
                 congrats.GetComponent<congrats>().complete(stars);
                 clear();
             }

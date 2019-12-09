@@ -108,11 +108,11 @@ public class levelManager : MonoBehaviour
         levelMoves = new int[] { 30,20,20,20,20,20,20,20,20,20,20 };
         currLevel = new float[(int)rows, (int)cols];
 
-        level0 = new float[,] { { 0,0,0,0,0,0},
-                                { 0,0,0,0,0,0},
-                                { 0,0,0,0,0,0},
-                                { 0,0,0,0,0,0},
-                                { 0,0,0,0,0,0}
+        level0 = new float[,] { { 1,1,1,1,1,1},
+                                { 1,1,1,1,1,1},
+                                { 1,1,1,1,1,1},
+                                { 1,1,1,1,1,1},
+                                { 1,1,1,1,1,1}
         };
 
         level1 = new float[,] { { 2,2,2,2,2,2},

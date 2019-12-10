@@ -15,7 +15,20 @@ public class NextLevel : MonoBehaviour
     void OnMouseDown()
     {
         Debug.Log("end");
-        level.GetComponent<levelManager>().setLevel(level.GetComponent<levelManager>().getLevel() + 1);
+        int lvl = level.GetComponent<levelManager>().getLevel();
+        if(lvl == 0)
+        {
+
+        }
+        else if (lvl == 10)
+        {
+            lvl = 1;
+        }
+        else
+        {
+            lvl++;
+        }
+        level.GetComponent<levelManager>().setLevel(lvl);
         congrats.GetComponent<congrats>().invis();
     }
 

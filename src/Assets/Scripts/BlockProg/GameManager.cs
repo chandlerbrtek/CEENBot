@@ -196,7 +196,11 @@ public class GameManager : MonoBehaviour
                 running = false;
                 int stars = levelManager.GetComponent<levelManager>().getStars();
                 activeLevel.GetComponent<activeLevel>().setStars(stars);
-                SaveLevelScore(activeLevel.GetComponent<activeLevel>().getLevel(), stars);
+                if (activeLevel.GetComponent<activeLevel>().getLevel() > 0)
+                {
+                    SaveLevelScore(activeLevel.GetComponent<activeLevel>().getLevel(), stars);
+                }
+                Debug.Log("complete");
                 congrats.GetComponent<congrats>().complete(stars);
                 clear();
             }

@@ -186,7 +186,7 @@ public class levelManager : MonoBehaviour
         };
 
 
-        generateRandomLevel();
+        
         //setLevel(0);
 
 
@@ -194,50 +194,55 @@ public class levelManager : MonoBehaviour
 
     public void setLevel(int i)
     {
+        generateRandomLevel();
         level = i;
-        Debug.Log("set level:" + i);
-        if(i == 0)
+        resetLevel();
+    }
+
+    public void resetLevel()
+    {
+        if (level == 0)
         {
             
             copyLevel(level0);
         }
-        if (i==1)
+        if (level==1)
         {
             copyLevel(level1);
         }
-        if (i == 2)
+        if (level == 2)
         {
             copyLevel(level2);
         }
-        if (i == 3)
+        if (level == 3)
         {
             copyLevel(level3);
         }
-        if (i == 4)
+        if (level == 4)
         {
             copyLevel(level4);
         }
-        if (i == 5)
+        if (level == 5)
         {
             copyLevel(level5);
         }
-        if (i == 6)
+        if (level == 6)
         {
             copyLevel(level6);
         }
-        if (i == 7)
+        if (level == 7)
         {
             copyLevel(level7);
         }
-        if (i == 8)
+        if (level == 8)
         {
             copyLevel(level8);
         }
-        if (i == 9)
+        if (level == 9)
         {
             copyLevel(level9);
         }
-        if (i == 10)
+        if (level == 10)
         {
             copyLevel(level10);
         }
@@ -464,7 +469,7 @@ public class levelManager : MonoBehaviour
 
         complete = false;
         robot.GetComponent<robot>().reset();
-        setLevel(level);
+        resetLevel();
 
     }
 

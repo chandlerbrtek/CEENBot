@@ -107,7 +107,7 @@ public class levelManager : MonoBehaviour
         offset = new Vector3(-2.888f, 3.974f);
 
         startDir = new int[] { 0, 0, 3, 1, 0, 0, 1, 1, 2, 0, 3 };
-        levelMoves = new int[] { 30,20,20,20,20,20,20,20,20,20,20 };
+        levelMoves = new int[] { 30,4,11,23,14,16,11,24,69,20,20 };
         currLevel = new float[(int)rows, (int)cols];
 
         level0 = new float[,] { { 1,1,1,1,1,1},
@@ -434,6 +434,7 @@ public class levelManager : MonoBehaviour
     public int getStars()
     {
         stars = 0;
+        Debug.Log("Moves used:" + moves + " Level Moves:" + levelMoves[level]);
         if(complete)
         {
             stars++;
@@ -790,7 +791,7 @@ public class levelManager : MonoBehaviour
         //pick number of objectives 0-2
         path[endx, endy] = 9;
         int numObjectives = Random.Range(0, 4);
-        numObjectives = 3;
+        //numObjectives = 3;
         for(int i = 0; i < rows; ++i)
         {
             for (int j = 0; j < cols; ++j)
@@ -1017,28 +1018,7 @@ public class levelManager : MonoBehaviour
             if (trying > 3)
                 trying = 0;
         }
-        /*
-        //Debug.Log("Trying:" + (x-1) + "," + y);
-        if (legalPathPlacement(x - 1, y)&& pathToFinish(x - 1, y))
-        {
-            return true;
-        }
-        //Debug.Log("Trying:" + (x + 1) + "," + y);
-        if (legalPathPlacement(x + 1, y) && pathToFinish(x + 1, y))
-        {
-            return true;
-        }
-        //Debug.Log("Trying:" + x  + "," + (y+1));
-        if (legalPathPlacement(x, y + 1) && pathToFinish(x, y + 1))
-        {
-            return true;
-        }
-        //Debug.Log("Trying:" + x + "," + (y - 1));
-        if (legalPathPlacement(x, y - 1) && pathToFinish(x, y - 1))
-        {
-            return true;
-        }
-        */
+
         path[x, y] = 0;
         return false;
 

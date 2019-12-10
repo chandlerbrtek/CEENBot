@@ -147,37 +147,43 @@ public class GameManager : MonoBehaviour
             
             if (curr.name == "ForwardBlock(Clone)")
             {
-
+                levelManager.GetComponent<levelManager>().addMove();
                 levelManager.GetComponent<levelManager>().startDriving();
                 levelManager.GetComponent<levelManager>().forward();
             }
             else if(curr.name == "BackBlock(Clone)")
             {
+                levelManager.GetComponent<levelManager>().addMove();
                 levelManager.GetComponent<levelManager>().startDriving();
                 levelManager.GetComponent<levelManager>().back();
             }
             else if (curr.name == "RightBlock(Clone)")
             {
+                levelManager.GetComponent<levelManager>().addMove();
                 levelManager.GetComponent<levelManager>().startDriving();
                 levelManager.GetComponent<levelManager>().right();
             }
             else if (curr.name == "LeftBlock(Clone)")
             {
+                levelManager.GetComponent<levelManager>().addMove();
                 levelManager.GetComponent<levelManager>().startDriving();
                 levelManager.GetComponent<levelManager>().left();
             }
             else if (curr.name == "BeepBlock(Clone)")
             {
+                levelManager.GetComponent<levelManager>().addMove();
                 levelManager.GetComponent<levelManager>().stopDriving();
                 levelManager.GetComponent<levelManager>().musicActivate();
             }
             else if (curr.name == "LightBlock(Clone)")
             {
+                levelManager.GetComponent<levelManager>().addMove();
                 levelManager.GetComponent<levelManager>().stopDriving();
                 levelManager.GetComponent<levelManager>().lightActivate();
             }
             else if (curr.name == "RestartBlock(Clone)")
             {
+                levelManager.GetComponent<levelManager>().addMove();
                 while (curr.GetComponent<BlockBehavior>().hasPrev)
                 {
                     curr = curr.GetComponent<BlockBehavior>().getPrevious();

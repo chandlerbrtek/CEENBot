@@ -17,6 +17,7 @@ public class ReturnScript : MonoBehaviour
     void OnMouseDown()
     {//function setting up data for dragging block movement
         resetPosition();
+        lm.GetComponent<levelManager>().setLevel(lm.GetComponent<levelManager>().getLevel() + 1);
     }
 
     public void resetPosition()

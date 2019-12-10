@@ -21,6 +21,7 @@ public class levelManager : MonoBehaviour
 
     public float[,] currLevel;
     float[,] path;
+    int[] startDir;
 
     public int[] levelMoves;
     int moves = 0;
@@ -105,6 +106,7 @@ public class levelManager : MonoBehaviour
         boulders = new List<GameObject>();
         offset = new Vector3(-2.888f, 3.974f);
 
+        startDir = new int[] { 0, 0, 3, 1, 0, 0, 1, 1, 2, 0, 3 };
         levelMoves = new int[] { 30,20,20,20,20,20,20,20,20,20,20 };
         currLevel = new float[(int)rows, (int)cols];
 
@@ -330,6 +332,7 @@ public class levelManager : MonoBehaviour
                     tiles.Add(go);
                     go.transform.position = offset + new Vector3(j * 2, i * -2);
                     robot.GetComponent<robot>().setStart(go.transform.position);
+                    robot.GetComponent<robot>().setStartDir(startDir[level]);
                     robot.GetComponent<robot>().position = new Vector3(j, i*-1, 0);
                 }
                 if (currLevel[i, j] == 9)
@@ -705,6 +708,7 @@ public class levelManager : MonoBehaviour
         int wall = Random.Range(0, 4);
         if(wall==0)
         {
+            startDir[0] = 1;
             startx = 0;
             starty = (int)Random.Range(0, cols);
             endx = (int)rows - 1;
@@ -712,6 +716,8 @@ public class levelManager : MonoBehaviour
         }
         if (wall == 1)
         {
+
+            startDir[0] = 3;
             startx = (int)rows - 1;
             starty = (int)Random.Range(0, cols);
             endx = 0;
@@ -719,6 +725,7 @@ public class levelManager : MonoBehaviour
         }
         if (wall == 2)
         {
+            startDir[0] = 0;
             startx = (int)Random.Range(0, rows);
             starty = 0;
             endx = (int)Random.Range(0, rows);
@@ -726,6 +733,7 @@ public class levelManager : MonoBehaviour
         }
         if (wall == 3)
         {
+            startDir[0] = 2;
             startx = (int)Random.Range(0, rows);
             starty = (int)cols - 1;
             endx = (int)Random.Range(0, rows);

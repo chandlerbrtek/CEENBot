@@ -6,6 +6,7 @@ public class robot : MonoBehaviour
 {
     public Vector3[] directions;
     public int dir = 0;
+    int startDir = 0;
     Vector3 rotation;
     public Vector3 position;
     public Vector3 start;
@@ -116,6 +117,11 @@ public class robot : MonoBehaviour
         start = pos;
     }
 
+    public void setStartDir(int i)
+    {
+        startDir = i;
+        reset();
+    }
     public Vector3 getPos()
     {
         return this.transform.position;
@@ -158,7 +164,7 @@ public class robot : MonoBehaviour
     {
         position = new Vector3(0, 0, 0);
         this.transform.position = start;
-        while (dir != 0)
+        while (dir != startDir)
         {
             rotation.z -= 90;
             this.transform.Rotate(new Vector3(0, 0, -90), Space.Self);

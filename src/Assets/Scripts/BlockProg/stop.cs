@@ -2,27 +2,31 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/**
+ * This program represents the behavior for the stop button
+ * 
+ */
 public class stop : MonoBehaviour
 {
     // Start is called before the first frame update
     private GameManager gm;
 
-
+    /**
+     * Initializes game manager object
+     */
     void Start()
     {
         gm = GameObject.FindObjectOfType<GameManager>();
     }
+
+    /**
+     * Calls the stop execution function
+     */
     void OnMouseDown()
     {
-        Debug.Log("what");
-        //gm.running = false;
-        //gm.executeBlockProgram();
+
         gm.stopExecution();
 
     }
-    // Update is called once per frame
-    void Update()
-    {
 
-    }
 }

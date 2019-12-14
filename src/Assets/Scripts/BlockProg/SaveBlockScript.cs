@@ -2,16 +2,25 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/**
+ * This class creates a backup of the block program
+ */
 public class SaveBlockScript : MonoBehaviour
 {
     // Start is called before the first frame update
     private GameManager gm;
     private string saveString;
-
+    /**
+     * iniatialize the game manager
+     */
     void Start()
     {
         gm = GameObject.FindObjectOfType<GameManager>();
     }
+
+    /**
+     * WHen clicked it iterates through the block program and saves each to file.
+     */
     void OnMouseDown()
     {
         saveString = "";
@@ -53,8 +62,5 @@ public class SaveBlockScript : MonoBehaviour
         gm.saveBlocks(saveString);
     }
     // Update is called once per frame
-    void Update()
-    {
 
-    }
 }

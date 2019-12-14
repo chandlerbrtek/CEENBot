@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/**
+ * This class manages the active level, loads the level by duplicating tiles and putting them where they should be on the map
+ * and executes specific moves and instructions while the game executes as directed by GameManager
+ */
 public class levelManager : MonoBehaviour
 {
     //Level Data
@@ -81,15 +85,17 @@ public class levelManager : MonoBehaviour
     public bool complete;
     bool justBeeped = false;
 
-    private void Awake()
-    {
-        
-    }
-
+    /**
+     * returns the current level
+     */
     public int getLevel()
     {
         return level;
     }
+
+    /**
+     * Initializes variables including a set of arrays representing the level data
+     */
     void Start()
     {
         drive = GetComponent<AudioSource>();
@@ -193,14 +199,18 @@ public class levelManager : MonoBehaviour
 
 
     }
-
+    /**
+     * generates a random level, then loads the specified level
+     */
     public void setLevel(int i)
     {
         generateRandomLevel();
         level = i;
         resetLevel();
     }
-
+    /**
+     * this function copies the level into the currentLevel array and then generates the level based on that.
+     */
     public void resetLevel()
     {
         if (level == 0)
@@ -253,7 +263,9 @@ public class levelManager : MonoBehaviour
 
 
     }
-
+    /**
+     * This function copies a specified level into the provided array
+     */
     public void copyLevel(float[,] arr)
     {
 
@@ -268,6 +280,10 @@ public class levelManager : MonoBehaviour
         }
             
     }
+    /**
+     * This function calls clear to clear the old level then
+     * iterates through the current level array and generates the tiles
+     */
     public void generateLevel()
     {
         clear();
@@ -349,16 +365,25 @@ public class levelManager : MonoBehaviour
     }
 
 
+    /**
+     * instruct the robot robot to turn right
+     */
     public void right()
     {
         robot.GetComponent<robot>().right();
     }
-
+    /**
+     * Instructs the robot to turn left
+     */
     public void left()
     {
         robot.GetComponent<robot>().left();
     }
-
+    /**
+     * Has the robot activate it's light
+     * If the robot was on a light objective it increases the objective count 
+     * and turns the light tile into a grass tile
+     */
     public void lightActivate()
     {
         Vector3 temp = robot.GetComponent<robot>().getMapPosition();
@@ -374,7 +399,11 @@ public class levelManager : MonoBehaviour
 
         }
     }
-
+    /**
+     * The robot plays musical beeps
+     *  If the robot was on a music objective it increases the objective count 
+     * and turns the music tile into a grass tile
+     */
     public void musicActivate()
     {
         Vector3 temp = robot.GetComponent<robot>().getMapPosition();
@@ -391,24 +420,28 @@ public class levelManager : MonoBehaviour
         }
     }
 
-
+    /**
+     * This function checks if moving forward is legal for the robot (and any boulder it might be pushing)
+     * and then initiates moving the robot in that direction
+     */
     public void forward()
     {
         if (legalMove(robot.GetComponent<robot>().getForward())&&boulderMove(robot.GetComponent<robot>().getForward()))
         {
-            //Debug.Log("moving to:" + robot.GetComponent<robot>().getForward());
             robot.GetComponent<robot>().forward();
             startPos = robot.GetComponent<robot>().getPos();
             endPos = robot.GetComponent<robot>().getRealForward();
             isMoving = true;
         }
     }
-
+    /**
+     * This function checks if moving bakcward is legal for the robot (and any boulder it might be pushing)
+     * and then initiates moving the robot in that direction
+     */
     public void back()
     {
         if (legalMove(robot.GetComponent<robot>().getBackward()))
         {
-            // Debug.Log("moving to:" + robot.GetComponent<robot>().getBackward());
             robot.GetComponent<robot>().back();
             startPos = robot.GetComponent<robot>().getPos();
             endPos = robot.GetComponent<robot>().getRealBackward();
@@ -416,25 +449,31 @@ public class levelManager : MonoBehaviour
         }
     }
 
+    /**
+     * returns true if the move is within bounds and the destination tile is not bush or water
+     */
     public bool legalMove(Vector3 pos)
     {
         
         if (pos.x >= 0 && pos.x < cols && pos.y>=0 && pos.y<rows)
         {
-          // Debug.Log("Checking" + pos + " val:" + currLevel[(int)pos.y, (int)pos.x]);
             if (currLevel[(int)pos.y,(int)pos.x] != 1 && currLevel[(int)pos.y, (int)pos.x]!=2)
             {
-                //Debug.Log("all clear");
                 return true;
             }
         }
         return false;
     }
-
+    /**
+     * Calculates and returns the number of stars earned
+     * 1 for level completion
+     * 1 for completing all objectives
+     * 1 for copmleting the level in a minimal number of moves
+     */
     public int getStars()
     {
         stars = 0;
-        Debug.Log("Moves used:" + moves + " Level Moves:" + levelMoves[level]);
+
         if(complete)
         {
             stars++;
@@ -451,12 +490,16 @@ public class levelManager : MonoBehaviour
         return stars;
     }
 
+    /**
+     * returns true if it would be legal for a boulder to move there
+     * checks to see if the spot is in bouns
+     * the spot is illegal if the destination tile is a bush or contains a boulder
+     */
     public bool legalBoulderMove(Vector3 pos)
     {
 
         if (pos.x >= 0 && pos.x < cols && pos.y >= 0 && pos.y < rows)
         {
-            // Debug.Log("Checking" + pos + " val:" + currLevel[(int)pos.y, (int)pos.x]);
             if (currLevel[(int)pos.y, (int)pos.x] != 1 && getBoulder(pos)==null)
             {
                 
@@ -466,6 +509,9 @@ public class levelManager : MonoBehaviour
         return false;
     }
 
+    /**
+    *resets the robot and the level
+    */
     public void reset()
     {
 
@@ -476,7 +522,9 @@ public class levelManager : MonoBehaviour
         resetLevel();
 
     }
-
+    /**
+     * resets variables and deletes all tiles and boulders
+     */
     public void clear()
     {
         moves = 0;
@@ -493,6 +541,10 @@ public class levelManager : MonoBehaviour
         }
         boulders.Clear();
     }
+    /**
+     * Returns true if there is no boulder in this spot or if the boulder would be able to move to the next square
+     * If the boulder can move it initiates the boulder movement
+     */
     public bool boulderMove(Vector3 pos)
     {
         bool rval=true;
@@ -505,22 +557,6 @@ public class levelManager : MonoBehaviour
             
             if (legalBoulderMove(oneFurther))
             {
-                /*
-                Vector3 newPos = pos - robot.GetComponent<robot>().getMapPosition();
-                newPos *= 2;
-                newPos.y *= -1;
-
-                b.transform.position += newPos;
-                if (currLevel[(int)oneFurther.y, (int)oneFurther.x] == 2)
-                {//spot is water
- 
-                    currLevel[(int)oneFurther.y, (int)oneFurther.x] = 3;
-                    GameObject go = Instantiate(mud);
-                    tiles.Add(go);
-                    go.transform.position = b.transform.position;
-                    boulders.Remove(b);
-                    Destroy(b);
-                }*/
                 boulderEndMapPos = oneFurther;
                 boulderEndPos  = pos - robot.GetComponent<robot>().getMapPosition();
                 boulderEndPos *=2;
@@ -540,6 +576,9 @@ public class levelManager : MonoBehaviour
         return rval;
     }
 
+    /**
+     * returns the map position of a game object
+     */
     public Vector3 getPos(GameObject go)
     {
         Vector3 rval = new Vector3();
@@ -549,11 +588,17 @@ public class levelManager : MonoBehaviour
         return rval;
     }
 
+    /**
+     * Increments the move counter, used for star calculation
+     */
     public void addMove()
     {
         moves++;
     }
 
+    /**
+     * if there is a boulder at this position, return a refrence to it
+     */
     public GameObject getBoulder(Vector3 pos)
     {
 
@@ -567,6 +612,10 @@ public class levelManager : MonoBehaviour
         }
         return rval;
     }
+
+    /**
+     * Begin playing the driving noise for Robot movement
+     */
     public void startDriving()
     {
         if (!drive.isPlaying || justBeeped)
@@ -575,11 +624,18 @@ public class levelManager : MonoBehaviour
             drive.Play();
         }
     }
-
+    /**
+     * Stop playing the drive noise
+     */
     public void stopDriving()
     {
         drive.Stop();
     }
+
+    /**
+     * On update if the robot or boulder are moving move them toward their destination
+     * If they reach they're destination then they stop moving
+     */
     private void Update()
     {
         if(isMoving)
@@ -617,7 +673,6 @@ public class levelManager : MonoBehaviour
                 temp = robot.GetComponent<robot>().getMapPosition();
                 if(currLevel[(int)temp.y,(int)temp.x]==9)
                 {
-                    Debug.Log("finished");
                     complete = true;
                     drive.Stop();
                     audioSource.PlayOneShot(levelcomplete);
@@ -626,11 +681,14 @@ public class levelManager : MonoBehaviour
         }
     }
 
+    /**
+     * Generates a random level and puts it into slot 0 on the level array
+     */
     public void generateRandomLevel()
     {
         int startx=0, starty=0;
         int endx=0, endy=0;
-
+        //The path array is used for calculating a path from the start to the finish
         path = new float[,]         {   { 0,0,0,0,0,0},
                                         { 0,0,0,0,0,0},
                                         { 0,0,0,0,0,0},
@@ -640,7 +698,6 @@ public class levelManager : MonoBehaviour
 
         //generate impassable terrain
         int water = Random.Range(0, 6);
-        
         if (water ==1 || water ==2)
             water=1;
         if (water == 3 || water == 4)
@@ -648,12 +705,12 @@ public class levelManager : MonoBehaviour
         if (water == 5)
             water = 3;
 
-            
+         //generates 0 to 3 water features
         while(water>0)
         {
             water--;
             if(Random.Range(0,2)==0)
-            {//river
+            {//genenrate river
                 if (Random.Range(0, 2)==0)
                 {
                     int i = (int)Random.Range(0, rows);
@@ -674,7 +731,7 @@ public class levelManager : MonoBehaviour
 
             }
             else
-            {//pond
+            {//generate pond
                 int size = Random.Range(1, 4);
                 int px = (int)Random.Range(0, rows-size);
                 int py = (int)Random.Range(0, cols-size);
@@ -687,7 +744,7 @@ public class levelManager : MonoBehaviour
         }
 
         if(Random.Range(0,2)==0)
-        {//flip water and trees
+        {//flip water and trees half of the time
             for(int i =0; i<rows;++i)
             {
                 for(int j=0; j<cols; ++j)
@@ -706,6 +763,7 @@ public class levelManager : MonoBehaviour
 
 
         //pick a start and end
+        //start and end are generated on opposite walls of the level
         int wall = Random.Range(0, 4);
         if(wall==0)
         {
@@ -743,23 +801,17 @@ public class levelManager : MonoBehaviour
         level0[startx,starty] = 8;
         level0[endx, endy] = 9;
 
-        //path[startx, starty] = 2;
         path[endx, endy] = 9;
 
-        //generate path from start to finish
-        int curx = startx;
-        int cury = starty;
-        //int[,] dirs = { { 1, 0 }, { -1, 0 }, { 0, 1 }, { 0, -1 } };
+ 
 
-        //copyLevel(level0) ;
-        //generateLevel();
-        Debug.Log("Starting path, curr:"+curx+","+cury+" end:"+endx+","+endy);
-
-
-        pathToFinish(curx, cury);
+        //call recursive pathing function to generate a path from start to finish
+        pathToFinish(startx, starty);
 
         
-
+        //now that the path has been decided identify other areas that could
+        //have paths in them without breaking up the main path
+        //randomly starts at a random point on the map and then starts over from the beggining
         for (int i = Random.Range(0,(int)rows); i < rows; ++i)
         {
             for (int j = Random.Range(0, (int)cols); j < cols; ++j)
@@ -771,7 +823,6 @@ public class levelManager : MonoBehaviour
                 }
             }
         }
-
         for (int i = 0; i < rows; ++i)
         {
             for (int j = 0; j < cols; ++j)
@@ -784,14 +835,12 @@ public class levelManager : MonoBehaviour
             }
         }
 
-
-
-        //pick obstacles 0-1
-        //put obstacles on path
         //pick number of objectives 0-2
         path[endx, endy] = 9;
         int numObjectives = Random.Range(0, 4);
-        //numObjectives = 3;
+
+        //for each objective being generated pick a spot identified as a potential path in the previous loops
+        // put an objective there and then generate a path to the closest point on the main path
         for(int i = 0; i < rows; ++i)
         {
             for (int j = 0; j < cols; ++j)
@@ -854,9 +903,7 @@ public class levelManager : MonoBehaviour
         }
 
 
-        //generate branches from path to objectives, or on the path
-
-
+        /*
         string s = "";
         for (int i = 0; i<rows; i++)
         {
@@ -865,10 +912,11 @@ public class levelManager : MonoBehaviour
                 s += level0[i, j];
                 s += ",";
             }
-            Debug.Log(s);
-            s = "";
-        }
 
+            s = "";
+        }*/
+
+        //copies the paths into the level
         for (int i = 0; i < rows; ++i)
         {
             for (int j = 0; j < cols; ++j)
@@ -884,7 +932,10 @@ public class levelManager : MonoBehaviour
 
     }
 
-
+    /**
+     * For the given point on the map (x,y), find the closest point on the main path
+     * and add a path from there to this point(x,y)
+     */
     public void addPath(int x, int y)
     {
         int nearx = 100;
@@ -908,7 +959,6 @@ public class levelManager : MonoBehaviour
                 }
             }
         }
-        Debug.Log("Connecting " + x + "," + y + " and " + nearx + "," + neary);
         //bool cont = true;
         int count = 0;
         while (x != nearx || y != neary)
@@ -918,25 +968,21 @@ public class levelManager : MonoBehaviour
             {
                 x--;
                 path[x, y] = 2;
-                Debug.Log("placing" + x + "," + y);
             }
             else if (x < nearx && path[x + 1, y] != 9)// && path[x + 1, y] == 1)
             {
                 x++;
                 path[x, y] = 2;
-                Debug.Log("placing" + x + "," + y);
             }
             else if (y > neary && path[x, y-1] != 9)// && path[x, y-1] == 1)
             {
                 y--;
                 path[x, y] = 2;
-                Debug.Log("placing" + x + "," + y);
             }
             else if (y < neary && path[x, y +1] != 9)// && path[x, y+1] == 1)
             {
                 y++;
                 path[x, y] = 2;
-                Debug.Log("placing" + x + "," + y);
             }
             count++;
             if (count > 10)
@@ -944,12 +990,20 @@ public class levelManager : MonoBehaviour
         }
     }
 
+    /**
+     * returns true if the position is in bounds
+     */
     public bool inBounds(int x, int y)
     {
         if (x < 0 || y < 0 || x >= rows || y >= cols)
            return false;
         return true;
     }
+
+    /**
+     * Returns true if turning the spot into a part of the path
+     * would not connect it to another part of the path.
+     */
     public bool legalPathPlacement(int x, int y)
     {
         
@@ -988,6 +1042,10 @@ public class levelManager : MonoBehaviour
         return rval;
     }
 
+    /**
+     * Recursivley attempts to wander the map and create a path from start to finish
+     * without looping back on itself
+     */
     public bool pathToFinish(int x, int y)
     {
 
@@ -995,8 +1053,6 @@ public class levelManager : MonoBehaviour
             return false;
 
         
-
-        //Debug.Log("Pathing:" + x + "," + y);
         if (path[x, y] == 9)
             return true;
 

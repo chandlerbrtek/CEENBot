@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/**
+ * This class functions as the behavior for the icon toggling buton
+ */
 public class iconToggle : MonoBehaviour
 {
     // Start is called before the first frame update
@@ -14,17 +17,10 @@ public class iconToggle : MonoBehaviour
     public GameObject loop;
 
     public GameObject gm;
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
+    /**
+     * Calls the toggle function on all buttons as well as the GameManager toggle function.
+     */
     private void OnMouseDown()
     {
         gm.GetComponent<GameManager>().toggleBlocks();

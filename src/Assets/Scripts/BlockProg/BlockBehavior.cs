@@ -196,23 +196,35 @@ public class BlockBehavior : MonoBehaviour
         }
     }
 
+    /**
+     * Move the block to the given position.
+     * @Param v Position to move to.
+     */
     public void move(Vector3 v)
     {
         transform.position = transform.position + v;
     }
 
+    /**
+     * Return the refrence to the Next Block.
+     */
     public GameObject getNext()
     {
         return nextBlock;
     }
 
+    /**
+     * Return the refrence to the previos block.
+     */
     public GameObject getPrevious()
     {
         return prevBlock;
     }
+
     /**
      * Goes through the GameManager's list of all blocks to find out if this
-     * block is in position under another block
+     * block is in position under another block, and adds it to that blocks
+     * list, if appropriate.
      */
     public void checkBlocks()
     { 
@@ -233,6 +245,9 @@ public class BlockBehavior : MonoBehaviour
 
     }
 
+    /**
+     * Swaps between text button sprites and icon button sprites.
+     */
     public void toggle()
     {
         if (icon)

@@ -7,7 +7,8 @@ using UnityEngine;
 /**
  * Since blocks are doubly linked lists but there can be multiple lists
  * the game manager functions as an object in the scene that keeps track of
- * all of the individual blocks.
+ * all of the individual blocks. In addition to that it manages the level object
+ * as well as the player profile data.
  */
 public class GameManager : MonoBehaviour
 {
@@ -34,6 +35,7 @@ public class GameManager : MonoBehaviour
 
     public string levelString;
     public GameObject levelManager;
+    private levelManager lm;
     public GameObject activeLevel;
 
     public List<GameObject> blocks;
@@ -43,15 +45,10 @@ public class GameManager : MonoBehaviour
     public GameObject trash;
 
     bool toggle = false;
+
     /**
-     * Intialization function
+     * initialize variables and set the level
      */
-
-    void Awake()
-    {
-
-    }
-
     void Start()
     {
         height = new Vector3(0, 0.93f, 0);
@@ -59,8 +56,8 @@ public class GameManager : MonoBehaviour
         blockId = 0;
         blocks = new List<GameObject>();
         addBlock(startButton);
-        Debug.Log("Loading level:" + activeLevel.GetComponent<activeLevel>().getLevel());
-        levelManager.GetComponent<levelManager>().setLevel(activeLevel.GetComponent<activeLevel>().getLevel());
+        lm = levelManager.GetComponent<levelManager>();
+        lm.setLevel(activeLevel.GetComponent<activeLevel>().getLevel());
     }
     /**
      * creates and returns a new block with id i
@@ -88,6 +85,9 @@ public class GameManager : MonoBehaviour
         blocks.Add(b);
     }
 
+    /**
+     * Saves the level's score into the player profile
+     */
     public void SaveLevelScore(int levelIndex, int numOfStars)
     {
         LoadGame();
@@ -106,6 +106,10 @@ public class GameManager : MonoBehaviour
         return save;
     }
 
+    /**
+     *A function that moves all blocks by an offset
+     * @param offset the distance and direction to move the objects
+     */
     public void moveBlocks(Vector3 offset)
     {
         foreach (GameObject go in blocks)
@@ -114,6 +118,9 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    /**
+     * This function is called by the start button, if the program is not allready running this resets the level and calls the coroutine that executes the program.
+     */
     public void executeBlockProgram()
     {
         if (!running)
@@ -122,11 +129,14 @@ public class GameManager : MonoBehaviour
             resetPosition.GetComponent<ReturnScript>().resetPosition();
             levelManager.GetComponent<levelManager>().reset();
             arrow.GetComponent<SpriteRenderer>().enabled = true;
-            StartCoroutine(Wait());
+            StartCoroutine(Run());
             
         }
     }
 
+    /**
+     * Stops the current program from execution.
+     */
     public void stopExecution()
     {
         if(running)
@@ -136,7 +146,13 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    IEnumerator Wait()
+    /**
+     * This program runs the block programming code. 
+     * It's set up as a coroutine so that it can wait for other parts of the game to catch up.
+     * While running it executes the current block by calling the appropriate methods in level manager, 
+     * waits for a short period of time, gets the next command, and breaks the loop if the level was completed.
+     */
+    IEnumerator Run()
     {
         GameObject curr = startButton;
 
@@ -147,43 +163,43 @@ public class GameManager : MonoBehaviour
             
             if (curr.name == "ForwardBlock(Clone)")
             {
-                levelManager.GetComponent<levelManager>().addMove();
-                levelManager.GetComponent<levelManager>().startDriving();
-                levelManager.GetComponent<levelManager>().forward();
+                lm.addMove();
+                lm.startDriving();
+                lm.forward();
             }
             else if(curr.name == "BackBlock(Clone)")
             {
-                levelManager.GetComponent<levelManager>().addMove();
-                levelManager.GetComponent<levelManager>().startDriving();
-                levelManager.GetComponent<levelManager>().back();
+                lm.addMove();
+                lm.startDriving();
+                lm.back();
             }
             else if (curr.name == "RightBlock(Clone)")
             {
-                levelManager.GetComponent<levelManager>().addMove();
-                levelManager.GetComponent<levelManager>().startDriving();
-                levelManager.GetComponent<levelManager>().right();
+                lm.addMove();
+                lm.startDriving();
+                lm.right();
             }
             else if (curr.name == "LeftBlock(Clone)")
             {
-                levelManager.GetComponent<levelManager>().addMove();
-                levelManager.GetComponent<levelManager>().startDriving();
-                levelManager.GetComponent<levelManager>().left();
+                lm.addMove();
+                lm.startDriving();
+                lm.left();
             }
             else if (curr.name == "BeepBlock(Clone)")
             {
-                levelManager.GetComponent<levelManager>().addMove();
-                levelManager.GetComponent<levelManager>().stopDriving();
-                levelManager.GetComponent<levelManager>().musicActivate();
+                lm.addMove();
+                lm.stopDriving();
+                lm.musicActivate();
             }
             else if (curr.name == "LightBlock(Clone)")
             {
-                levelManager.GetComponent<levelManager>().addMove();
-                levelManager.GetComponent<levelManager>().stopDriving();
-                levelManager.GetComponent<levelManager>().lightActivate();
+                lm.addMove();
+                lm.stopDriving();
+                lm.lightActivate();
             }
             else if (curr.name == "RestartBlock(Clone)")
             {
-                levelManager.GetComponent<levelManager>().addMove();
+                lm.addMove();
                 while (curr.GetComponent<BlockBehavior>().hasPrev)
                 {
                     curr = curr.GetComponent<BlockBehavior>().getPrevious();
@@ -193,20 +209,20 @@ public class GameManager : MonoBehaviour
             }
             
             yield return new WaitForSeconds(.5f);
-            while(levelManager.GetComponent<levelManager>().isMoving)
+            while(lm.isMoving)
             {
                 yield return new WaitForSeconds(.1f);
             }
-            if (levelManager.GetComponent<levelManager>().complete)
+            if (lm.complete)
             {
                 running = false;
-                int stars = levelManager.GetComponent<levelManager>().getStars();
+                int stars = lm.getStars();
                 activeLevel.GetComponent<activeLevel>().setStars(stars);
                 if (activeLevel.GetComponent<activeLevel>().getLevel() > 0)
                 {
                     SaveLevelScore(activeLevel.GetComponent<activeLevel>().getLevel(), stars);
                 }
-                Debug.Log("complete");
+               // Debug.Log("complete");
                 congrats.GetComponent<congrats>().complete(stars);
                 clear();
             }
@@ -216,7 +232,7 @@ public class GameManager : MonoBehaviour
             moveBlocks(height);
             if (!curr.GetComponent<BlockBehavior>().hasNext)
             {
-                levelManager.GetComponent<levelManager>().stopDriving();
+                lm.stopDriving();
                 break;
             }
             curr = curr.GetComponent<BlockBehavior>().getNext();
@@ -241,7 +257,7 @@ public class GameManager : MonoBehaviour
         bf.Serialize(file, save);
         file.Close();
 
-        Debug.Log("Game Saved");
+        //Debug.Log("Game Saved");
     }
 
     public void LoadGame()
@@ -259,18 +275,18 @@ public class GameManager : MonoBehaviour
             profiles = save.profiles;
             blocksave = save.profiles[selectedProfile].progress;
 
-            Debug.Log("Game Loaded");
+            //Debug.Log("Game Loaded");
 
         }
         else
         {
-            Debug.Log("No game saved!");
+            //Debug.Log("No game saved!");
         }
     }
 
     public void saveBlocks(string toSave)
     {
-        Debug.Log(selectedProfile);
+        //Debug.Log(selectedProfile);
         profiles[selectedProfile].progress = toSave;
         SaveGame();
     }
@@ -279,7 +295,9 @@ public class GameManager : MonoBehaviour
     {
         return startButton;
     }
-
+    /**
+     * This function deletes all programming blocks.
+     */
     public void clear()
     {
         GameObject g;
@@ -291,24 +309,18 @@ public class GameManager : MonoBehaviour
         }
        
     }
-
+    /**
+     * This function removes a specific block.
+     */
     public void removeBlock(GameObject block)
     {
         blocks.Remove(block);
         Destroy(block);
     }
 
-    public void removeBlock(int id)
-    {
-        foreach(GameObject g in blocks)
-        {
-            if(g.GetComponent<BlockBehavior>().blockId == id)
-            {
-                removeBlock(g);
-            }
-        }
-    }
-
+    /**
+     * This function iterates through all blocks to toggle their sprites between text and icons
+     */
     public void toggleBlocks()
     {
         for(int i = 1; i<blocks.Count; ++i)

@@ -71,7 +71,9 @@ public class ButtonClick : MonoBehaviour
         newButton.GetComponent<BlockBehavior>().checkBlocks();  
     }
     
-    
+    /**
+     * Swaps between button sprites with text and icons
+     */
     public void toggleSprite()
     {
         if(icon)

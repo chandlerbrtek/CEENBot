@@ -2,19 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/**
+ * This class functions as the behavior for the next level button
+ */
 public class NextLevel : MonoBehaviour
 {
     public GameObject level;
     public GameObject congrats;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
+    /**
+     * When clicked this button loads the next level, if it was the last level it loops back around to the first, 
+     * if it was a random level it loads a new random level.
+     */
     void OnMouseDown()
     {
-        Debug.Log("end");
         int lvl = level.GetComponent<levelManager>().getLevel();
         if(lvl == 0)
         {
@@ -32,9 +33,4 @@ public class NextLevel : MonoBehaviour
         congrats.GetComponent<congrats>().invis();
     }
 
-        // Update is called once per frame
-        void Update()
-    {
-        
     }
-}

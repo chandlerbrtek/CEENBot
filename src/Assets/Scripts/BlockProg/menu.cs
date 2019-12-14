@@ -2,24 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
+/**
+ * This class functions as the behavior for the menu button
+ */
 public class menu : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
+    /**
+     * When clicked it loads the main menu
+     */
     void OnMouseDown()
     {
         SceneManager.LoadScene(0);
 
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+ 
 }

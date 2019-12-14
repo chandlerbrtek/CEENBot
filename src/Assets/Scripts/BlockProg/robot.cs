@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/**
+ * This class represents the robot on the field and tracks related positioning data
+ */
 public class robot : MonoBehaviour
 {
     public Vector3[] directions;
@@ -10,16 +13,21 @@ public class robot : MonoBehaviour
     Vector3 rotation;
     public Vector3 position;
     public Vector3 start;
-    // Start is called before the first frame update
+
+
     bool rotating = true;
     float startDeg;
     float targetDeg;
     float speed;
     float turned;
-    public Light light;
+
+    public Light spotlight;
 
     float litTime = 0;
 
+    /**
+     * Intializes some variables
+     */
     void Start()
     {
         directions = new Vector3[4];
@@ -32,17 +40,22 @@ public class robot : MonoBehaviour
 
     }
 
-    // Update is called once per frame
+    /**
+     * Updates time sensitive robot funcitons related to rotation and the spotlight
+     */
     void Update()
     {
+        //if the light is on check to see if it should be turned off yet
         if(litTime>0)
         {
             litTime--;
             if(litTime==0)
             {
-                light.GetComponent<Light>().enabled = false;
+                spotlight.GetComponent<Light>().enabled = false;
             }
         }
+
+        //if the robot is currently rotating, rotate and then check to see if we should stop
         if (rotating)
         {
             rotation.z += speed;
@@ -55,11 +68,11 @@ public class robot : MonoBehaviour
         }
     }
 
+    /**
+     * When called tracks the robots direciton and starts the clockwise rotation process 
+     */
     public void right()
     {
-        /*
-        rotation.z -= 90;
-        this.transform.Rotate(new Vector3(0,0,-90), Space.Self);*/
         rotating = true;
         startDeg = rotation.z;
         targetDeg = startDeg - 90;
@@ -71,10 +84,11 @@ public class robot : MonoBehaviour
 
     }
 
+    /**
+     * When called tracks the robots direciton and starts the counter clockwise rotation process 
+     */
     public void left()
     {
-        /*rotation.z += 90;
-        this.transform.Rotate(new Vector3(0, 0, 90), Space.Self);*/
         rotating = true;
         startDeg = rotation.z;
         targetDeg = startDeg + 90;
@@ -86,47 +100,71 @@ public class robot : MonoBehaviour
 
     }
 
+    /**
+     * activates the light and sets it's timer
+     */
     public void lightRobot()
     {
         litTime = 30;
-        light.GetComponent<Light>().enabled = true;
+        spotlight.GetComponent<Light>().enabled = true;
 
     }
 
+    /**
+     * Moves the robot forwardn it's map position
+     * actual position movement logic is in Level Manager
+     */
     public void forward()
     {
-        //this.transform.position = this.transform.position + directions[dir]*2;
         position += directions[dir];
     }
 
+    /**
+     * Moves the robot backwards in it's map position
+     * actual position movement logic is in Level Manager
+     */
     public void back()
     {
-        //this.transform.position = this.transform.position - directions[dir]*2;
         position -= directions[dir];
     }
 
+    /**
+     * Sets the robots actual position
+     */
     public void setPos(Vector3 pos)
     {
         this.transform.position = pos;
 
     }
 
+    /**
+     * Sets the robots start position
+     */
     public void setStart(Vector3 pos)
     {
         this.transform.position = pos;
         start = pos;
     }
-
+    /**
+     * Sets the direciton the robot will be facing on level start
+     */
     public void setStartDir(int i)
     {
         startDir = i;
         reset();
     }
+
+    /**
+     * gets the robots actual position
+     */
     public Vector3 getPos()
     {
         return this.transform.position;
     }
 
+    /**
+     * gets the robots coordinates on the map
+     */
     public Vector3 getMapPosition()
     {
         Vector3 rval = new Vector3();
@@ -136,6 +174,9 @@ public class robot : MonoBehaviour
         return rval;
     }
 
+    /**
+     * return the map position the robot would move to if it moved forwards
+     */
     public Vector3 getForward()
     {
         Vector3 rval = position + directions[dir];
@@ -143,6 +184,9 @@ public class robot : MonoBehaviour
         return rval;
     }
 
+    /**
+     * returns the map position the robot would move to if it moved backwards
+     */
     public Vector3 getBackward()
     {
         Vector3 rval = position - directions[dir];
@@ -150,16 +194,24 @@ public class robot : MonoBehaviour
         return rval;
     }
 
+    /**
+     * gets the actual positon the robot would be in if it moved foward
+     */
     public Vector3 getRealForward()
     {
         return this.transform.position + directions[dir] * 2;
     }
-
+    /**
+     * gets the actual positon the robot would be in if it moved backwards
+     */
     public Vector3 getRealBackward()
     {
         return this.transform.position - directions[dir] * 2;
     }
 
+    /**
+     * resets the robots map position, actual position, direction and rotation.
+     */
     public void reset()
     {
         position = new Vector3(0, 0, 0);

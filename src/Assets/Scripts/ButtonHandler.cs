@@ -5,24 +5,36 @@ using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 using UnityEngine.UI;
 
+/**
+ * The ButtonHandler is called for a variety of button clicks on the main menu
+ */
 public class ButtonHandler : MonoBehaviour
 {
 
     private int selectedProfile;
     private List<Player> profiles;
 
-    // Start is called before the first frame update
+    /**
+     * Start is called before the first frame update
+     */
     void Start()
     {
      
     }
 
-    // Update is called once per frame
+    /**
+     * Update is called once per frame
+     */
     void Update()
     {
         
     }
 
+    /**
+     * This function loads the game and then adds a new profile to the end of
+     * the list. It knows what name to used based upon the text entered into
+     * the field. Once the profile has been added, the game is promptly saved.
+     */
     public void CreateNewProfile()
     {
         profiles = new List<Player>();
@@ -31,12 +43,17 @@ public class ButtonHandler : MonoBehaviour
         GameObject inputFieldGo = GameObject.Find("TextBox");
         InputField inputFieldCo = inputFieldGo.GetComponent<InputField>();
         profileName = inputFieldCo.text;
+        inputFieldCo.text = "";
         Player player = new Player(profileName);
         profiles.Add(player);
         SaveGame();
     }
 
-
+    /**
+     * Acts as a helper function to the SaveGame function, creating a Save
+     * object and then saving the current variables to that object, before
+     * returning it
+     */
     private Save CreateSaveGameObject()
     {
         Save save = new Save();
@@ -48,6 +65,9 @@ public class ButtonHandler : MonoBehaviour
         return save;
     }
 
+    /**
+     * Creates a save object and then saves that data to the PlayerPrefs
+     */
     private void SaveGame()
     {
         // 1
@@ -62,6 +82,12 @@ public class ButtonHandler : MonoBehaviour
         Debug.Log("Game Saved");
     }
 
+    /**
+     * LoadGame loads the game from playerPrefs, setting the repective variables
+     * to the values loaded. If loadProfiles is set to true, the text is set for
+     * the profiles that can be selected
+     * @param loadGame true if loading profiles, false if not
+     */
     public void LoadGame(bool loadProfiles)
     {
         // 1
@@ -113,6 +139,10 @@ public class ButtonHandler : MonoBehaviour
         }
     }
 
+    /**
+     * Sets the selectedProfile variable in the playerPrefs to the index of the
+     * selected profile
+     */
     public void SelectProfile(int profileIdx)
     {
         LoadGame(false);
@@ -121,6 +151,9 @@ public class ButtonHandler : MonoBehaviour
         SaveGame();
     }
 
+    /**
+     * Deletes the profile at the selected index in the PlayerPrefs
+     */
     public void DeleteProfile(int profileIdx)
     {
         LoadGame(false);

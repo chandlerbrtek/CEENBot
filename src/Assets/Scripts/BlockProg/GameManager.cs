@@ -246,6 +246,9 @@ public class GameManager : MonoBehaviour
         
     }
 
+    /**
+     * Creates a save object and then saves that data to the PlayerPrefs
+     */
     private void SaveGame()
     {
         // 1
@@ -260,6 +263,11 @@ public class GameManager : MonoBehaviour
         //Debug.Log("Game Saved");
     }
 
+
+    /**
+     * LoadGame loads the game from playerPrefs, setting the repective variables
+     * to the values loaded.
+     */
     public void LoadGame()
     {
         // 1
@@ -284,6 +292,9 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    /**
+     * Saves the current laid blocks to the players profile
+     */
     public void saveBlocks(string toSave)
     {
         //Debug.Log(selectedProfile);
@@ -291,6 +302,9 @@ public class GameManager : MonoBehaviour
         SaveGame();
     }
 
+    /**
+     * Gets the starting block of the LinkedList
+     */
     public GameObject getStartBlock()
     {
         return startButton;

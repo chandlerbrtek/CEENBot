@@ -3,6 +3,9 @@ using System.Collections;
 
 [RequireComponent(typeof(BoxCollider2D))]
 
+/**
+ * Class that handles dragging of blocks
+ */
 public class Drag : MonoBehaviour
 {
 
@@ -23,6 +26,9 @@ public class Drag : MonoBehaviour
 
     public int blockId;
 
+    /**
+     * Start is called before the first frame update
+     */
     private void Start()
     {                                                         
         gm = GameObject.FindObjectOfType<GameManager>();
@@ -31,8 +37,11 @@ public class Drag : MonoBehaviour
         hasPrev = false;
     }
 
+    /**
+     * Function setting up data for dragging block movement
+     */
     void OnMouseDown()
-    {//function setting up data for dragging block movement
+    {
         offset = gameObject.transform.position - Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y));
 
         //if the block was in a list, remove it, but it keeps it's children
@@ -43,10 +52,11 @@ public class Drag : MonoBehaviour
         }
     }
 
-    
+    /**
+     * Move the block to follow the cursor
+     */
     void OnMouseDrag()
     {
-        //move the block to follow the cursor
         Vector3 curScreenPoint = new Vector3(Input.mousePosition.x, Input.mousePosition.y);
         Vector3 curPosition = Camera.main.ScreenToWorldPoint(curScreenPoint) + offset;
         transform.position = curPosition;
@@ -55,14 +65,19 @@ public class Drag : MonoBehaviour
         alignChildren();
     }
 
+    /**
+     * When you stop moving the block, check if it's in position to be added to another list
+     */
     private void OnMouseUp()
     {
-        //when you stop moving the block, check if it's in position to be added to another list
         checkBlocks();
     }
 
+    /**
+     * Returns true if the position given would be in position to be the next block
+     */
     public bool shouldSnap(Vector3 pos)
-    {//returns true if the position given would be in position to be the next block
+    {
 
             Vector3 tpos = new Vector3(pos.x, (float)(pos.y + 1.5), pos.z);
             if (nextCollider.bounds.Contains(tpos))
@@ -74,6 +89,9 @@ public class Drag : MonoBehaviour
         return false;
     }
 
+    /**
+     * set parent block
+     */
     public void setPrev(GameObject b)
     {//set parent block
         hasPrev = true;
@@ -81,12 +99,18 @@ public class Drag : MonoBehaviour
 
     }
 
+    /**
+     * remove child block
+     */
     public void removeChild()
     {//remove child block
         hasNext = false;
         nextBlock = null;
     }
 
+    /**
+     * Adds a block to this list
+     */
     public void addBlock(GameObject b)
     {//adds a block to this list
         if(b.GetComponent<Drag>().blockId == blockId)
@@ -107,6 +131,9 @@ public class Drag : MonoBehaviour
         }
     }
 
+    /**
+     * Makes sure that the children of this block are lined up with this one
+     */
     public void alignChildren()
     {//make sure that the children of this block are lined up with this one
         if(hasNext)
@@ -118,6 +145,9 @@ public class Drag : MonoBehaviour
         }
     }
 
+    /**
+     * Checks to find if there is a block that this block is in position under
+     */
     public void checkBlocks()
     {//check to find if there is a block that this block is in position under
         foreach(GameObject go in gm.blocks)

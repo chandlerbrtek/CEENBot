@@ -93,6 +93,10 @@ public class levelManager : MonoBehaviour
         return level;
     }
 
+    public void setVol(float f)
+    {
+        drive.volume = f;
+    }
     /**
      * Initializes variables including a set of arrays representing the level data
      */

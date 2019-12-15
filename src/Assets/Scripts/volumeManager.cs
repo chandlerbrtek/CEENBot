@@ -12,17 +12,26 @@ public class volumeManager : MonoBehaviour {
     public Slider masterSlider;
     public Slider musicSlider;
     public AudioSource musicAudio;
+    public float startMusicOffset;
 
 	void Start () {
-        masterSlider.value = 0.4f;
-        musicSlider.value = 0.4f;
-	}
+        masterSlider.value = 1;
+        musicSlider.value = 1f;
+        startMusicOffset = 0.1f;
+        musicAudio.volume = musicSlider.value * masterSlider.value*startMusicOffset;
+        
+    }
 
     /**  
     * Update is called once per frame   
     */ 
     void Update () {
-        musicAudio.volume = musicSlider.value;
-        AudioListener.volume = masterSlider.value *musicAudio.volume;
+        
+        //AudioListener.volume = masterSlider.value *musicAudio.volume;
 	}
+
+    public void updateVol()
+    {
+        musicAudio.volume = musicSlider.value * masterSlider.value*startMusicOffset;
+    }
 }

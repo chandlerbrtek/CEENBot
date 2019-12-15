@@ -46,6 +46,8 @@ public class GameManager : MonoBehaviour
 
     bool toggle = false;
 
+
+
     /**
      * initialize variables and set the level
      */
@@ -58,6 +60,8 @@ public class GameManager : MonoBehaviour
         addBlock(startButton);
         lm = levelManager.GetComponent<levelManager>();
         lm.setLevel(activeLevel.GetComponent<activeLevel>().getLevel());
+        GetComponent<AudioSource>().volume = activeLevel.GetComponent<activeLevel>().getMusicVol();
+        lm.setVol(activeLevel.GetComponent<activeLevel>().getSfxVol());
     }
     /**
      * creates and returns a new block with id i

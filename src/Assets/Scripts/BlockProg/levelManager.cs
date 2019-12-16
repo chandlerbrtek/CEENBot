@@ -663,6 +663,8 @@ public class levelManager : MonoBehaviour
 
                         currLevel[(int)boulderEndMapPos.y, (int)boulderEndMapPos.x] = 3;
                         GameObject go = Instantiate(mud);
+                        //go.layer = 8;
+                        go.GetComponent<SpriteRenderer>().rendererPriority = 8;
                         tiles.Add(go);
                         go.transform.position = bo.transform.position;
                         boulders.Remove(bo);

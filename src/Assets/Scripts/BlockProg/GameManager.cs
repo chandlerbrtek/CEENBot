@@ -149,7 +149,7 @@ public class GameManager : MonoBehaviour
         if(running)
         {
             running = false;
-
+            lm.stopDriving();
         }
     }
 

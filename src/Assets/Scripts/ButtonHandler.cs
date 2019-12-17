@@ -110,31 +110,32 @@ public class ButtonHandler : MonoBehaviour
 
             if (loadProfiles)
             {
-                GameObject inputFieldGo = GameObject.Find("ProfOneText");
-                Text inputFieldCo = inputFieldGo.GetComponent<Text>();
-                inputFieldCo.text = "" + profiles[0].username;
+                GameObject inputFieldGo;
+                Text inputFieldCo;
 
-                inputFieldGo = GameObject.Find("ProfTwoText");
-                inputFieldCo = inputFieldGo.GetComponent<Text>();
-                inputFieldCo.text = "" + profiles[1].username;
-
-                inputFieldGo = GameObject.Find("ProfThreeText");
-                inputFieldCo = inputFieldGo.GetComponent<Text>();
-                inputFieldCo.text = "" + profiles[2].username;
-
-                inputFieldGo = GameObject.Find("ProfFourText");
-                inputFieldCo = inputFieldGo.GetComponent<Text>();
-                inputFieldCo.text = "" + profiles[3].username;
-
-                inputFieldGo = GameObject.Find("ProfFiveText");
-                inputFieldCo = inputFieldGo.GetComponent<Text>();
-                inputFieldCo.text = "" + profiles[4].username;
+                for (int i = 0; i < 30; i++)
+                {
+                    if (profiles.Count > i)
+                    {
+                        GameObject.Find("Profile" + (i + 1)).SetActive(true);
+                        inputFieldGo = GameObject.Find("Prof" + (i + 1) + "Text");
+                        inputFieldCo = inputFieldGo.GetComponent<Text>();
+                        inputFieldCo.text = "" + profiles[i].username;
+                    }
+                    else
+                    {
+                        if (GameObject.Find("Profile" + (i + 1)))
+                        {
+                            GameObject.Find("Profile" + (i + 1)).SetActive(false);
+                        }
+                    }
+                }
             }
 
         }
         else
         {
-            selectedProfile = 0;
+            selectedProfile = 99;
             Debug.Log("No game saved!");
         }
     }

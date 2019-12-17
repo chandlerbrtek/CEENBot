@@ -1,0 +1,25 @@
+var annotated_dup =
+[
+    [ "activeLevel", "classactive_level.html", "classactive_level" ],
+    [ "BackgroundScript", "class_background_script.html", null ],
+    [ "BlockBehavior", "class_block_behavior.html", "class_block_behavior" ],
+    [ "ButtonClick", "class_button_click.html", "class_button_click" ],
+    [ "ButtonHandler", "class_button_handler.html", "class_button_handler" ],
+    [ "congrats", "classcongrats.html", "classcongrats" ],
+    [ "GameManager", "class_game_manager.html", "class_game_manager" ],
+    [ "iconToggle", "classicon_toggle.html", "classicon_toggle" ],
+    [ "levelManager", "classlevel_manager.html", "classlevel_manager" ],
+    [ "LoadSceneOnClick", "class_load_scene_on_click.html", "class_load_scene_on_click" ],
+    [ "menu", "classmenu.html", null ],
+    [ "NextLevel", "class_next_level.html", "class_next_level" ],
+    [ "Player", "class_player.html", "class_player" ],
+    [ "QuitOnClick", "class_quit_on_click.html", "class_quit_on_click" ],
+    [ "ReturnScript", "class_return_script.html", "class_return_script" ],
+    [ "robot", "classrobot.html", "classrobot" ],
+    [ "RunScript", "class_run_script.html", null ],
+    [ "Save", "class_save.html", "class_save" ],
+    [ "SaveBlockScript", "class_save_block_script.html", null ],
+    [ "SelectOnInput", "class_select_on_input.html", "class_select_on_input" ],
+    [ "stop", "classstop.html", null ],
+    [ "volumeManager", "classvolume_manager.html", "classvolume_manager" ]
+];

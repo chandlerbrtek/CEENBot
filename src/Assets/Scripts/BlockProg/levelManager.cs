@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /**
- * This class manages the active level, loads the level by duplicating tiles and putting them where they should be on the map
+ * This class manages the level, loads the level by duplicating tiles and putting them where they should be on the map
  * and executes specific moves and instructions while the game executes as directed by GameManager
  */
 public class levelManager : MonoBehaviour
@@ -211,6 +211,9 @@ public class levelManager : MonoBehaviour
         generateRandomLevel();
         level = i;
         resetLevel();
+        GameObject.FindObjectOfType<GameManager>().GetComponent<GameManager>().activeLevel.GetComponent<activeLevel>().setLevel(i);
+
+
     }
     /**
      * this function copies the level into the currentLevel array and then generates the level based on that.

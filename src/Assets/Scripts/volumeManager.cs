@@ -13,8 +13,11 @@ public class volumeManager : MonoBehaviour {
     public Slider musicSlider;
     public AudioSource musicAudio;
     public float startMusicOffset;
-
-	void Start () {
+    /**
+     * Called on program start
+     */
+    void Start () 
+    {
         masterSlider.value = 1;
         musicSlider.value = 1f;
         startMusicOffset = 0.1f;
@@ -22,14 +25,9 @@ public class volumeManager : MonoBehaviour {
         
     }
 
-    /**  
-    * Update is called once per frame   
-    */ 
-    void Update () {
-        
-        //AudioListener.volume = masterSlider.value *musicAudio.volume;
-	}
-
+    /**
+     * updates the volume for the menu music
+     */
     public void updateVol()
     {
         musicAudio.volume = musicSlider.value * masterSlider.value*startMusicOffset;

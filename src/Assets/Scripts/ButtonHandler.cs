@@ -155,6 +155,9 @@ public class ButtonHandler : MonoBehaviour
         SaveGame();
     }
 
+    /**
+     * loads the star data and sets up the appropriate sprites on level buttons
+     */
     public void LoadStars()
     {
         Sprite none = Resources.Load<Sprite>("0star");

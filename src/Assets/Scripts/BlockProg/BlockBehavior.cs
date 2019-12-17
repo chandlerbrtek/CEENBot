@@ -119,7 +119,9 @@ public class BlockBehavior : MonoBehaviour
 
         return false;
     }
-
+    /**
+     * Deletes this blcok form the scene
+     */
     public void deleteSelf()
     {
         if(hasPrev)

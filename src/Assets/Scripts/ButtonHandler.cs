@@ -146,8 +146,11 @@ public class ButtonHandler : MonoBehaviour
     public void SelectProfile(int profileIdx)
     {
         LoadGame(false);
-        Debug.Log(profiles[profileIdx].stars[0]);
-        selectedProfile = profileIdx;
+        if (profileIdx < 30)
+        {
+            Debug.Log(profiles[profileIdx].stars[0]);
+            selectedProfile = profileIdx;
+        }
         SaveGame();
     }
 

@@ -95,8 +95,11 @@ public class GameManager : MonoBehaviour
     public void SaveLevelScore(int levelIndex, int numOfStars)
     {
         LoadGame();
-        Player player = profiles[selectedProfile];
-        player.stars[levelIndex - 1] = numOfStars;
+        if (selectedProfile < 30)
+        {
+            Player player = profiles[selectedProfile];
+            player.stars[levelIndex - 1] = numOfStars;
+        }
         SaveGame();
     }
 

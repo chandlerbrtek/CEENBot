@@ -6570,6 +6570,7 @@ GameObject:
   - component: {fileID: 635484368}
   - component: {fileID: 635484367}
   - component: {fileID: 635484370}
+  - component: {fileID: 635484371}
   m_Layer: 5
   m_Name: LevelButton
   m_TagString: Untagged
@@ -6662,6 +6663,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+      - m_Target: {fileID: 635484371}
+        m_MethodName: SelectProfile
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 99
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!114 &635484368
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6708,6 +6720,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 94335d68e6dfda34a8fc82c771671240, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &635484371
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 635484365}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5128a5e8bb012483c8bc2ff19b69147c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &649161165
@@ -10433,6 +10457,7 @@ GameObject:
   - component: {fileID: 1035762439}
   - component: {fileID: 1035762438}
   - component: {fileID: 1035762441}
+  - component: {fileID: 1035762442}
   m_Layer: 5
   m_Name: Random Level
   m_TagString: Untagged
@@ -10525,6 +10550,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1035762442}
+        m_MethodName: SelectProfile
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 99
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1035762439
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10571,6 +10607,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 94335d68e6dfda34a8fc82c771671240, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1035762442
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1035762436}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5128a5e8bb012483c8bc2ff19b69147c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1044315030

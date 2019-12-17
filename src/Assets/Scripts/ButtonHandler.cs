@@ -150,9 +150,55 @@ public class ButtonHandler : MonoBehaviour
         if (profileIdx < 30)
         {
             Debug.Log(profiles[profileIdx].stars[0]);
-            selectedProfile = profileIdx;
         }
+        selectedProfile = profileIdx;
         SaveGame();
+    }
+
+    public void LoadStars()
+    {
+        Sprite none = Resources.Load<Sprite>("0star");
+        Sprite one = Resources.Load<Sprite>("1star");
+        Sprite two = Resources.Load<Sprite>("2star");
+        Sprite three = Resources.Load<Sprite>("3star");
+
+        LoadGame(false);
+        if (selectedProfile == 99)
+        {
+        GameObject.Find("Lvl1Stars").GetComponent<Image>().sprite = none;
+        GameObject.Find("Lvl2Stars").GetComponent<Image>().sprite = none;
+        GameObject.Find("Lvl3Stars").GetComponent<Image>().sprite = none;
+        GameObject.Find("Lvl4Stars").GetComponent<Image>().sprite = none;
+        GameObject.Find("Lvl5Stars").GetComponent<Image>().sprite = none;
+        GameObject.Find("Lvl6Stars").GetComponent<Image>().sprite = none;
+        GameObject.Find("Lvl7Stars").GetComponent<Image>().sprite = none;
+        GameObject.Find("Lvl8Stars").GetComponent<Image>().sprite = none;
+        GameObject.Find("Lvl9Stars").GetComponent<Image>().sprite = none;
+        GameObject.Find("Lvl10Stars").GetComponent<Image>().sprite = none;
+
+        }
+        else
+        {
+            //guess we have to actually load the profile!!!!!
+            int[] stars = profiles[selectedProfile].stars;
+
+            for (int i = 0; i < stars.Length; i++)
+            {
+                if (stars[i] == -1 || stars[i] == 0)
+                {
+                    GameObject.Find("Lvl" + (i + 1) + "Stars").GetComponent<Image>().sprite = none;
+                } else if (stars[i] == 1)
+                {
+                    GameObject.Find("Lvl" + (i + 1) + "Stars").GetComponent<Image>().sprite = one;
+                } else if (stars[i] == 2)
+                {
+                    GameObject.Find("Lvl" + (i + 1) + "Stars").GetComponent<Image>().sprite = two;
+                } else if (stars[i] == 3)
+                {
+                    GameObject.Find("Lvl" + (i + 1) + "Stars").GetComponent<Image>().sprite = three;
+                }
+            }
+        }
     }
 
     /**

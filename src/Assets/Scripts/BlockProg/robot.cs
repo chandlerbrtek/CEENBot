@@ -37,6 +37,7 @@ public class robot : MonoBehaviour
         directions[3] = new Vector3(0, 1, 0);
 
         rotation = new Vector3(0, 0, 0);
+        spotlight = GetComponentInChildren<Light>();
 
     }
 

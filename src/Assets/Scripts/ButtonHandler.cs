@@ -184,7 +184,7 @@ public class ButtonHandler : MonoBehaviour
         {
             //guess we have to actually load the profile!!!!!
             int[] stars = profiles[selectedProfile].stars;
-
+            bool incomplete = false;
             for (int i = 0; i < stars.Length; i++)
             {
                 if (stars[i] == -1 || stars[i] == 0)
@@ -199,6 +199,18 @@ public class ButtonHandler : MonoBehaviour
                 } else if (stars[i] == 3)
                 {
                     GameObject.Find("Lvl" + (i + 1) + "Stars").GetComponent<Image>().sprite = three;
+                }
+                if (incomplete)
+                {
+                    GameObject.Find("Lvl" + (i + 1)+"Button").GetComponent<Button>().enabled = false;
+                }
+                else
+                {
+                    GameObject.Find("Lvl" + (i + 1) + "Button").GetComponent<Button>().enabled = true ;
+                }
+                if(stars[i]==-1)
+                {
+                    incomplete = true;
                 }
             }
         }

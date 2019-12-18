@@ -1,0 +1,154 @@
+\hypertarget{classrobot}{}\doxysection{robot Class Reference}
+\label{classrobot}\index{robot@{robot}}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classrobot_aefb72d8614045c401ac47ccad0b7ddf0}{right}} ()
+\item 
+void \mbox{\hyperlink{classrobot_a9109554989f393f2101fb181df650dc0}{left}} ()
+\item 
+void \mbox{\hyperlink{classrobot_a1ffb12c10119747e1019892d56f94b25}{light\+Robot}} ()
+\item 
+void \mbox{\hyperlink{classrobot_ac37641ff48493c236ccc7beba7c5f6a1}{forward}} ()
+\item 
+void \mbox{\hyperlink{classrobot_a96d5c32965ad90a978c58f8f7c51d890}{back}} ()
+\item 
+void \mbox{\hyperlink{classrobot_a8412d924d68ab0adbbdcf736af5e24b9}{set\+Pos}} (Vector3 pos)
+\item 
+void \mbox{\hyperlink{classrobot_a8b5af1184cf8ceca36854edf22bea7e4}{set\+Start}} (Vector3 pos)
+\item 
+void \mbox{\hyperlink{classrobot_adf031105903022b5514b3320a92c8ad3}{set\+Start\+Dir}} (int i)
+\item 
+Vector3 \mbox{\hyperlink{classrobot_a94818bbc1efd8e755082a6e50ce31c97}{get\+Pos}} ()
+\item 
+Vector3 \mbox{\hyperlink{classrobot_aead0b782b2eb336eb641ec93db86ff0e}{get\+Map\+Position}} ()
+\item 
+Vector3 \mbox{\hyperlink{classrobot_a879474985775cee58aa9b8a84bc939e6}{get\+Forward}} ()
+\item 
+Vector3 \mbox{\hyperlink{classrobot_ac6ec5929a1ce2fd4d6c9f7fa5870b043}{get\+Backward}} ()
+\item 
+Vector3 \mbox{\hyperlink{classrobot_a2bd9394117074e0468e0268383a17453}{get\+Real\+Forward}} ()
+\item 
+Vector3 \mbox{\hyperlink{classrobot_afbf4b50e1eff810aeb9a11a2d720bf46}{get\+Real\+Backward}} ()
+\item 
+void \mbox{\hyperlink{classrobot_ac0113d30ae3c93d4bc61ed6358e232c1}{reset}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classrobot_a29bd6030b69112d157524b760b0dd474}\label{classrobot_a29bd6030b69112d157524b760b0dd474}} 
+Vector3\mbox{[}$\,$\mbox{]} {\bfseries directions}
+\item 
+\mbox{\Hypertarget{classrobot_ab207373b5090fbc3956f4428a186d5c9}\label{classrobot_ab207373b5090fbc3956f4428a186d5c9}} 
+int {\bfseries dir} = 0
+\item 
+\mbox{\Hypertarget{classrobot_a8f85e28765b7d34a821f7d3c6e96d078}\label{classrobot_a8f85e28765b7d34a821f7d3c6e96d078}} 
+Vector3 {\bfseries position}
+\item 
+\mbox{\Hypertarget{classrobot_a0ed0c0902320592fa82f45e5ab39916a}\label{classrobot_a0ed0c0902320592fa82f45e5ab39916a}} 
+Vector3 {\bfseries start}
+\item 
+\mbox{\Hypertarget{classrobot_a9389c9bf3f9b168ad09b8f879f59ccbd}\label{classrobot_a9389c9bf3f9b168ad09b8f879f59ccbd}} 
+Light {\bfseries spotlight}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+This class represents the robot on the field and tracks related positioning data 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classrobot_a96d5c32965ad90a978c58f8f7c51d890}\label{classrobot_a96d5c32965ad90a978c58f8f7c51d890}} 
+\index{robot@{robot}!back@{back}}
+\index{back@{back}!robot@{robot}}
+\doxysubsubsection{\texorpdfstring{back()}{back()}}
+{\footnotesize\ttfamily void robot.\+back (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Moves the robot backwards in it\textquotesingle{}s map position actual position movement logic is in Level Manager \mbox{\Hypertarget{classrobot_ac37641ff48493c236ccc7beba7c5f6a1}\label{classrobot_ac37641ff48493c236ccc7beba7c5f6a1}} 
+\index{robot@{robot}!forward@{forward}}
+\index{forward@{forward}!robot@{robot}}
+\doxysubsubsection{\texorpdfstring{forward()}{forward()}}
+{\footnotesize\ttfamily void robot.\+forward (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Moves the robot forwardn it\textquotesingle{}s map position actual position movement logic is in Level Manager \mbox{\Hypertarget{classrobot_ac6ec5929a1ce2fd4d6c9f7fa5870b043}\label{classrobot_ac6ec5929a1ce2fd4d6c9f7fa5870b043}} 
+\index{robot@{robot}!getBackward@{getBackward}}
+\index{getBackward@{getBackward}!robot@{robot}}
+\doxysubsubsection{\texorpdfstring{getBackward()}{getBackward()}}
+{\footnotesize\ttfamily Vector3 robot.\+get\+Backward (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+returns the map position the robot would move to if it moved backwards \mbox{\Hypertarget{classrobot_a879474985775cee58aa9b8a84bc939e6}\label{classrobot_a879474985775cee58aa9b8a84bc939e6}} 
+\index{robot@{robot}!getForward@{getForward}}
+\index{getForward@{getForward}!robot@{robot}}
+\doxysubsubsection{\texorpdfstring{getForward()}{getForward()}}
+{\footnotesize\ttfamily Vector3 robot.\+get\+Forward (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+return the map position the robot would move to if it moved forwards \mbox{\Hypertarget{classrobot_aead0b782b2eb336eb641ec93db86ff0e}\label{classrobot_aead0b782b2eb336eb641ec93db86ff0e}} 
+\index{robot@{robot}!getMapPosition@{getMapPosition}}
+\index{getMapPosition@{getMapPosition}!robot@{robot}}
+\doxysubsubsection{\texorpdfstring{getMapPosition()}{getMapPosition()}}
+{\footnotesize\ttfamily Vector3 robot.\+get\+Map\+Position (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+gets the robots coordinates on the map \mbox{\Hypertarget{classrobot_a94818bbc1efd8e755082a6e50ce31c97}\label{classrobot_a94818bbc1efd8e755082a6e50ce31c97}} 
+\index{robot@{robot}!getPos@{getPos}}
+\index{getPos@{getPos}!robot@{robot}}
+\doxysubsubsection{\texorpdfstring{getPos()}{getPos()}}
+{\footnotesize\ttfamily Vector3 robot.\+get\+Pos (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+gets the robots actual position \mbox{\Hypertarget{classrobot_afbf4b50e1eff810aeb9a11a2d720bf46}\label{classrobot_afbf4b50e1eff810aeb9a11a2d720bf46}} 
+\index{robot@{robot}!getRealBackward@{getRealBackward}}
+\index{getRealBackward@{getRealBackward}!robot@{robot}}
+\doxysubsubsection{\texorpdfstring{getRealBackward()}{getRealBackward()}}
+{\footnotesize\ttfamily Vector3 robot.\+get\+Real\+Backward (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+gets the actual positon the robot would be in if it moved backwards \mbox{\Hypertarget{classrobot_a2bd9394117074e0468e0268383a17453}\label{classrobot_a2bd9394117074e0468e0268383a17453}} 
+\index{robot@{robot}!getRealForward@{getRealForward}}
+\index{getRealForward@{getRealForward}!robot@{robot}}
+\doxysubsubsection{\texorpdfstring{getRealForward()}{getRealForward()}}
+{\footnotesize\ttfamily Vector3 robot.\+get\+Real\+Forward (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+gets the actual positon the robot would be in if it moved foward \mbox{\Hypertarget{classrobot_a9109554989f393f2101fb181df650dc0}\label{classrobot_a9109554989f393f2101fb181df650dc0}} 
+\index{robot@{robot}!left@{left}}
+\index{left@{left}!robot@{robot}}
+\doxysubsubsection{\texorpdfstring{left()}{left()}}
+{\footnotesize\ttfamily void robot.\+left (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+When called tracks the robots direciton and starts the counter clockwise rotation process \mbox{\Hypertarget{classrobot_a1ffb12c10119747e1019892d56f94b25}\label{classrobot_a1ffb12c10119747e1019892d56f94b25}} 
+\index{robot@{robot}!lightRobot@{lightRobot}}
+\index{lightRobot@{lightRobot}!robot@{robot}}
+\doxysubsubsection{\texorpdfstring{lightRobot()}{lightRobot()}}
+{\footnotesize\ttfamily void robot.\+light\+Robot (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+activates the light and sets it\textquotesingle{}s timer \mbox{\Hypertarget{classrobot_ac0113d30ae3c93d4bc61ed6358e232c1}\label{classrobot_ac0113d30ae3c93d4bc61ed6358e232c1}} 
+\index{robot@{robot}!reset@{reset}}
+\index{reset@{reset}!robot@{robot}}
+\doxysubsubsection{\texorpdfstring{reset()}{reset()}}
+{\footnotesize\ttfamily void robot.\+reset (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+resets the robots map position, actual position, direction and rotation. \mbox{\Hypertarget{classrobot_aefb72d8614045c401ac47ccad0b7ddf0}\label{classrobot_aefb72d8614045c401ac47ccad0b7ddf0}} 
+\index{robot@{robot}!right@{right}}
+\index{right@{right}!robot@{robot}}
+\doxysubsubsection{\texorpdfstring{right()}{right()}}
+{\footnotesize\ttfamily void robot.\+right (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+When called tracks the robots direciton and starts the clockwise rotation process \mbox{\Hypertarget{classrobot_a8412d924d68ab0adbbdcf736af5e24b9}\label{classrobot_a8412d924d68ab0adbbdcf736af5e24b9}} 
+\index{robot@{robot}!setPos@{setPos}}
+\index{setPos@{setPos}!robot@{robot}}
+\doxysubsubsection{\texorpdfstring{setPos()}{setPos()}}
+{\footnotesize\ttfamily void robot.\+set\+Pos (\begin{DoxyParamCaption}\item[{Vector3}]{pos }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Sets the robots actual position \mbox{\Hypertarget{classrobot_a8b5af1184cf8ceca36854edf22bea7e4}\label{classrobot_a8b5af1184cf8ceca36854edf22bea7e4}} 
+\index{robot@{robot}!setStart@{setStart}}
+\index{setStart@{setStart}!robot@{robot}}
+\doxysubsubsection{\texorpdfstring{setStart()}{setStart()}}
+{\footnotesize\ttfamily void robot.\+set\+Start (\begin{DoxyParamCaption}\item[{Vector3}]{pos }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Sets the robots start position \mbox{\Hypertarget{classrobot_adf031105903022b5514b3320a92c8ad3}\label{classrobot_adf031105903022b5514b3320a92c8ad3}} 
+\index{robot@{robot}!setStartDir@{setStartDir}}
+\index{setStartDir@{setStartDir}!robot@{robot}}
+\doxysubsubsection{\texorpdfstring{setStartDir()}{setStartDir()}}
+{\footnotesize\ttfamily void robot.\+set\+Start\+Dir (\begin{DoxyParamCaption}\item[{int}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Sets the direciton the robot will be facing on level start 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/\+Assets/\+Scripts/\+Block\+Prog/robot.\+cs\end{DoxyCompactItemize}

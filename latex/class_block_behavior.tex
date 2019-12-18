@@ -1,0 +1,128 @@
+\hypertarget{class_block_behavior}{}\doxysection{Block\+Behavior Class Reference}
+\label{class_block_behavior}\index{BlockBehavior@{BlockBehavior}}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{class_block_behavior_a3d4207f29d9cf974111de739409e7f17}{should\+Snap}} (Vector3 pos)
+\item 
+void \mbox{\hyperlink{class_block_behavior_aec840bfbae5449883393436cbd5bcbd7}{delete\+Self}} ()
+\item 
+void \mbox{\hyperlink{class_block_behavior_a5334f0c070cc8cff3bfd36061b1c2540}{set\+Prev}} (Game\+Object b)
+\item 
+void \mbox{\hyperlink{class_block_behavior_afec58fb545dc023c0a786b33c26780c7}{remove\+Child}} ()
+\item 
+void \mbox{\hyperlink{class_block_behavior_ac8e110742b368dacf06eefd2ee1b934f}{add\+Block}} (Game\+Object b)
+\item 
+void \mbox{\hyperlink{class_block_behavior_a8cdfc228983e092ffc041a13ec592eee}{align\+Children}} ()
+\item 
+void \mbox{\hyperlink{class_block_behavior_ab0c11545036eeb533d9d8d11f9dcdeec}{move}} (Vector3 v)
+\item 
+Game\+Object \mbox{\hyperlink{class_block_behavior_a101aa8e00fe1c966310e1fd3f842f041}{get\+Next}} ()
+\item 
+Game\+Object \mbox{\hyperlink{class_block_behavior_a746fe2924b632889955cc2763c8b4229}{get\+Previous}} ()
+\item 
+void \mbox{\hyperlink{class_block_behavior_a4f7e2e23cd473ad9724a269c2e255586}{check\+Blocks}} ()
+\item 
+void \mbox{\hyperlink{class_block_behavior_a826ea40e255087713fc7d6da7e671503}{toggle}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_block_behavior_ac00fd00d6db85e7d82c4510383077799}\label{class_block_behavior_ac00fd00d6db85e7d82c4510383077799}} 
+bool {\bfseries has\+Next}
+\item 
+\mbox{\Hypertarget{class_block_behavior_ab9150a9199d941f5d7d14398b10c1470}\label{class_block_behavior_ab9150a9199d941f5d7d14398b10c1470}} 
+bool {\bfseries has\+Prev}
+\item 
+\mbox{\Hypertarget{class_block_behavior_a423bb9f212bdfdc1d6479e1f47b5a012}\label{class_block_behavior_a423bb9f212bdfdc1d6479e1f47b5a012}} 
+int {\bfseries block\+Id}
+\item 
+\mbox{\Hypertarget{class_block_behavior_a9acc1ec810483000df450310c95b9892}\label{class_block_behavior_a9acc1ec810483000df450310c95b9892}} 
+bool {\bfseries root}
+\item 
+\mbox{\Hypertarget{class_block_behavior_affe8db65e28c1676992d5eff350fd794}\label{class_block_behavior_affe8db65e28c1676992d5eff350fd794}} 
+Sprite {\bfseries button}
+\item 
+\mbox{\Hypertarget{class_block_behavior_aeb468a79f0de7003dcbdd7645d29f8f6}\label{class_block_behavior_aeb468a79f0de7003dcbdd7645d29f8f6}} 
+Sprite {\bfseries button\+Icon}
+\item 
+\mbox{\Hypertarget{class_block_behavior_a28b2e8f590604f6e30904ed97ab5649c}\label{class_block_behavior_a28b2e8f590604f6e30904ed97ab5649c}} 
+bool {\bfseries icon} = false
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\mbox{\hyperlink{class_block_behavior}{Block\+Behavior}} is a script that governs how individual programming blocks behave Blocks function as a doubly linked list as well 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_block_behavior_ac8e110742b368dacf06eefd2ee1b934f}\label{class_block_behavior_ac8e110742b368dacf06eefd2ee1b934f}} 
+\index{BlockBehavior@{BlockBehavior}!addBlock@{addBlock}}
+\index{addBlock@{addBlock}!BlockBehavior@{BlockBehavior}}
+\doxysubsubsection{\texorpdfstring{addBlock()}{addBlock()}}
+{\footnotesize\ttfamily void Block\+Behavior.\+add\+Block (\begin{DoxyParamCaption}\item[{Game\+Object}]{b }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Function takes in a game block If this block does not have a child it\textquotesingle{}s child is set to the passed block If we have a child, call pass the block recursively to it \mbox{\Hypertarget{class_block_behavior_a8cdfc228983e092ffc041a13ec592eee}\label{class_block_behavior_a8cdfc228983e092ffc041a13ec592eee}} 
+\index{BlockBehavior@{BlockBehavior}!alignChildren@{alignChildren}}
+\index{alignChildren@{alignChildren}!BlockBehavior@{BlockBehavior}}
+\doxysubsubsection{\texorpdfstring{alignChildren()}{alignChildren()}}
+{\footnotesize\ttfamily void Block\+Behavior.\+align\+Children (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Recursive function making sure that the children of this block are lined up with this one \mbox{\Hypertarget{class_block_behavior_a4f7e2e23cd473ad9724a269c2e255586}\label{class_block_behavior_a4f7e2e23cd473ad9724a269c2e255586}} 
+\index{BlockBehavior@{BlockBehavior}!checkBlocks@{checkBlocks}}
+\index{checkBlocks@{checkBlocks}!BlockBehavior@{BlockBehavior}}
+\doxysubsubsection{\texorpdfstring{checkBlocks()}{checkBlocks()}}
+{\footnotesize\ttfamily void Block\+Behavior.\+check\+Blocks (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Goes through the \mbox{\hyperlink{class_game_manager}{Game\+Manager}}\textquotesingle{}s list of all blocks to find out if this block is in position under another block, and adds it to that blocks list, if appropriate. \mbox{\Hypertarget{class_block_behavior_aec840bfbae5449883393436cbd5bcbd7}\label{class_block_behavior_aec840bfbae5449883393436cbd5bcbd7}} 
+\index{BlockBehavior@{BlockBehavior}!deleteSelf@{deleteSelf}}
+\index{deleteSelf@{deleteSelf}!BlockBehavior@{BlockBehavior}}
+\doxysubsubsection{\texorpdfstring{deleteSelf()}{deleteSelf()}}
+{\footnotesize\ttfamily void Block\+Behavior.\+delete\+Self (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Deletes this blcok form the scene \mbox{\Hypertarget{class_block_behavior_a101aa8e00fe1c966310e1fd3f842f041}\label{class_block_behavior_a101aa8e00fe1c966310e1fd3f842f041}} 
+\index{BlockBehavior@{BlockBehavior}!getNext@{getNext}}
+\index{getNext@{getNext}!BlockBehavior@{BlockBehavior}}
+\doxysubsubsection{\texorpdfstring{getNext()}{getNext()}}
+{\footnotesize\ttfamily Game\+Object Block\+Behavior.\+get\+Next (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Return the refrence to the Next Block. \mbox{\Hypertarget{class_block_behavior_a746fe2924b632889955cc2763c8b4229}\label{class_block_behavior_a746fe2924b632889955cc2763c8b4229}} 
+\index{BlockBehavior@{BlockBehavior}!getPrevious@{getPrevious}}
+\index{getPrevious@{getPrevious}!BlockBehavior@{BlockBehavior}}
+\doxysubsubsection{\texorpdfstring{getPrevious()}{getPrevious()}}
+{\footnotesize\ttfamily Game\+Object Block\+Behavior.\+get\+Previous (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Return the refrence to the previos block. \mbox{\Hypertarget{class_block_behavior_ab0c11545036eeb533d9d8d11f9dcdeec}\label{class_block_behavior_ab0c11545036eeb533d9d8d11f9dcdeec}} 
+\index{BlockBehavior@{BlockBehavior}!move@{move}}
+\index{move@{move}!BlockBehavior@{BlockBehavior}}
+\doxysubsubsection{\texorpdfstring{move()}{move()}}
+{\footnotesize\ttfamily void Block\+Behavior.\+move (\begin{DoxyParamCaption}\item[{Vector3}]{v }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Move the block to the given position. @\+Param v Position to move to. \mbox{\Hypertarget{class_block_behavior_afec58fb545dc023c0a786b33c26780c7}\label{class_block_behavior_afec58fb545dc023c0a786b33c26780c7}} 
+\index{BlockBehavior@{BlockBehavior}!removeChild@{removeChild}}
+\index{removeChild@{removeChild}!BlockBehavior@{BlockBehavior}}
+\doxysubsubsection{\texorpdfstring{removeChild()}{removeChild()}}
+{\footnotesize\ttfamily void Block\+Behavior.\+remove\+Child (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Remove the child block of this block \mbox{\Hypertarget{class_block_behavior_a5334f0c070cc8cff3bfd36061b1c2540}\label{class_block_behavior_a5334f0c070cc8cff3bfd36061b1c2540}} 
+\index{BlockBehavior@{BlockBehavior}!setPrev@{setPrev}}
+\index{setPrev@{setPrev}!BlockBehavior@{BlockBehavior}}
+\doxysubsubsection{\texorpdfstring{setPrev()}{setPrev()}}
+{\footnotesize\ttfamily void Block\+Behavior.\+set\+Prev (\begin{DoxyParamCaption}\item[{Game\+Object}]{b }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Set the parent block to the block that was passed \mbox{\Hypertarget{class_block_behavior_a3d4207f29d9cf974111de739409e7f17}\label{class_block_behavior_a3d4207f29d9cf974111de739409e7f17}} 
+\index{BlockBehavior@{BlockBehavior}!shouldSnap@{shouldSnap}}
+\index{shouldSnap@{shouldSnap}!BlockBehavior@{BlockBehavior}}
+\doxysubsubsection{\texorpdfstring{shouldSnap()}{shouldSnap()}}
+{\footnotesize\ttfamily bool Block\+Behavior.\+should\+Snap (\begin{DoxyParamCaption}\item[{Vector3}]{pos }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+returns true if the position given would be in position to be the next block \mbox{\Hypertarget{class_block_behavior_a826ea40e255087713fc7d6da7e671503}\label{class_block_behavior_a826ea40e255087713fc7d6da7e671503}} 
+\index{BlockBehavior@{BlockBehavior}!toggle@{toggle}}
+\index{toggle@{toggle}!BlockBehavior@{BlockBehavior}}
+\doxysubsubsection{\texorpdfstring{toggle()}{toggle()}}
+{\footnotesize\ttfamily void Block\+Behavior.\+toggle (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Swaps between text button sprites and icon button sprites. 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/\+Assets/\+Scripts/\+Block\+Prog/Block\+Behavior.\+cs\end{DoxyCompactItemize}

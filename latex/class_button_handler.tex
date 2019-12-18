@@ -1,0 +1,61 @@
+\hypertarget{class_button_handler}{}\doxysection{Button\+Handler Class Reference}
+\label{class_button_handler}\index{ButtonHandler@{ButtonHandler}}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_button_handler_aeb46f1896e54ebd417ae21d6fbea6a48}{Create\+New\+Profile}} ()
+\item 
+void \mbox{\hyperlink{class_button_handler_a12a68622c207616c3a18756d76ef95c1}{Load\+Game}} (bool load\+Profiles)
+\item 
+void \mbox{\hyperlink{class_button_handler_a976de4e04fa4185f9d900de3f3e2b236}{Select\+Profile}} (int profile\+Idx)
+\item 
+void \mbox{\hyperlink{class_button_handler_af1b0ff23fe6c8f633923450d33b49af1}{Load\+Stars}} ()
+\item 
+void \mbox{\hyperlink{class_button_handler_a6c25b94ba0cd0fdc7671b18c6ed555e5}{Delete\+Profile}} (int profile\+Idx)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+The \mbox{\hyperlink{class_button_handler}{Button\+Handler}} is called for a variety of button clicks on the main menu 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_button_handler_aeb46f1896e54ebd417ae21d6fbea6a48}\label{class_button_handler_aeb46f1896e54ebd417ae21d6fbea6a48}} 
+\index{ButtonHandler@{ButtonHandler}!CreateNewProfile@{CreateNewProfile}}
+\index{CreateNewProfile@{CreateNewProfile}!ButtonHandler@{ButtonHandler}}
+\doxysubsubsection{\texorpdfstring{CreateNewProfile()}{CreateNewProfile()}}
+{\footnotesize\ttfamily void Button\+Handler.\+Create\+New\+Profile (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+This function loads the game and then adds a new profile to the end of the list. It knows what name to used based upon the text entered into the field. Once the profile has been added, the game is promptly saved. \mbox{\Hypertarget{class_button_handler_a6c25b94ba0cd0fdc7671b18c6ed555e5}\label{class_button_handler_a6c25b94ba0cd0fdc7671b18c6ed555e5}} 
+\index{ButtonHandler@{ButtonHandler}!DeleteProfile@{DeleteProfile}}
+\index{DeleteProfile@{DeleteProfile}!ButtonHandler@{ButtonHandler}}
+\doxysubsubsection{\texorpdfstring{DeleteProfile()}{DeleteProfile()}}
+{\footnotesize\ttfamily void Button\+Handler.\+Delete\+Profile (\begin{DoxyParamCaption}\item[{int}]{profile\+Idx }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Deletes the profile at the selected index in the Player\+Prefs \mbox{\Hypertarget{class_button_handler_a12a68622c207616c3a18756d76ef95c1}\label{class_button_handler_a12a68622c207616c3a18756d76ef95c1}} 
+\index{ButtonHandler@{ButtonHandler}!LoadGame@{LoadGame}}
+\index{LoadGame@{LoadGame}!ButtonHandler@{ButtonHandler}}
+\doxysubsubsection{\texorpdfstring{LoadGame()}{LoadGame()}}
+{\footnotesize\ttfamily void Button\+Handler.\+Load\+Game (\begin{DoxyParamCaption}\item[{bool}]{load\+Profiles }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Load\+Game loads the game from player\+Prefs, setting the repective variables to the values loaded. If load\+Profiles is set to true, the text is set for the profiles that can be selected 
+\begin{DoxyParams}{Parameters}
+{\em load\+Game} & true if loading profiles, false if not \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_button_handler_af1b0ff23fe6c8f633923450d33b49af1}\label{class_button_handler_af1b0ff23fe6c8f633923450d33b49af1}} 
+\index{ButtonHandler@{ButtonHandler}!LoadStars@{LoadStars}}
+\index{LoadStars@{LoadStars}!ButtonHandler@{ButtonHandler}}
+\doxysubsubsection{\texorpdfstring{LoadStars()}{LoadStars()}}
+{\footnotesize\ttfamily void Button\+Handler.\+Load\+Stars (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+loads the star data and sets up the appropriate sprites on level buttons \mbox{\Hypertarget{class_button_handler_a976de4e04fa4185f9d900de3f3e2b236}\label{class_button_handler_a976de4e04fa4185f9d900de3f3e2b236}} 
+\index{ButtonHandler@{ButtonHandler}!SelectProfile@{SelectProfile}}
+\index{SelectProfile@{SelectProfile}!ButtonHandler@{ButtonHandler}}
+\doxysubsubsection{\texorpdfstring{SelectProfile()}{SelectProfile()}}
+{\footnotesize\ttfamily void Button\+Handler.\+Select\+Profile (\begin{DoxyParamCaption}\item[{int}]{profile\+Idx }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Sets the selected\+Profile variable in the player\+Prefs to the index of the selected profile 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/\+Assets/\+Scripts/Button\+Handler.\+cs\end{DoxyCompactItemize}

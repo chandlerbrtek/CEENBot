@@ -14,11 +14,16 @@ public class activeLevel : MonoBehaviour
     static float masterVol = 0.4f;
     static float musicVol = 0.4f;
     static float sfxVol = 1;
+    static int profile = 99;
 
     public GameObject maV;
     public GameObject muV;
     public GameObject sfV;
-   
+    public int prof = profile;
+
+
+
+
     /**
      * sets the level data
      */
@@ -87,6 +92,22 @@ public class activeLevel : MonoBehaviour
     public float getSfxVol()
     {
         return masterVol * sfxVol;
+    }
+    /**
+     * sets the profile data
+     */
+    public void setProfile(int p)
+    {
+        profile = p;
+        prof = p;
+
+    }
+    /**
+     * get the profile data
+     */
+    public int getProfile()
+    {
+        return profile;
     }
     /**
      * revents this object form being destroyed between scenes

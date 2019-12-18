@@ -19,7 +19,7 @@ public class ButtonHandler : MonoBehaviour
      */
     void Start()
     {
-     
+        //SelectProfile(FindObjectOfType<activeLevel>().getProfile());
     }
 
     /**
@@ -79,7 +79,7 @@ public class ButtonHandler : MonoBehaviour
         bf.Serialize(file, save);
         file.Close();
 
-        Debug.Log("Game Saved");
+        //Debug.Log("Game Saved");
     }
 
     /**
@@ -106,7 +106,7 @@ public class ButtonHandler : MonoBehaviour
             {
                 profiles = new List<Player>();
             }
-            Debug.Log("Game Loaded");
+           // Debug.Log("Game Loaded");
 
             if (loadProfiles)
             {
@@ -146,13 +146,18 @@ public class ButtonHandler : MonoBehaviour
      */
     public void SelectProfile(int profileIdx)
     {
-        LoadGame(false);
-        if (profileIdx < 30)
+        if (profileIdx != 99)
         {
-            Debug.Log(profiles[profileIdx].stars[0]);
+            Debug.Log("loading profile:" + profileIdx);
+            LoadGame(false);
+            if (profileIdx < 30)
+            {
+                Debug.Log(profiles[profileIdx].stars[0]);
+            }
+            selectedProfile = profileIdx;
+            FindObjectOfType<activeLevel>().setProfile(selectedProfile);
+            SaveGame();
         }
-        selectedProfile = profileIdx;
-        SaveGame();
     }
 
     /**
@@ -160,6 +165,7 @@ public class ButtonHandler : MonoBehaviour
      */
     public void LoadStars()
     {
+        SelectProfile(FindObjectOfType<activeLevel>().getProfile());
         Sprite none = Resources.Load<Sprite>("0star");
         Sprite one = Resources.Load<Sprite>("1star");
         Sprite two = Resources.Load<Sprite>("2star");

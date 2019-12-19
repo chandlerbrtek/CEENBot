@@ -60,6 +60,7 @@ public class BlockBehavior : MonoBehaviour
             //if the block was in a list, remove it, but it keeps it's children
             if (hasPrev)
             {
+                Debug.Log("removing parent " + prevBlock.GetComponent<BlockBehavior>().blockId + " fform " + blockId);
                 prevBlock.GetComponent<BlockBehavior>().removeChild();
                 hasPrev = false;
             }
@@ -166,21 +167,26 @@ public class BlockBehavior : MonoBehaviour
      */
     public void addBlock(GameObject b)
     {//adds a block to this list
+       // Debug.Log("adding block " + b.GetComponent<BlockBehavior>().blockId + " to " + blockId);
         if (b.GetComponent<BlockBehavior>().blockId == blockId)
         {//if this block is trying to add itself as a child, don't
-            //Debug.Log("Woah");
+            Debug.Log("Woah");
             return;
         }
         if (hasNext)
         {//if this block has a child, add the block as a child of that block instead
+           // Debug.Log("instead passing to child " + nextBlock.GetComponent<BlockBehavior>().blockId);
             nextBlock.GetComponent<BlockBehavior>().addBlock(b);
+          
         }
         else
         { //otherwise the block is the child of this block
+           // Debug.Log("Confirming "+b.GetComponent<BlockBehavior>().blockId + " is now the child of " + blockId);
             nextBlock = b;
             hasNext = true;
             b.GetComponent<BlockBehavior>().setPrev(this.gameObject);
             alignChildren();
+
         }
     }
 
@@ -239,6 +245,7 @@ public class BlockBehavior : MonoBehaviour
                     if (go.GetComponent<BlockBehavior>().shouldSnap(transform.position))
                     {
                         go.GetComponent<BlockBehavior>().addBlock(this.gameObject);
+                        return;
                     }
                 }
 

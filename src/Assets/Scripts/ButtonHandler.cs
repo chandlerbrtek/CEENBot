@@ -117,10 +117,15 @@ public class ButtonHandler : MonoBehaviour
                 {
                     if (profiles.Count > i)
                     {
-                        GameObject.Find("Profile" + (i + 1)).SetActive(true);
-                        inputFieldGo = GameObject.Find("Prof" + (i + 1) + "Text");
-                        inputFieldCo = inputFieldGo.GetComponent<Text>();
-                        inputFieldCo.text = "" + profiles[i].username;
+                        if (GameObject.Find("Profile" + (i + 1)) != null)
+                        {
+                            GameObject.Find("Profile" + (i + 1)).SetActive(true);
+
+                            inputFieldGo = GameObject.Find("Prof" + (i + 1) + "Text");
+                            inputFieldCo = inputFieldGo.GetComponent<Text>();
+                            inputFieldCo.text = "" + profiles[i].username;
+                        }
+                        
                     }
                     else
                     {

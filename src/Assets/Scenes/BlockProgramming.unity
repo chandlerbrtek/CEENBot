@@ -786,7 +786,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buttonType: 6
   button: {fileID: 21300000, guid: 5fb9e7d4817cecc41897120cc9cf500d, type: 3}
-  buttonIcon: {fileID: 21300000, guid: 94576a732279c4342b58d36c23f89d1f, type: 3}
+  buttonIcon: {fileID: 21300000, guid: 8af4adf8df91a9f46b2190e90a8e2c4e, type: 3}
 --- !u!61 &403221621
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2862,6 +2862,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac00397f2590bf3429d4ce358871b83e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maV: {fileID: 0}
+  muV: {fileID: 0}
+  sfV: {fileID: 0}
+  prof: 99
 --- !u!4 &1831761798
 Transform:
   m_ObjectHideFlags: 0

@@ -397,10 +397,12 @@ public class levelManager : MonoBehaviour
         robot.GetComponent<robot>().lightRobot();
         if (currLevel[(int)temp.y, (int)temp.x]==6)
         {
+            Debug.Log("object light");
             completedObjectives++;
             
             currLevel[(int)boulderEndMapPos.y, (int)boulderEndMapPos.x] = 0;
             GameObject go = Instantiate(grass);
+            go.GetComponent<SpriteRenderer>().rendererPriority = 8;
             tiles.Add(go);
             go.transform.position = robot.GetComponent<robot>().getPos();
 
@@ -418,9 +420,11 @@ public class levelManager : MonoBehaviour
         justBeeped = true;
         if (currLevel[(int)temp.y, (int)temp.x] == 5)
         {
+            Debug.Log("object music");
             completedObjectives++;
             currLevel[(int)boulderEndMapPos.y, (int)boulderEndMapPos.x] = 0;
             GameObject go = Instantiate(grass);
+            go.GetComponent<SpriteRenderer>().rendererPriority = 8;
             tiles.Add(go);
             go.transform.position = robot.GetComponent<robot>().getPos();
 

@@ -3547,8 +3547,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1431185873}
   m_HandleRect: {fileID: 1431185872}
   m_Direction: 2
-  m_Value: 1.0000007
-  m_Size: 0.52975184
+  m_Value: 1.0000006
+  m_Size: 0.4
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -21295,6 +21295,7 @@ GameObject:
   - component: {fileID: 1956856217}
   - component: {fileID: 1956856216}
   - component: {fileID: 1956856219}
+  - component: {fileID: 1956856220}
   m_Layer: 5
   m_Name: SubmitButton
   m_TagString: Untagged
@@ -21409,6 +21410,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+      - m_Target: {fileID: 1956856220}
+        m_MethodName: LoadByIndex
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!114 &1956856217
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21455,6 +21467,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5128a5e8bb012483c8bc2ff19b69147c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1956856220
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1956856214}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94335d68e6dfda34a8fc82c771671240, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1958458769

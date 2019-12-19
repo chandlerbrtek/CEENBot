@@ -47,6 +47,7 @@ public class ButtonHandler : MonoBehaviour
         Player player = new Player(profileName);
         profiles.Add(player);
         SaveGame();
+        LoadGame(false);
     }
 
     /**
@@ -91,6 +92,7 @@ public class ButtonHandler : MonoBehaviour
     public void LoadGame(bool loadProfiles)
     {
         // 1
+        Debug.Log("being called:" + loadProfiles);
         if (File.Exists(Application.persistentDataPath + "/gamesave.save"))
         {
             // 2
@@ -124,6 +126,7 @@ public class ButtonHandler : MonoBehaviour
                             inputFieldGo = GameObject.Find("Prof" + (i + 1) + "Text");
                             inputFieldCo = inputFieldGo.GetComponent<Text>();
                             inputFieldCo.text = "" + profiles[i].username;
+                            
                         }
                         
                     }

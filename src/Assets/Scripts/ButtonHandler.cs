@@ -47,7 +47,8 @@ public class ButtonHandler : MonoBehaviour
         Player player = new Player(profileName);
         profiles.Add(player);
         SaveGame();
-        LoadGame(false);
+        LoadGame(true);
+       // Debug.Log("hi");
     }
 
     /**
